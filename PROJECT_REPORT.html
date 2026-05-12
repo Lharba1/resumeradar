@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResumeRadar — Project Report</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:      #006EDC;
+      --blue-light:#E6F2FD;
+      --blue-dark: #00366B;
+      --green:     #16A34A;
+      --green-bg:  #F0FDF4;
+      --green-bd:  #BBF7D0;
+      --red:       #DC2626;
+      --red-bg:    #FEF2F2;
+      --red-bd:    #FECACA;
+      --amber:     #D97706;
+      --amber-bg:  #FFFBEB;
+      --amber-bd:  #FDE68A;
+      --gray-50:   #F8FAFC;
+      --gray-100:  #F1F5F9;
+      --gray-200:  #E2E8F0;
+      --gray-400:  #94A3B8;
+      --gray-600:  #475569;
+      --gray-800:  #1E293B;
+      --gray-900:  #0F172A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--gray-800);
+      background: var(--gray-50);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 32px;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--gray-900);
+      text-decoration: none;
+    }
+    .nav-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 11px;
+      font-weight: 900;
+      transform: rotate(-2deg);
+    }
+    .nav-badge {
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 5px;
+      letter-spacing: 0.05em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-links a {
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--gray-600);
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .nav-links a:hover { background: var(--gray-100); color: var(--gray-900); }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 56px 0 40px;
+      border-bottom: 1px solid var(--gray-200);
+      margin-bottom: 48px;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid;
+    }
+    .pill-blue  { background: var(--blue-light); color: var(--blue); border-color: #b3d4f5; }
+    .pill-green { background: var(--green-bg);   color: var(--green); border-color: var(--green-bd); }
+    .pill-gray  { background: var(--gray-100);   color: var(--gray-600); border-color: var(--gray-200); }
+
+    h1 { font-size: 38px; font-weight: 800; color: var(--gray-900); line-height: 1.15; margin-bottom: 14px; }
+    h1 span { color: var(--blue); }
+    .hero-desc { font-size: 16px; color: var(--gray-600); max-width: 640px; line-height: 1.7; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-top: 36px;
+    }
+    .stat-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 18px 20px;
+      text-align: center;
+    }
+    .stat-num  { font-size: 28px; font-weight: 800; color: var(--blue); line-height: 1; }
+    .stat-lbl  { font-size: 12px; color: var(--gray-400); margin-top: 5px; font-weight: 500; }
+
+    /* ── SECTIONS ── */
+    .section { margin-bottom: 60px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--gray-200);
+    }
+    .section-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    h2 { font-size: 22px; font-weight: 700; color: var(--gray-900); }
+    .section-sub { font-size: 14px; color: var(--gray-400); margin-top: 2px; }
+
+    /* ── FEATURE CARDS ── */
+    .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .card-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+    .feature-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 22px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .card-kept::before  { background: var(--green); }
+    .card-cut::before   { background: var(--red); }
+    .card-defer::before { background: var(--amber); }
+
+    .card-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+    .status-kept  { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-bd); }
+    .status-cut   { background: var(--red-bg);   color: var(--red);   border: 1px solid var(--red-bd); }
+    .status-defer { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-bd); }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-route {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 11px;
+      background: var(--gray-100);
+      color: var(--gray-600);
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-weight: 500;
+    }
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .reason-block {
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+    }
+    .reason-kept  { background: var(--green-bg); border: 1px solid var(--green-bd); }
+    .reason-cut   { background: var(--red-bg);   border: 1px solid var(--red-bd); }
+    .reason-defer { background: var(--amber-bg); border: 1px solid var(--amber-bd); }
+    .reason-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .reason-title-kept  { color: var(--green); }
+    .reason-title-cut   { color: var(--red); }
+    .reason-title-defer { color: var(--amber); }
+    .reason-text { color: var(--gray-700); line-height: 1.55; }
+
+    .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .tag {
+      font-size: 11px;
+      padding: 2px 9px;
+      border-radius: 20px;
+      border: 1px solid var(--gray-200);
+      background: var(--gray-50);
+      color: var(--gray-600);
+    }
+
+    /* ── ARCHITECTURE ── */
+    .arch-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+    }
+    .arch-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .arch-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--gray-400);
+      margin-bottom: 10px;
+    }
+    .arch-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 13px;
+      color: var(--gray-700);
+    }
+    .arch-item:last-child { border-bottom: none; }
+    .arch-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    /* ── API TABLE ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    thead tr { background: var(--gray-900); }
+    thead th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: white;
+      letter-spacing: 0.04em;
+    }
+    thead th:first-child { border-radius: 10px 0 0 10px; }
+    thead th:last-child  { border-radius: 0 10px 10px 0; }
+    tbody tr {
+      border-bottom: 1px solid var(--gray-100);
+      transition: background 0.1s;
+    }
+    tbody tr:hover { background: var(--gray-50); }
+    tbody td { padding: 11px 16px; color: var(--gray-700); vertical-align: top; }
+    td code {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 12px;
+      background: var(--gray-100);
+      padding: 2px 7px;
+      border-radius: 5px;
+      color: var(--blue-dark);
+    }
+    .method-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: monospace;
+    }
+    .method-post { background: #FFF7ED; color: #EA580C; }
+    .method-get  { background: #F0FDF4; color: #16A34A; }
+    .method-patch{ background: #EEF2FF; color: #4F46E5; }
+
+    /* ── PREMORTEM ── */
+    .premortem-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 18px;
+    }
+    .premortem-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .severity {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+    .sev-high   { background: var(--red-bg);   color: var(--red);   border: 1px solid var(--red-bd); }
+    .sev-medium { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-bd); }
+    .sev-low    { background: var(--blue-light); color: var(--blue); border: 1px solid #b3d4f5; }
+    .pm-title   { font-size: 16px; font-weight: 700; color: var(--gray-900); }
+    .pm-finding {
+      background: var(--red-bg);
+      border: 1px solid var(--red-bd);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+    .pm-fix {
+      background: var(--green-bg);
+      border: 1px solid var(--green-bd);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+    .pm-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 5px;
+    }
+    .pm-red   { color: var(--red); }
+    .pm-green { color: var(--green); }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 9px; top: 8px; bottom: 8px;
+      width: 2px;
+      background: var(--gray-200);
+    }
+    .tl-item { position: relative; margin-bottom: 28px; }
+    .tl-dot {
+      position: absolute;
+      left: -23px;
+      top: 5px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--gray-200);
+    }
+    .tl-blue   { background: var(--blue); box-shadow: 0 0 0 2px #b3d4f5; }
+    .tl-green  { background: var(--green); box-shadow: 0 0 0 2px var(--green-bd); }
+    .tl-amber  { background: var(--amber); box-shadow: 0 0 0 2px var(--amber-bd); }
+    .tl-title  { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
+    .tl-detail { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+
+    /* ── ENV VARS ── */
+    .env-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .env-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .env-req {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+    .env-required { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-bd); }
+    .env-optional { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-bd); }
+    .env-name  { font-family: monospace; font-size: 13px; font-weight: 600; color: var(--gray-900); }
+    .env-desc  { font-size: 12.5px; color: var(--gray-500); margin-top: 2px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--gray-200);
+      padding: 28px 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      border-radius: 14px;
+      padding: 18px 22px;
+      margin-bottom: 24px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .callout-warn { background: var(--amber-bg); border: 1px solid var(--amber-bd); }
+    .callout-info { background: var(--blue-light); border: 1px solid #b3d4f5; }
+    .callout-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .callout-body { font-size: 13.5px; line-height: 1.6; color: var(--gray-700); }
+    .callout-body strong { color: var(--gray-900); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <div class="nav-logo">JR</div>
+      ResumeRadar
+      <span class="nav-badge">AI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#built">Built</a></li>
+      <li><a href="#cut">Cut</a></li>
+      <li><a href="#premortem">Premortem</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#api">API</a></li>
+      <li><a href="#decisions">Decisions</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="container">
+  <div class="hero">
+    <div class="hero-meta">
+      <span class="pill pill-blue">v1.0</span>
+      <span class="pill pill-green">✓ Build passing</span>
+      <span class="pill pill-gray">Generated 2026-05-08</span>
+    </div>
+    <h1>ResumeRadar — <span>Project Report</span></h1>
+    <p class="hero-desc">
+      An AI-powered job search platform built for international candidates targeting Canada.
+      This report documents every feature built, every decision to cut or defer, and the reasoning behind each choice.
+    </p>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">9</div><div class="stat-lbl">Features Built</div></div>
+      <div class="stat-card"><div class="stat-num">10</div><div class="stat-lbl">API Endpoints</div></div>
+      <div class="stat-card"><div class="stat-num">7</div><div class="stat-lbl">AI Prompts</div></div>
+      <div class="stat-card"><div class="stat-num">5</div><div class="stat-lbl">Features Cut</div></div>
+      <div class="stat-card"><div class="stat-num">4</div><div class="stat-lbl">Deferred</div></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  SECTION 1 — WHAT WAS BUILT                               -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section" id="built">
+    <div class="section-header">
+      <div class="section-icon" style="background:#F0FDF4; font-size:20px;">✅</div>
+      <div>
+        <h2>Features Built &amp; Kept</h2>
+        <div class="section-sub">9 features shipped — each with the reason it made the cut</div>
+      </div>
+    </div>
+
+    <div class="card-grid">
+
+      <!-- 1 -->
+      <div class="feature-card card-kept">
+        <div class="card-status status-kept">✓ SHIPPED</div>
+        <div class="card-title">
+          CV Upload + Enrichment
+          <span class="card-route">/upload</span>
+        </div>
+        <div class="card-desc">
+          User uploads a PDF CV (max 2 MB) and optionally attaches up to 5 "boost" documents —
+          PDF, DOCX, PPTX, or TXT (max 20 MB each). GPT-4o parses the CV into a structured profile.
+          Extra document text is stored as <code>enrichment_context</code> and injected into every downstream AI prompt.
+        </div>
+        <div class="reason-block reason-kept">
+          <div class="reason-title reason-title-kept">Why it's here</div>
+          <div class="reason-text">This is the foundation of everything. Without a CV, the optimizer, cover letter, and job scoring have no candidate context. The enrichment feature (PPTX/DOCX portfolio docs) is the key differentiator — it lets the AI pull real project metrics into bullets without the user rewriting their CV manually.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">pdf-parse</span><span class="tag">mammoth</span><span class="tag">adm-zip</span>
+          <span class="tag">GPT-4o</span><span class="tag">Rate limit: 5/day</span>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="feature-card card-kept">
+        <div class="card-status status-kept">✓ SHIPPED</div>
+        <div class="card-title">
+          Job Feed (JobBank + Adzuna)
+          <span class="card-route">/jobs</span>
+        </div>
+        <div class="card-desc">
+          Two modes: manual search (enter job title) and CV scan (AI generates 4 queries from the CV profile).
+          Both run JobBank Canada (Cheerio scraper) and Adzuna API in parallel per query.
+          Each job is classified by GPT-4o for visa sponsorship likelihood (high/medium/low), international friendliness, and relocation support.
+        </div>
+        <div class="reason-block reason-kept">
+          <div class="reason-title reason-title-kept">Why it's here</div>
+          <div class="reason-text">The core product loop — without jobs, nothing else in the app makes sense. Dual source (JobBank + Adzuna) gives broader coverage. The visa likelihood scoring is the primary differentiator: it filters noise for the target user (international candidates who only care about roles that can sponsor them).</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">Cheerio</span><span class="tag">Adzuna API</span><span class="tag">GPT-4o classification</span>
+          <span class="tag">Deduplication</span><span class="tag">Rate limit: 3/day</span>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="feature-card card-kept">
+        <div class="card-status status-kept">✓ SHIPPED</div>
+        <div class="card-title">
+          ATS Resume Optimizer
+          <span class="card-route">/optimize</span>
+        </div>
+        <div class="card-desc">
+          Takes a saved CV + a pasted job description. GPT-4o rewrites the CV to maximize ATS keyword match
+          while staying 100% truthful to the source. Returns before/after ATS scores, matched and missing keywords,
+          improvement notes, and a full optimized CV (CVData JSON) that can be downloaded as a PDF.
+        </div>
+        <div class="reason-block reason-kept">
+          <div class="reason-title reason-title-kept">Why it's here</div>
+          <div class="reason-text">ATS optimization is the main monetizable feature — the #1 pain point for international candidates who get zero callbacks despite being qualified. The strict bullet-count rule (4–6 per role) and keyword injection make the output genuinely usable, not just reordered text.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">CVData JSON</span><span class="tag">html2pdf.js</span>
+          <span class="tag">Score ring SVG</span><span class="tag">Rate limit: 10/day</span>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="feature-card card-kept">
+        <div class="card-status status-kept">✓ SHIPPED</div>
+        <div class="card-title">
+          Cover Letter Generator
+          <span class="card-route">/cover-letter</span>
+        </div>
+        <div class="card-desc">
+          Input: CV + job description text or a job URL (server-side fetch + HTML strip).
+          Language toggle: Canadian English or Quebec French.
+          Output: 3–4 paragraph cover letter with proper letterhead — subject line, greeting, paragraphs, closing, contact info.
+          Can be copied as text or downloaded as a PDF.
+        </div>
+        <div class="reason-block reason-kept">
+          <div class="reason-title reason-title-kept">Why it's here</div>
+          <div class="reason-text">Completes the application package. The URL fetch feature is critical — most users find jobs on LinkedIn or Indeed and shouldn't have to copy-paste the full description. The bilingual output (EN/FR) is uniquely Canadian and covers Quebec employers who require French.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">URL fetcher</span><span class="tag">Quebec French</span>
+          <span class="tag">enrichment_context injection</span><span class="tag">Rate limit: 10/day</span>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="feature-card card-kept">
+        <div class="card-status status-kept">✓ SHIPPED</div>
+        <div class="card-title">
+          Interview Prep Coach
+          <span class="card-route">/interview</span>
+        </div>
+        <div class="card-desc">
+          Generates 12 tailored interview questions (4 behavioral, 4 technical, 2 situational, 2 Canadian culture)
+          from a job description + optional CV. Each question includes a practice area where the user types their STAR answer
+          and receives AI feedback: score (1–10), STAR breakdown (strong/weak/missing per element),
+          strengths, improvements, and a model rewrite.
+        </div>
+        <div class="reason-block reason-kept">
+          <div class="reason-title reason-title-kept">Why it's here</div>
+          <div class="reason-text">Completes the full hiring funnel. This feature has zero data accuracy risk (unlike salary or immigration data) and high perceived value. The Canadian culture questions address a real pain point for immigrants who aren't familiar with Canadian workplace communication norms. Low liability, high stickiness.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">STAR method</span><span class="tag">Canadian culture tips</span>
+          <span class="tag">Questions: 15/day</span><span class="tag">Feedback: 30/day</span>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="feature-card card-kept">
+        <div class="card-status status-kept">✓ SHIPPED</div>
+        <div class="card-title">
+          Application Tracker
+          <span class="card-route">/tracker</span>
+        </div>
+        <div class="card-desc">
+          Kanban board with 6 columns: saved → applied → screening → interview → offer → rejected.
+          Drag-and-drop via @dnd-kit. Notes field per application, applied_at timestamp.
+          Full job details visible in each card.
+        </div>
+        <div class="reason-block reason-kept">
+          <div class="reason-title reason-title-kept">Why it's here</div>
+          <div class="reason-text">Retention anchor. Without a tracker, users apply once and leave. With it, they keep coming back to update statuses, which feeds the Dashboard analytics and creates a habit loop. It's also the simplest feature to build and one of the most-requested by job seekers.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">@dnd-kit</span><span class="tag">6 statuses</span>
+          <span class="tag">Supabase real-time</span><span class="tag">Rate limit: 100/day</span>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="feature-card card-kept">
+        <div class="card-status status-kept">✓ SHIPPED</div>
+        <div class="card-title">
+          Analytics Dashboard
+          <span class="card-route">/dashboard</span>
+        </div>
+        <div class="card-desc">
+          Metrics: total applications, applied count, response rate, avg ATS score, avg relocation score.
+          Visa distribution chart (Recharts). GPT-4o generates career insights only when the user has at least 1 application —
+          best countries, best job types, improvement tips.
+        </div>
+        <div class="reason-block reason-kept">
+          <div class="reason-title reason-title-kept">Why it's here</div>
+          <div class="reason-text">Closes the feedback loop. Users who see their response rate and ATS trends stay engaged longer. The AI insights are gated behind real data (min 1 application) to avoid empty advice — a deliberate design decision to keep quality high.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">Recharts</span><span class="tag">GPT-4o insights</span>
+          <span class="tag">Rate limit: 100/day</span>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="feature-card card-kept">
+        <div class="card-status status-kept">✓ SHIPPED</div>
+        <div class="card-title">
+          CV Generator (ATS PDF)
+          <span class="card-route">/api/cv/generate</span>
+        </div>
+        <div class="card-desc">
+          Generates a full ATS-optimized Canadian CV from a CV profile + target job descriptions.
+          Detects whether to produce English, French, or both based on job description language signals.
+          Output: CVData JSON → "Modern Professional" PDF template (Georgia serif name, Arial body,
+          inline-only styles to prevent html2pdf.js leakage).
+        </div>
+        <div class="reason-block reason-kept">
+          <div class="reason-title reason-title-kept">Why it's here</div>
+          <div class="reason-text">The PDF download is the tangible deliverable users came for. The template rewrite (fixing the html2pdf style-bleed bug) was critical — the first version rendered incorrectly because &lt;style&gt; tags in innerHTML leak into the browser's global scope. The fix (inline-only styles + container.firstElementChild capture) was non-obvious and essential.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">html2pdf.js</span><span class="tag">Modern Professional template</span>
+          <span class="tag">Bilingual EN/FR</span><span class="tag">Rate limit: 10/day</span>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="feature-card card-kept">
+        <div class="card-status status-kept">✓ SHIPPED</div>
+        <div class="card-title">
+          Auth, Settings, Account
+          <span class="card-route">/login /settings /account</span>
+        </div>
+        <div class="card-desc">
+          Supabase Auth (magic link + Google OAuth ready). All API routes protected by requireUser() guard.
+          All data scoped to user_id. Settings page for preferences.
+          Account page for export and deletion. Privacy and Terms pages.
+        </div>
+        <div class="reason-block reason-kept">
+          <div class="reason-title reason-title-kept">Why it's here</div>
+          <div class="reason-text">Non-negotiable for a multi-user platform. Per-user data isolation is enforced at the database level (every query filters by user_id). GDPR-style data export and deletion are included to stay compliant with Canadian PIPEDA requirements.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">@supabase/ssr</span><span class="tag">Magic link</span>
+          <span class="tag">PIPEDA compliance</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  SECTION 2 — WHAT WAS CUT AND WHY                         -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section" id="cut">
+    <div class="section-header">
+      <div class="section-icon" style="background:#FEF2F2; font-size:20px;">✂️</div>
+      <div>
+        <h2>Features Cut — and Why</h2>
+        <div class="section-sub">Planned features that were explicitly removed. These are not "coming soon" — they were cut for hard reasons.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body">
+        <strong>Cut ≠ Failed.</strong> Cutting a feature before it ships is good engineering. The features below were cut
+        because shipping them as-scoped would have created legal liability, destroyed user trust through inaccuracy,
+        or required data sources that don't exist. Each cut makes the product sharper.
+      </div>
+    </div>
+
+    <div class="card-grid">
+
+      <!-- CRS ESTIMATOR -->
+      <div class="feature-card card-cut">
+        <div class="card-status status-cut">✂ CUT</div>
+        <div class="card-title">Express Entry CRS Score Estimator</div>
+        <div class="card-desc">
+          Originally planned as part of the "Immigration Intelligence Layer": the user inputs their profile
+          and receives a Comprehensive Ranking System (CRS) score estimate used for Canada's Express Entry immigration program.
+        </div>
+        <div class="reason-block reason-cut">
+          <div class="reason-title reason-title-cut">Why it was cut — Legal liability</div>
+          <div class="reason-text">
+            Under Canadian law (IRCC regulations), only Regulated Canadian Immigration Consultants (RCICs) and immigration lawyers
+            are permitted to provide immigration advice. "Your CRS score is 423 and you qualify for Express Entry"
+            is immigration advice, even if prefaced with a disclaimer. If a user acts on a wrong estimate
+            and misses a filing window or enters the wrong Express Entry pool, the platform faces real legal exposure.
+            No disclaimer negates this under IRCC's framework — the advice is the problem, not the framing.
+            <br><br>
+            <strong>What we kept instead:</strong> A NOC code display (informational, not advisory)
+            with a hard callout: "Consult a Regulated Canadian Immigration Consultant (RCIC) for immigration decisions."
+          </div>
+        </div>
+      </div>
+
+      <!-- SPONSORSHIP LIKELY TAG -->
+      <div class="feature-card card-cut">
+        <div class="card-status status-cut">✂ CUT</div>
+        <div class="card-title">"Sponsorship Likely" Job Tagging</div>
+        <div class="card-desc">
+          Jobs in the feed were to be tagged with a "Sponsorship likely" badge based on AI analysis of
+          company size, industry, job description keywords, and employer history with work permits.
+        </div>
+        <div class="reason-block reason-cut">
+          <div class="reason-title reason-title-cut">Why it was cut — Accuracy &lt; 60%, trust destroyed</div>
+          <div class="reason-text">
+            There is no reliable signal for whether a specific employer will sponsor a work permit for a specific role.
+            Company size correlates weakly. The absence of "visa sponsorship" in a job posting doesn't mean they won't —
+            and its presence doesn't mean they will. An AI making this call from job description text alone would be wrong
+            roughly 40–50% of the time. A badge that's wrong half the time is worse than no badge:
+            users apply to jobs expecting sponsorship and get rejected at the offer stage.
+            That experience destroys trust in the entire product.
+            <br><br>
+            <strong>What we kept instead:</strong> The existing high/medium/low classification based strictly on what is
+            explicitly stated in the job description (high = explicitly mentions visa/work permit, medium = multinational, low = unclear).
+          </div>
+        </div>
+      </div>
+
+      <!-- PNP ELIGIBILITY -->
+      <div class="feature-card card-cut">
+        <div class="card-status status-cut">✂ CUT</div>
+        <div class="card-title">Provincial Nominee Program (PNP) Eligibility Checker</div>
+        <div class="card-desc">
+          Would scan the user's profile and show which provincial streams they might be eligible for
+          across all 13 Canadian provinces and territories.
+        </div>
+        <div class="reason-block reason-cut">
+          <div class="reason-title reason-title-cut">Why it was cut — Maintenance cost + legal risk</div>
+          <div class="reason-text">
+            PNP eligibility rules change frequently — some provinces update streams monthly.
+            Ontario's Human Capital Priorities stream, BC PNP Tech, Alberta Opportunity Stream:
+            each has different occupation lists, score thresholds, language requirements, and intake periods
+            that open and close unpredictably. Building this accurately would require a team monitoring 13 provincial
+            immigration websites continuously and updating a rules engine.
+            As a solo developer, maintaining stale PNP data creates the same liability as the CRS estimator
+            — users make decisions based on outdated information.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  SECTION 3 — DEFERRED (NOT CUT, NOT YET BUILT)            -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#FFFBEB; font-size:20px;">⏳</div>
+      <div>
+        <h2>Features Deferred — Later, Not Never</h2>
+        <div class="section-sub">These were planned but need specific prerequisites before they can ship correctly.</div>
+      </div>
+    </div>
+
+    <div class="card-grid card-grid-3">
+
+      <!-- JOB ALERTS -->
+      <div class="feature-card card-defer">
+        <div class="card-status status-defer">⏳ DEFERRED</div>
+        <div class="card-title">Job Alerts &amp; Email Digest</div>
+        <div class="card-desc">
+          Weekly/daily email of new matching jobs. Originally scoped for 1–2 days but revised after premortem identified hidden complexity.
+        </div>
+        <div class="reason-block reason-defer">
+          <div class="reason-title reason-title-defer">Why it's deferred — Wrong scope estimate</div>
+          <div class="reason-text">
+            "Match your CV" requires a skill-index pipeline that doesn't exist. CASL (Canada's anti-spam law)
+            requires a verifiable one-click unsubscribe or the sender faces fines.
+            Resend will suspend accounts with high unsubscribe rates.
+            <br><br>
+            <strong>Prerequisite to ship:</strong> Build keyword-only matching first (v1 = match job title to user's last search),
+            add unsubscribe endpoint, configure Resend with proper SPF/DKIM for the domain.
+          </div>
+        </div>
+      </div>
+
+      <!-- SALARY INTELLIGENCE -->
+      <div class="feature-card card-defer">
+        <div class="card-status status-defer">⏳ DEFERRED</div>
+        <div class="card-title">Salary Intelligence</div>
+        <div class="card-desc">
+          Province-by-province salary bands by NOC code. Cost-of-living comparison.
+          Auto-inject salary range into cover letters.
+        </div>
+        <div class="reason-block reason-defer">
+          <div class="reason-title reason-title-defer">Why it's deferred — No reliable data source</div>
+          <div class="reason-text">
+            AI-estimated salary data will be wrong for niche roles and small provinces.
+            Auto-injecting wrong salary expectations into a cover letter makes the candidate look uninformed —
+            worse than not having the feature.
+            <br><br>
+            <strong>Prerequisite to ship:</strong> Integrate StatsCan Job Vacancy and Wage Survey data (annual CSV, publicly available)
+            mapped to NOC 2021 codes. Only then should salary data appear in the UI.
+          </div>
+        </div>
+      </div>
+
+      <!-- NOC MATCHER -->
+      <div class="feature-card card-defer">
+        <div class="card-status status-defer">⏳ DEFERRED</div>
+        <div class="card-title">NOC Code Matcher</div>
+        <div class="card-desc">
+          Map the user's job title and skills to the correct NOC 2021 code (National Occupational Classification).
+          Display the code with a link to ESDC's official description.
+        </div>
+        <div class="reason-block reason-defer">
+          <div class="reason-title reason-title-defer">Why it's deferred — Accuracy requirement</div>
+          <div class="reason-text">
+            GPT-4o hallucinating a wrong NOC code is a real risk — "Software Engineer" and "Software Developer"
+            map to different codes in NOC 2021, and the distinction matters for immigration applications.
+            <br><br>
+            <strong>Prerequisite to ship:</strong> Load ESDC's official NOC 2021 dataset into a vector store and
+            use semantic search against canonical descriptions — not prompt-only classification.
+            Add a hard disclaimer: "Informational only — verify with an RCIC before using in any application."
+          </div>
+        </div>
+      </div>
+
+      <!-- LINKEDIN OPTIMIZER -->
+      <div class="feature-card card-defer">
+        <div class="card-status status-defer">⏳ DEFERRED</div>
+        <div class="card-title">LinkedIn Profile Optimizer</div>
+        <div class="card-desc">Paste LinkedIn About/Experience → AI rewrites for Canadian ATS. Headline + summary generator.</div>
+        <div class="reason-block reason-defer">
+          <div class="reason-title reason-title-defer">Why it's deferred — Scope, not risk</div>
+          <div class="reason-text">
+            Technically straightforward (same flow as ATS optimizer). Deferred because the existing
+            CV + cover letter + interview prep pipeline is more impactful for the current user.
+            <br><br>
+            <strong>When to ship:</strong> After job alerts. LinkedIn optimizer is a Tier 2 feature — valuable
+            but not on the critical path for getting a Canadian job offer.
+          </div>
+        </div>
+      </div>
+
+      <!-- GC JOBS -->
+      <div class="feature-card card-defer">
+        <div class="card-status status-defer">⏳ DEFERRED</div>
+        <div class="card-title">GC Jobs Integration</div>
+        <div class="card-desc">Government of Canada jobs feed (jobs.gc.ca). Federal jobs are major for immigrants — stability + PR pathways.</div>
+        <div class="reason-block reason-defer">
+          <div class="reason-title reason-title-defer">Why it's deferred — Scraper complexity</div>
+          <div class="reason-text">
+            GC Jobs has anti-scraping measures and no public API. A Cheerio scraper is possible but fragile.
+            The current JobBank scraper is already fragile — adding a second fragile scraper doubles maintenance.
+            <br><br>
+            <strong>When to ship:</strong> After stabilizing JobBank scraper with a fallback (retry + selector versioning)
+            and validating user demand for federal jobs specifically.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  SECTION 4 — PREMORTEM FINDINGS                           -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section" id="premortem">
+    <div class="section-header">
+      <div class="section-icon" style="background:#FEF2F2; font-size:20px;">🔍</div>
+      <div>
+        <h2>Premortem Findings</h2>
+        <div class="section-sub">We ran a premortem on the original 4-feature roadmap. Here's what we found and how we responded.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        A <strong>premortem</strong> asks: "It's 3 months from now and this roadmap failed. Work backwards — what killed it?"
+        Running this before writing code saved us from 3 significant mistakes.
+      </div>
+    </div>
+
+    <!-- Finding 1 -->
+    <div class="premortem-card">
+      <div class="premortem-header">
+        <span class="severity sev-high">HIGH RISK</span>
+        <div class="pm-title">Job Alerts — "1–2 days" was wrong by a factor of 3</div>
+      </div>
+      <div class="pm-finding">
+        <div class="pm-label pm-red">🔥 What would have killed it</div>
+        The "match your CV" alert requires a skill-index pipeline that doesn't exist. Without it,
+        users get irrelevant emails → high unsubscribe rate → Resend suspends the account for spam signals.
+        Also: CASL (Canada's Anti-Spam Law) requires a verifiable one-click unsubscribe in every commercial email —
+        missing this is a $1M CAD fine risk.
+      </div>
+      <div class="pm-fix">
+        <div class="pm-label pm-green">✓ What we did instead</div>
+        Deferred to after the core funnel is proven. When built: v1 will use keyword-only matching
+        (no CV skill index), include a proper unsubscribe endpoint, and configure Resend with
+        domain SPF/DKIM before sending a single email.
+      </div>
+    </div>
+
+    <!-- Finding 2 -->
+    <div class="premortem-card">
+      <div class="premortem-header">
+        <span class="severity sev-high">HIGH RISK — LEGAL</span>
+        <div class="pm-title">CRS Estimator — immigration advice without an RCIC license</div>
+      </div>
+      <div class="pm-finding">
+        <div class="pm-label pm-red">🔥 What would have killed it</div>
+        IRCC explicitly prohibits non-RCICs from giving immigration advice. "Your CRS score is 423"
+        is immigration advice regardless of the disclaimer. Wrong estimate + user misses filing window =
+        platform liability. Canadian courts have ruled on this. This is not hypothetical.
+      </div>
+      <div class="pm-fix">
+        <div class="pm-label pm-green">✓ What we did instead</div>
+        Cut the CRS estimator entirely. When the NOC matcher ships, it will display the code
+        as purely informational with a hard callout: "Not immigration advice. Consult a Regulated Canadian
+        Immigration Consultant (RCIC) for any immigration decisions."
+      </div>
+    </div>
+
+    <!-- Finding 3 -->
+    <div class="premortem-card">
+      <div class="premortem-header">
+        <span class="severity sev-high">HIGH RISK — DATA</span>
+        <div class="pm-title">Salary Intelligence — no real data source exists for free</div>
+      </div>
+      <div class="pm-finding">
+        <div class="pm-label pm-red">🔥 What would have killed it</div>
+        AI-estimated salary bands by NOC and province will be confidently wrong for niche roles and small provinces.
+        Auto-injecting wrong salary expectations into a cover letter makes the candidate look uninformed
+        in interviews. This is worse than the feature not existing at all.
+      </div>
+      <div class="pm-fix">
+        <div class="pm-label pm-green">✓ What we did instead</div>
+        Deferred until StatsCan Job Vacancy and Wage Survey data (publicly available annual CSVs)
+        is properly loaded and indexed by NOC 2021 code. Only then should a salary estimate appear.
+      </div>
+    </div>
+
+    <!-- Finding 4 -->
+    <div class="premortem-card">
+      <div class="premortem-header">
+        <span class="severity sev-medium">MEDIUM RISK</span>
+        <div class="pm-title">Interview Prep — one-shot feature with no retention loop</div>
+      </div>
+      <div class="pm-finding">
+        <div class="pm-label pm-red">⚠ What would have degraded it</div>
+        Without saving sessions or tracking progress across questions, users run it once,
+        get generic questions, and never return. Overestimated stickiness.
+      </div>
+      <div class="pm-fix">
+        <div class="pm-label pm-green">✓ What we did instead</div>
+        Built per-question answer + feedback persistence in React state (answers and feedbacks indexed by question).
+        User can practice multiple questions in one session without losing progress when switching between them.
+        Future v2: persist sessions to Supabase so users can resume practice across sessions.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  SECTION 5 — ARCHITECTURE                                  -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section" id="architecture">
+    <div class="section-header">
+      <div class="section-icon" style="background:#EEF2FF; font-size:20px;">🏗</div>
+      <div>
+        <h2>Architecture</h2>
+        <div class="section-sub">Tech stack, data flow, and structural decisions</div>
+      </div>
+    </div>
+
+    <div class="arch-row">
+      <div class="arch-card">
+        <div class="arch-label">Frontend</div>
+        <div class="arch-item"><div class="arch-dot"></div>Next.js 16.2 (App Router)</div>
+        <div class="arch-item"><div class="arch-dot"></div>React 19 — client components where needed</div>
+        <div class="arch-item"><div class="arch-dot"></div>Tailwind CSS v4 — inline import syntax</div>
+        <div class="arch-item"><div class="arch-dot"></div>Recharts — dashboard charts</div>
+        <div class="arch-item"><div class="arch-dot"></div>@dnd-kit — drag-and-drop tracker</div>
+        <div class="arch-item"><div class="arch-dot"></div>html2pdf.js — client-side PDF generation</div>
+      </div>
+      <div class="arch-card">
+        <div class="arch-label">Backend &amp; Data</div>
+        <div class="arch-item"><div class="arch-dot"></div>Next.js API routes — Node.js runtime</div>
+        <div class="arch-item"><div class="arch-dot"></div>Supabase — PostgreSQL + Auth (SSR cookies)</div>
+        <div class="arch-item"><div class="arch-dot"></div>requireUser() guard on every route</div>
+        <div class="arch-item"><div class="arch-dot"></div>Rate limiting via Supabase RPC + api_usage table</div>
+        <div class="arch-item"><div class="arch-dot"></div>All data scoped to user_id (row-level isolation)</div>
+        <div class="arch-item"><div class="arch-dot"></div>maxDuration: 120s for slow AI routes</div>
+      </div>
+      <div class="arch-card">
+        <div class="arch-label">AI &amp; External APIs</div>
+        <div class="arch-item"><div class="arch-dot"></div>OpenAI GPT-4o — all AI features</div>
+        <div class="arch-item"><div class="arch-dot"></div>response_format: json_object — no parsing errors</div>
+        <div class="arch-item"><div class="arch-dot"></div>JobBank Canada — Cheerio scraper</div>
+        <div class="arch-item"><div class="arch-dot"></div>Adzuna API — second job source</div>
+        <div class="arch-item"><div class="arch-dot"></div>Server-side URL fetcher (cover letter, interview)</div>
+        <div class="arch-item"><div class="arch-dot"></div>mammoth (DOCX) + adm-zip (PPTX) extraction</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;" class="arch-card">
+      <div class="arch-label">Key Technical Decisions</div>
+      <div class="arch-item">
+        <div class="arch-dot"></div>
+        <div><strong>html2pdf.js style isolation:</strong> &lt;style&gt; tags in innerHTML bleed into the browser's global scope, making PDF columns render full-width. Fix: zero &lt;style&gt; blocks in PDF templates, all inline styles on a #cv-root div, capture container.firstElementChild (the 210mm div) not the wrapper, set html2canvas: { width: 794 }.</div>
+      </div>
+      <div class="arch-item">
+        <div class="arch-dot"></div>
+        <div><strong>page-break-inside: avoid scope:</strong> Applying this to sections (not entries) causes entire sections to be pushed to page 2, creating blank pages. Only apply to individual entry cards (per job, per education row).</div>
+      </div>
+      <div class="arch-item">
+        <div class="arch-dot"></div>
+        <div><strong>enrichment_context flow:</strong> Extra docs (PPTX/DOCX/PDF/TXT) are parsed server-side and stored in cv_profiles.enrichment_context (max 40k chars). This column is injected as "PROJECT &amp; PORTFOLIO CONTEXT" into every downstream AI prompt — optimizer, cover letter, and interview prep.</div>
+      </div>
+      <div class="arch-item">
+        <div class="arch-dot"></div>
+        <div><strong>Rate limit bypass in dev:</strong> checkAndIncrement() returns { allowed: true, remaining: 999 } when NODE_ENV === "development". No real API usage is counted during local development.</div>
+      </div>
+      <div class="arch-item">
+        <div class="arch-dot"></div>
+        <div><strong>bodySizeLimit: "25mb":</strong> Set in next.config.ts experimental.serverActions to handle large PPTX/PDF uploads. The default 1MB limit silently rejected files, which manifested as a cryptic parse error.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  SECTION 6 — API REFERENCE                                 -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section" id="api">
+    <div class="section-header">
+      <div class="section-icon" style="background:#F0FDF4; font-size:20px;">🔌</div>
+      <div>
+        <h2>API Reference</h2>
+        <div class="section-sub">All endpoints — method, input, output, rate limit. All require a valid Supabase session (401 otherwise).</div>
+      </div>
+    </div>
+
+    <div style="background:white; border:1px solid var(--gray-200); border-radius:16px; overflow:hidden;">
+      <table>
+        <thead>
+          <tr>
+            <th>Endpoint</th>
+            <th>Method</th>
+            <th>Input</th>
+            <th>Output</th>
+            <th>Limit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>/api/cv/parse</code></td>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td>FormData: cv (PDF), extras[] (PDF/DOCX/PPTX/TXT)</td>
+            <td>CVProfile + extras_parsed count</td>
+            <td>5/day</td>
+          </tr>
+          <tr>
+            <td><code>/api/cv/generate</code></td>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td>{ cv_id, job_ids[] }</td>
+            <td>{ cv_en: CVData, cv_fr: CVData }</td>
+            <td>10/day</td>
+          </tr>
+          <tr>
+            <td><code>/api/cv/optimize</code></td>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td>{ cv_id, job_description }</td>
+            <td>OptimizeResult (scores, keywords, optimized_cv)</td>
+            <td>10/day</td>
+          </tr>
+          <tr>
+            <td><code>/api/cover-letter</code></td>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td>{ cv_id, job_description?, job_url?, language? }</td>
+            <td>CoverLetterResult (paragraphs[], contact)</td>
+            <td>10/day</td>
+          </tr>
+          <tr>
+            <td><code>/api/interview-prep/questions</code></td>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td>{ cv_id?, job_description?, job_url? }</td>
+            <td>QuestionsResult (12 questions, culture_tips[])</td>
+            <td>15/day</td>
+          </tr>
+          <tr>
+            <td><code>/api/interview-prep/feedback</code></td>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td>{ question, answer, job_title? }</td>
+            <td>StarFeedback (score, breakdown, rewrite)</td>
+            <td>30/day</td>
+          </tr>
+          <tr>
+            <td><code>/api/jobs/fetch</code></td>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td>{ jobTitle?, country, visaOnly, cvId?, scanMode? }</td>
+            <td>{ jobs[], searchQuery, sources }</td>
+            <td>3/day</td>
+          </tr>
+          <tr>
+            <td><code>/api/jobs/score</code></td>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td>{ cvId, jobIds[] }</td>
+            <td>{ scored[] } with ats_score, relocation_score, decision</td>
+            <td>5/day</td>
+          </tr>
+          <tr>
+            <td><code>/api/tracker</code></td>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td>—</td>
+            <td>TrackerEntry[] with joined Job</td>
+            <td>100/day</td>
+          </tr>
+          <tr>
+            <td><code>/api/tracker</code></td>
+            <td><span class="method-badge method-post">POST</span></td>
+            <td>{ job_id }</td>
+            <td>TrackerEntry (status: "saved")</td>
+            <td>100/day</td>
+          </tr>
+          <tr>
+            <td><code>/api/tracker</code></td>
+            <td><span class="method-badge method-patch">PATCH</span></td>
+            <td>{ id, status?, notes?, applied_at? }</td>
+            <td>Updated TrackerEntry</td>
+            <td>100/day</td>
+          </tr>
+          <tr>
+            <td><code>/api/dashboard</code></td>
+            <td><span class="method-badge method-get">GET</span></td>
+            <td>—</td>
+            <td>Metrics, visa_distribution[], AI career insights</td>
+            <td>100/day</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  SECTION 7 — KEY DECISIONS                                 -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section" id="decisions">
+    <div class="section-header">
+      <div class="section-icon" style="background:#FFF7ED; font-size:20px;">⚖️</div>
+      <div>
+        <h2>Key Engineering Decisions</h2>
+        <div class="section-sub">Non-obvious choices and the reasoning behind them</div>
+      </div>
+    </div>
+
+    <div class="card-grid">
+
+      <div class="feature-card card-kept" style="border-top-color: var(--blue);">
+        <div class="card-title">Single PDF template — inline styles only</div>
+        <div class="card-desc">The cvPdf.ts template returns a raw &lt;div&gt; with no &lt;style&gt; block. All 40+ style properties are inlined on every element.</div>
+        <div class="reason-block reason-kept">
+          <div class="reason-title reason-title-kept">Decision</div>
+          <div class="reason-text">html2pdf.js uses html2canvas to rasterize DOM. When you inject a &lt;style&gt; block via innerHTML, the browser applies those styles globally — so body gets width: 210mm, breaking the page layout and clipping the right column. Inline-only styles are the only reliable escape. Combined with capturing container.firstElementChild (not the wrapper) and html2canvas width: 794, this produces pixel-accurate A4 output.</div>
+        </div>
+      </div>
+
+      <div class="feature-card card-kept" style="border-top-color: var(--blue);">
+        <div class="card-title">GPT-4o for all AI tasks — no Haiku/Sonnet split</div>
+        <div class="card-desc">Every AI feature uses GPT-4o with response_format: json_object. No model routing by task complexity.</div>
+        <div class="reason-block reason-kept">
+          <div class="reason-title reason-title-kept">Decision</div>
+          <div class="reason-text">CV optimization and cover letter generation require high output quality — a downgrade to a smaller model produces visibly worse bullet quality and keyword injection. The rate limits (5–15/day per feature) keep costs manageable at scale. json_object mode eliminates JSON parsing errors entirely — the model is forced to return valid JSON or the call fails cleanly.</div>
+        </div>
+      </div>
+
+      <div class="feature-card card-kept" style="border-top-color: var(--blue);">
+        <div class="card-title">enrichment_context stored at parse time, injected at use time</div>
+        <div class="card-desc">Extra documents are parsed and stored in the DB at upload. Each AI feature re-reads this column and injects it into the prompt.</div>
+        <div class="reason-block reason-kept">
+          <div class="reason-title reason-title-kept">Decision</div>
+          <div class="reason-text">Alternative: re-parse docs on each AI call. This would mean re-uploading files, hitting 25MB limits on every optimize call, and adding latency. Storing processed text solves all three. The 40k char limit on enrichment_context prevents token budget exhaustion in downstream prompts.</div>
+        </div>
+      </div>
+
+      <div class="feature-card card-kept" style="border-top-color: var(--blue);">
+        <div class="card-title">Fail-open rate limiting</div>
+        <div class="card-desc">If the rate limit RPC itself fails (network error, Supabase timeout), the call is allowed through with remaining: 1.</div>
+        <div class="reason-block reason-kept">
+          <div class="reason-title reason-title-kept">Decision</div>
+          <div class="reason-text">Failing closed (blocking the user when rate limit check fails) would cause false rejections during Supabase cold starts or edge timeouts. The cost of one extra AI call leaking through is lower than blocking a legitimate user. Rate limits are a soft guardrail, not a security boundary.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  SECTION 8 — ENVIRONMENT VARIABLES                         -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#F0FDF4; font-size:20px;">🔐</div>
+      <div>
+        <h2>Environment Variables</h2>
+        <div class="section-sub">Required to run the application</div>
+      </div>
+    </div>
+    <div class="env-grid">
+      <div class="env-card">
+        <span class="env-req env-required">REQUIRED</span>
+        <div>
+          <div class="env-name">OPENAI_API_KEY</div>
+          <div class="env-desc">All AI features (GPT-4o). Every feature degrades without this. App throws on startup if missing.</div>
+        </div>
+      </div>
+      <div class="env-card">
+        <span class="env-req env-required">REQUIRED</span>
+        <div>
+          <div class="env-name">NEXT_PUBLIC_SUPABASE_URL</div>
+          <div class="env-desc">Supabase project URL. Used both client-side (auth) and server-side (queries).</div>
+        </div>
+      </div>
+      <div class="env-card">
+        <span class="env-req env-required">REQUIRED</span>
+        <div>
+          <div class="env-name">NEXT_PUBLIC_SUPABASE_ANON_KEY</div>
+          <div class="env-desc">Public anon key for client-side Supabase (auth state, public reads).</div>
+        </div>
+      </div>
+      <div class="env-card">
+        <span class="env-req env-required">REQUIRED</span>
+        <div>
+          <div class="env-name">SUPABASE_SERVICE_ROLE_KEY</div>
+          <div class="env-desc">Server-only admin key. Bypasses Row Level Security for API routes that need cross-user access.</div>
+        </div>
+      </div>
+      <div class="env-card">
+        <span class="env-req env-optional">OPTIONAL</span>
+        <div>
+          <div class="env-name">ADZUNA_APP_ID</div>
+          <div class="env-desc">Adzuna job feed. If unset, the job fetch silently falls back to JobBank only — no error thrown.</div>
+        </div>
+      </div>
+      <div class="env-card">
+        <span class="env-req env-optional">OPTIONAL</span>
+        <div>
+          <div class="env-name">ADZUNA_APP_KEY</div>
+          <div class="env-desc">Required alongside APP_ID. Register at developer.adzuna.com — free tier covers ~50 calls/day.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  SECTION 9 — KNOWN LIMITATIONS                             -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#FEF2F2; font-size:20px;">🐛</div>
+      <div>
+        <h2>Known Limitations &amp; Tech Debt</h2>
+        <div class="section-sub">Honest list of what's imperfect — and whether it matters</div>
+      </div>
+    </div>
+
+    <div class="card-grid card-grid-3">
+      <div class="feature-card" style="border-top: 3px solid var(--red);">
+        <div class="card-title">Stale supabase-schema.sql</div>
+        <div class="card-desc">The committed schema file doesn't include enrichment_context, user_id columns, or the api_usage rate limit table. Live DB was migrated via Supabase MCP.</div>
+        <div class="reason-block reason-cut">
+          <div class="reason-title reason-title-cut">Impact: Medium</div>
+          <div class="reason-text">A fresh deployment from the SQL file alone would fail. A new dev would need to run the MCP migration history manually. Fix: regenerate schema from Supabase dashboard and commit it.</div>
+        </div>
+      </div>
+      <div class="feature-card" style="border-top: 3px solid var(--amber);">
+        <div class="card-title">JobBank scraper is fragile</div>
+        <div class="card-desc">Cheerio selectors against Job Bank Canada's HTML. Any site redesign will break the scraper — silently (returns empty results, not an error).</div>
+        <div class="reason-block reason-defer">
+          <div class="reason-title reason-title-defer">Impact: High if it breaks</div>
+          <div class="reason-text">Mitigate with a selector version file and an admin alert if the result count drops to 0 for 3 consecutive fetches. JobBank has a public API in beta — worth monitoring.</div>
+        </div>
+      </div>
+      <div class="feature-card" style="border-top: 3px solid var(--amber);">
+        <div class="card-title">No CV update or delete</div>
+        <div class="card-desc">cv_profiles only supports insert. Users accumulate CVs with no way to remove old ones from the UI.</div>
+        <div class="reason-block reason-defer">
+          <div class="reason-title reason-title-defer">Impact: Low now, medium at scale</div>
+          <div class="reason-text">A user with 10 CVs in the dropdown is a UX problem. Fix: add a delete button in the CV panel with a confirmation dialog. Also enable update (re-parse with a new PDF, same cv_id).</div>
+        </div>
+      </div>
+      <div class="feature-card" style="border-top: 3px solid var(--amber);">
+        <div class="card-title">No error monitoring</div>
+        <div class="card-desc">No Sentry, no server-side log aggregation beyond console.error. Production failures are invisible unless a user reports them.</div>
+        <div class="reason-block reason-defer">
+          <div class="reason-title reason-title-defer">Impact: High in production</div>
+          <div class="reason-text">Add Sentry (free tier) with Next.js plugin. Track: AI call failures, scraper empty results, rate limit hits (to validate the limits are set correctly), and PDF generation errors.</div>
+        </div>
+      </div>
+      <div class="feature-card" style="border-top: 3px solid var(--gray-400);">
+        <div class="card-title">@anthropic-ai/sdk installed but unused</div>
+        <div class="card-desc">The package is in dependencies but no route uses it. Leftover from an earlier exploration.</div>
+        <div class="reason-block" style="background: var(--gray-50); border: 1px solid var(--gray-200);">
+          <div class="reason-title" style="color: var(--gray-400);">Impact: Negligible</div>
+          <div class="reason-text">Adds ~1.5MB to the bundle. Run <code>npm uninstall @anthropic-ai/sdk</code> when convenient.</div>
+        </div>
+      </div>
+      <div class="feature-card" style="border-top: 3px solid var(--amber);">
+        <div class="card-title">Adzuna visa filter not implemented</div>
+        <div class="card-desc">The visaOnly parameter is accepted but ignored in the Adzuna integration — the API doesn't expose a visa filter.</div>
+        <div class="reason-block reason-defer">
+          <div class="reason-title reason-title-defer">Impact: Medium on UX</div>
+          <div class="reason-text">Adzuna results don't respect the "visa only" toggle. The GPT-4o classification still scores them correctly — it just means more "low" results appear in the feed when visaOnly is checked. No silent data quality issue, just UX noise.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  SECTION 10 — REVISED ROADMAP                              -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section" id="roadmap">
+    <div class="section-header">
+      <div class="section-icon" style="background:#EEF2FF; font-size:20px;">🗺</div>
+      <div>
+        <h2>Revised Roadmap (Post-Premortem)</h2>
+        <div class="section-sub">What to build next, in what order, and with what prerequisites</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot tl-green"></div>
+        <div class="tl-title">Phase 0 — Complete (shipped today)</div>
+        <div class="tl-detail">CV upload + enrichment, Job feed, ATS optimizer, Cover letter, Interview prep, Tracker, Dashboard, Auth. 9 features, 0 TypeScript errors.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot tl-blue"></div>
+        <div class="tl-title">Phase 1 — Fix the foundation (next 1 week)</div>
+        <div class="tl-detail">
+          Regenerate and commit supabase-schema.sql from live DB. Add CV delete/update to the upload page.
+          Install Sentry free tier. Fix Adzuna visa filter (post-filter results by GPT-4o classification, not API param).
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot tl-blue"></div>
+        <div class="tl-title">Phase 2 — Job Alerts v1 (2–3 days)</div>
+        <div class="tl-detail">
+          Keyword-only matching (user's last search query, not CV skill index). Weekly digest via Resend.
+          CASL-compliant one-click unsubscribe endpoint. Domain SPF/DKIM configured before first send.
+          <em>No CV-matching until a skill-index pipeline is built.</em>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot tl-blue"></div>
+        <div class="tl-title">Phase 3 — NOC Code Matcher (3–4 days)</div>
+        <div class="tl-detail">
+          Load ESDC NOC 2021 dataset into Supabase pgvector. Semantic search against canonical descriptions.
+          Display NOC code + title + link to official ESDC page. Hard disclaimer: "Informational only — not immigration advice."
+          <em>No CRS estimator. No PNP eligibility. Hard line.</em>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot tl-amber"></div>
+        <div class="tl-title">Phase 4 — Salary Intelligence (later)</div>
+        <div class="tl-detail">
+          Only after StatsCan JVWS data is loaded by NOC code. Province + NOC → salary band.
+          Show on job cards as context, not as a recommendation. Do not auto-inject into cover letters.
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot tl-amber"></div>
+        <div class="tl-title">Phase 5 — LinkedIn Optimizer + GC Jobs (later)</div>
+        <div class="tl-detail">
+          LinkedIn optimizer: same pipeline as ATS optimizer, different input (LinkedIn About/Experience text).
+          GC Jobs: only after JobBank scraper has selector versioning and retry logic — don't add a second fragile scraper without stabilizing the first.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <div class="container">
+    ResumeRadar — Project Report &nbsp;·&nbsp; Generated 2026-05-08 &nbsp;·&nbsp; Branch: claude/ats-resume-optimizer-h4qJO
+  </div>
+</footer>
+
+</body>
+</html>

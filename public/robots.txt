@@ -1,0 +1,42 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /optimize
+Disallow: /build-resume
+Disallow: /upload
+Disallow: /jobs
+Disallow: /tracker
+Disallow: /cover-letter
+Disallow: /interview
+Disallow: /library
+Disallow: /settings
+
+# AI search crawlers — allow for GEO visibility
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Block raw training harvesters
+User-agent: CCBot
+Disallow: /
+
+Sitemap: https://resumeradar.io/sitemap.xml

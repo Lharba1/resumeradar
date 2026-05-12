@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Premortem Report — ResumeRadar</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0d0d0f;
+    color: #e2e2e5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 48px 24px 80px;
+  }
+  .container { max-width: 860px; margin: 0 auto; }
+
+  /* Header */
+  .header { margin-bottom: 48px; border-bottom: 1px solid #2a2a35; padding-bottom: 32px; }
+  .tag {
+    display: inline-block;
+    background: #1e1a2e;
+    color: #a78bfa;
+    border: 1px solid #3b2f6e;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    margin-bottom: 16px;
+  }
+  h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .subtitle { color: #888; font-size: 14px; }
+
+  /* Synthesis cards */
+  .synthesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+  .synth-card {
+    background: #13131a;
+    border: 1px solid #22223a;
+    border-radius: 12px;
+    padding: 20px 22px;
+  }
+  .synth-card.full { grid-column: 1 / -1; }
+  .synth-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .synth-label.likely  { color: #f59e0b; }
+  .synth-label.danger  { color: #ef4444; }
+  .synth-label.hidden  { color: #a78bfa; }
+  .synth-card p { font-size: 14px; color: #ccc; line-height: 1.6; }
+  .synth-card strong { color: #fff; }
+
+  /* Section titles */
+  h2 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin: 48px 0 20px;
+  }
+
+  /* Failure cards */
+  .failure-grid { display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; }
+  .failure-card {
+    background: #13131a;
+    border: 1px solid #22223a;
+    border-radius: 12px;
+    padding: 24px 26px;
+  }
+  .failure-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; }
+  .severity-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0; margin-top: 6px;
+  }
+  .sev-critical { background: #ef4444; box-shadow: 0 0 8px #ef4444aa; }
+  .sev-high     { background: #f97316; box-shadow: 0 0 8px #f97316aa; }
+  .sev-medium   { background: #f59e0b; box-shadow: 0 0 8px #f59e0baa; }
+  .failure-title { font-size: 16px; font-weight: 600; color: #fff; }
+  .failure-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 2px 8px;
+    margin-top: 4px;
+  }
+  .badge-critical { background: #2d1515; color: #ef4444; border: 1px solid #5a1e1e; }
+  .badge-high     { background: #2d1d10; color: #f97316; border: 1px solid #5a341a; }
+  .badge-medium   { background: #2d2410; color: #f59e0b; border: 1px solid #5a4614; }
+
+  .failure-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #555;
+    margin: 14px 0 6px;
+  }
+  .failure-card p { font-size: 14px; color: #bbb; line-height: 1.65; margin-bottom: 8px; }
+  .failure-card ul { padding-left: 18px; }
+  .failure-card li { font-size: 14px; color: #bbb; margin-bottom: 5px; line-height: 1.5; }
+  .assumption-box {
+    background: #1a1a2e;
+    border-left: 3px solid #4c4caa;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #c0b8f0;
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* Revised plan table */
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #555;
+    padding: 8px 12px;
+    border-bottom: 1px solid #22223a;
+  }
+  td {
+    padding: 12px 12px;
+    font-size: 14px;
+    color: #bbb;
+    border-bottom: 1px solid #1a1a22;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  .p-critical { color: #ef4444; font-weight: 700; font-size: 12px; }
+  .p-high     { color: #f97316; font-weight: 700; font-size: 12px; }
+  .p-medium   { color: #f59e0b; font-weight: 700; font-size: 12px; }
+
+  /* Checklist */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #1a1a22;
+    font-size: 14px; color: #bbb;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 18px; height: 18px; flex-shrink: 0;
+    border: 2px solid #3a3a55;
+    border-radius: 4px; margin-top: 1px;
+  }
+
+  /* One-thing box */
+  .one-thing {
+    background: linear-gradient(135deg, #1a1030, #150e2a);
+    border: 1px solid #4c2e8a;
+    border-radius: 14px;
+    padding: 28px 30px;
+    margin-top: 48px;
+    text-align: center;
+  }
+  .one-thing .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #7c5cbf; margin-bottom: 10px; }
+  .one-thing p { font-size: 17px; font-weight: 600; color: #d8b4fe; line-height: 1.5; }
+
+  /* Footer */
+  .footer { text-align: center; color: #333; font-size: 12px; margin-top: 60px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="tag">Premortem Report</div>
+    <h1>ResumeRadar</h1>
+    <p class="subtitle">Generated 2026-05-06 &nbsp;·&nbsp; 6 failure modes analyzed &nbsp;·&nbsp; Assumes failure 6 months from now</p>
+  </div>
+
+  <!-- Synthesis -->
+  <h2>Synthesis</h2>
+  <div class="synthesis-grid">
+    <div class="synth-card">
+      <div class="synth-label likely">Most Likely Failure</div>
+      <p><strong>No auth kills retention before the product can grow.</strong> Every user who uploads a CV and generates a tailored CV loses all of it when they close the tab. They return to a blank slate. The app acquires users continuously but retains none — a leaky bucket. Every growth lever (alerts, saved searches, referrals) is structurally unavailable.</p>
+    </div>
+    <div class="synth-card">
+      <div class="synth-label danger">Most Dangerous Failure</div>
+      <p><strong>One viral post triggers a $42,000/month API bill overnight.</strong> 2,000 daily users × 42 GPT-4o calls = $420/day. One bot operator discovers the open endpoint: $1,200/day. OpenAI suspends the account mid-month. The app goes dark with users mid-workflow, no warning, no graceful shutdown.</p>
+    </div>
+    <div class="synth-card full">
+      <div class="synth-label hidden">The Hidden Assumption</div>
+      <p style="font-size:15px; font-style:italic; color:#d0c8f8;">"Users complete their full job-search workflow in one session, and the product delivers its entire value in that session."</p>
+      <p style="margin-top:10px;">This was never a stated decision — it was never decided at all. The entire architecture defaulted to it, and it cascades into: no auth, no session persistence, no alerts, no retention, no monetization path.</p>
+    </div>
+  </div>
+
+  <!-- Failure deep-dives -->
+  <h2>Failure Deep-Dives</h2>
+  <div class="failure-grid">
+
+    <div class="failure-card">
+      <div class="failure-header">
+        <div class="severity-dot sev-high"></div>
+        <div>
+          <div class="failure-title">Job Bank scraper breaks or gets blocked</div>
+          <span class="failure-badge badge-high">High Severity</span>
+        </div>
+      </div>
+      <div class="failure-section-title">The Failure Story</div>
+      <p>ESDC pushes a routine redesign — React-rendered layout replaces JSP-era HTML. The <code>article.action-buttons</code> wrapper gets renamed. Cheerio returns zero matches silently. The API's catch block swallows failed queries; the <code>allRaw.length === 0</code> branch returns a 404 indistinguishable from "no jobs for this title." Users assume they're unqualified and tweak search terms. No alert fires because HTTP 200s are still being served.</p>
+      <p>By month 3 the builder notices but Job Bank has also added bot detection — a Cloudflare challenge page that requires JavaScript. The static <code>fetch()</code> hits the challenge wall and returns a 403, which gets caught and silenced inside <code>Promise.allSettled</code>.</p>
+      <p>By month 6 the site requires JS execution for search results. Cheerio cannot run JS. The entire job-feed feature is dead until rebuilt from scratch with Playwright or a paid scraping API.</p>
+      <div class="failure-section-title">The Underlying Assumption</div>
+      <div class="assumption-box">jobbank.gc.ca is a stable, scrapable, static HTML site that will not add bot protection, change its DOM, or require JS rendering — indefinitely, without notice.</div>
+      <div class="failure-section-title">Early Warning Signs</div>
+      <ul>
+        <li>Result counts quietly drop (15 → 3 → 0) with no server errors</li>
+        <li><code>article.action-buttons</code> returns 0 matches on a manual curl test while the browser still shows jobs</li>
+        <li>HTTP 200 responses with a Cloudflare challenge body (<code>cf-browser-verification</code>, <code>__cf_bm</code> cookie)</li>
+        <li><code>jsessionid</code> disappears from Job Bank URLs (signals a backend migration)</li>
+      </ul>
+    </div>
+
+    <div class="failure-card">
+      <div class="failure-header">
+        <div class="severity-dot sev-critical"></div>
+        <div>
+          <div class="failure-title">OpenAI API costs spiral out of control</div>
+          <span class="failure-badge badge-critical">Critical Severity</span>
+        </div>
+      </div>
+      <div class="failure-section-title">The Failure Story</div>
+      <p>A developer posts ResumeRadar on Reddit. Traffic spikes to 200 daily users. Each session triggers ~42 GPT-4o calls (20 visa classifications + 20 scoring + 1 CV + 1 insights). At ~$0.005/call: $42/day — manageable. A Hacker News mention brings 2,000 daily users for a week: $420/day.</p>
+      <p>A bot operator discovers the unprotected endpoint and scripts 500 automated sessions/hour. 20 job descriptions × 500 sessions = ~10M tokens/hour. At $5/1M input tokens: $50/hour, $1,200/day from bots alone. Real users add $200/day. Monthly bill: <strong>~$42,000</strong>. OpenAI suspends the account. The app goes dark.</p>
+      <div class="failure-section-title">The Underlying Assumption</div>
+      <div class="assumption-box">Usage will be low-volume and human-paced. Organic growth will scale slowly enough to monetize before costs become serious. The open endpoint is a convenience, not a liability.</div>
+      <div class="failure-section-title">Early Warning Signs</div>
+      <ul>
+        <li>Daily OpenAI spend exceeds $20 within the first two weeks of any public announcement</li>
+        <li>Requests cluster in sub-second intervals in the usage dashboard (bot signature)</li>
+        <li>A single IP accounts for &gt;10% of total monthly token consumption</li>
+        <li>App latency increases as parallel calls multiply — feels slow before the bill arrives</li>
+      </ul>
+    </div>
+
+    <div class="failure-card">
+      <div class="failure-header">
+        <div class="severity-dot sev-critical"></div>
+        <div>
+          <div class="failure-title">No authentication — zero retention</div>
+          <span class="failure-badge badge-critical">Critical Severity</span>
+        </div>
+      </div>
+      <div class="failure-section-title">The Failure Story</div>
+      <p>A user uploads their CV, spends 20 minutes tuning their profile, scores three promising leads, generates a tailored CV, and closes the tab. The next morning: blank slate. UUID is lost, sessionStorage is gone. They have no reason to believe the app knows them. They Google a competitor with accounts and never return.</p>
+      <p>Word of mouth never compounds. Power users — the ones who would revisit weekly and evangelize — churn at the exact moment they'd have become loyal. Growth looks like a leaky bucket: high daily uniques that never convert to weekly actives. The app also can't send job alerts, follow-up nudges, or re-engagement emails.</p>
+      <div class="failure-section-title">The Underlying Assumption</div>
+      <div class="assumption-box">The core value is delivered in a single session. Retention was treated as a product problem to solve later, after the session-only architecture was already baked in.</div>
+      <div class="failure-section-title">Early Warning Signs</div>
+      <ul>
+        <li>Near-zero repeat sessions from the same device in analytics</li>
+        <li>Zero direct/bookmark traffic growth despite new-user spikes</li>
+        <li>User feedback requests "how do I save my profile"</li>
+        <li>Reviews mentioning data loss</li>
+      </ul>
+    </div>
+
+    <div class="failure-card">
+      <div class="failure-header">
+        <div class="severity-dot sev-high"></div>
+        <div>
+          <div class="failure-title">Promises four markets, delivers one</div>
+          <span class="failure-badge badge-high">High Severity</span>
+        </div>
+      </div>
+      <div class="failure-section-title">The Failure Story</div>
+      <p>A user in Morocco sees "Canada, USA, New Zealand, and Australia" on the landing page. They select "Australia," search their title, and get zero results — or worse, Canadian jobs tagged as Australian in the database. They conclude the product is broken, or that Australian employers aren't hiring. Both conclusions are wrong, and both erode trust permanently.</p>
+      <p>There is no graceful degradation — no "coming soon" label, no disabled state, no honest message. The UI actively invites the broken path. The error message even leaks "Job Bank" regardless of country selected: a visible tell that the backend is country-agnostic.</p>
+      <div class="failure-section-title">The Underlying Assumption</div>
+      <div class="assumption-box">"Country" is a display attribute — a label to attach to data — not a routing key that determines which data source to call. The geographic scope was designed at the UI layer and deferred indefinitely at the data layer.</div>
+      <div class="failure-section-title">Early Warning Signs</div>
+      <ul>
+        <li>The <code>country</code> field is written to the database but never read back as a filter or router</li>
+        <li><code>QUERY_GENERATOR_SYSTEM</code> prompt hardcodes "Canadian job boards" while the UI advertises four markets</li>
+        <li>The error message leaks "Job Bank" for any country selection</li>
+      </ul>
+    </div>
+
+    <div class="failure-card">
+      <div class="failure-header">
+        <div class="severity-dot sev-high"></div>
+        <div>
+          <div class="failure-title">CV quality insufficient for immigrant stakes</div>
+          <span class="failure-badge badge-high">High Severity</span>
+        </div>
+      </div>
+      <div class="failure-section-title">The Failure Story</div>
+      <p>Amara, a software engineer from Senegal with 8 years of experience, arrives in Montreal and uploads her profile to ResumeRadar. She generates a CV and submits it to 40 employers over two weeks. She hears nothing. What she doesn't know: GPT-4o quietly dropped her most recent role, reworded accomplishments into vague generalities, and invented a soft-skills bullet she never claimed.</p>
+      <p>She has no baseline to compare against. She doesn't know what a strong Canadian CV looks like. She iterates on the wrong variables — her cover letter, her LinkedIn — while the CV quietly poisons every application. Weeks become months. Her work permit has a clock. Each failed cycle costs confidence, money, and legal runway. The product presents as authoritative ("ATS-optimized") while producing output no expert ever reviewed.</p>
+      <div class="failure-section-title">The Underlying Assumption</div>
+      <div class="assumption-box">GPT-4o, given structured input, will produce output that is accurate, complete, and locally appropriate — without verification. The user will catch any errors.</div>
+      <div class="failure-section-title">Early Warning Signs</div>
+      <ul>
+        <li>Users regenerate CVs multiple times without understanding why (silent dissatisfaction)</li>
+        <li>No user ever reports a specific factual error — they can't detect what they can't compare</li>
+        <li>Download rates are high but callback rates (if tracked) are near zero</li>
+        <li>Generated CV omits roles or conflates dates — detectable with automated output diffing</li>
+      </ul>
+    </div>
+
+    <div class="failure-card">
+      <div class="failure-header">
+        <div class="severity-dot sev-high"></div>
+        <div>
+          <div class="failure-title">Legal exposure: scraping ToS + unprotected PII</div>
+          <span class="failure-badge badge-high">High Severity</span>
+        </div>
+      </div>
+      <div class="failure-section-title">The Failure Story</div>
+      <p>Job Bank's legal team notices unusual automated traffic and sends a cease-and-desist citing their Terms of Use, which prohibit automated harvesting. Simultaneously, a user discovers their full name, address, and phone number in an exposed Supabase table. They file a complaint with the Office of the Privacy Commissioner under PIPEDA.</p>
+      <p>Two active legal fronts: scraping violation carries injunctive risk and contractual liability. The PIPEDA complaint triggers an OPC investigation — no consent form, no stated purpose, no retention limits, no deletion mechanism, no privacy policy. If any user is in the EU, GDPR exposure compounds: fines up to 4% of global revenue. Deleting the data now looks like evidence destruction. The app shuts down while legal counsel is retained.</p>
+      <div class="failure-section-title">The Underlying Assumption</div>
+      <div class="assumption-box">"It's just a side project" creates a legal safe harbor. Collecting PII to help users is inherently benign, so compliance can be deferred until scale.</div>
+      <div class="failure-section-title">Early Warning Signs</div>
+      <ul>
+        <li>Job Bank returns 403s or rate-limit blocks on scraped routes</li>
+        <li>A user asks "where is my data stored and can I delete it?"</li>
+        <li>Supabase dashboard shows anonymous public reads on the <code>cv_profiles</code> table</li>
+        <li>No <code>/privacy</code> URL exists and a user Googles it</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Revised Plan -->
+  <h2>Revised Plan</h2>
+  <table>
+    <tr>
+      <th>Priority</th>
+      <th>Action</th>
+      <th>Why</th>
+    </tr>
+    <tr>
+      <td><span class="p-critical">1 — Critical</span></td>
+      <td>Add Supabase Auth (magic link / email)</td>
+      <td>Fixes retention AND closes the open API exploit in one move — gate all AI calls behind an auth check</td>
+    </tr>
+    <tr>
+      <td><span class="p-critical">2 — Critical</span></td>
+      <td>Add rate limiting on all <code>/api</code> routes</td>
+      <td>Max N AI calls per user per day; blocks bot abuse; simple per-user counter in Supabase or middleware</td>
+    </tr>
+    <tr>
+      <td><span class="p-high">3 — High</span></td>
+      <td>Remove USA / NZ / AU or gate with "Coming Soon"</td>
+      <td>Every non-Canada selection fails silently and misleads users. The error message leaks "Job Bank" regardless of country</td>
+    </tr>
+    <tr>
+      <td><span class="p-high">4 — High</span></td>
+      <td>Add CV output diff validation</td>
+      <td>Before returning the CV, compare roles/dates against the input profile — if a role is missing, retry or flag for user review</td>
+    </tr>
+    <tr>
+      <td><span class="p-medium">5 — Medium</span></td>
+      <td>Add <code>/privacy</code> page + Supabase RLS on <code>cv_profiles</code></td>
+      <td>Raw PII stored with no consent flow, no deletion mechanism, no access control. One misconfigured key from a PIPEDA complaint</td>
+    </tr>
+  </table>
+
+  <!-- Checklist -->
+  <h2>Pre-Launch Checklist</h2>
+  <ul class="checklist">
+    <li><div class="check-box"></div>Supabase Auth live — no AI endpoint callable without a valid session token</li>
+    <li><div class="check-box"></div>Rate limiter active — max 3 job searches + 2 CV generations per user per day (free tier)</li>
+    <li><div class="check-box"></div>Non-Canada country options show "Coming soon" — no silent broken paths</li>
+    <li><div class="check-box"></div>Privacy policy exists at <code>/privacy</code> — what data is stored and how to delete it</li>
+    <li><div class="check-box"></div>CV generation shows "Review carefully before submitting — AI can miss details from your profile"</li>
+  </ul>
+
+  <!-- One Thing -->
+  <div class="one-thing">
+    <div class="label">The One Thing</div>
+    <p>Ship auth before you share the URL with anyone.<br/>
+    One mention in the wrong Slack channel and you're looking at a four-figure bill before morning.<br/>
+    Auth costs one afternoon with Supabase and solves three critical failures simultaneously.</p>
+  </div>
+
+  <div class="footer">
+    Premortem · ResumeRadar · 2026-05-06T15:17:10 · 6 failure modes · Generated by Claude
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 {
-  "name": "jobradar",
+  "name": "resumeradar",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,13 +8,37 @@
     "start": "next start"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.94.0",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@google/generative-ai": "^0.24.1",
+    "@react-email/components": "^1.0.12",
+    "@react-email/render": "^2.0.8",
+    "@supabase/ssr": "^0.10.2",
+    "@supabase/supabase-js": "^2.105.3",
+    "@types/dompurify": "^3.0.5",
+    "adm-zip": "^0.5.17",
+    "cheerio": "^1.2.0",
+    "dompurify": "^3.4.2",
+    "html2pdf.js": "^0.14.0",
+    "jspdf": "^4.2.1",
+    "mammoth": "^1.12.0",
     "next": "16.2.4",
+    "openai": "^6.36.0",
+    "pdf-parse": "^2.4.5",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "recharts": "^3.8.1",
+    "resend": "^6.12.3",
+    "stripe": "^22.1.1",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/adm-zip": "^0.5.8",
+    "@types/node": "^20.19.39",
+    "@types/pdf-parse": "^1.1.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
