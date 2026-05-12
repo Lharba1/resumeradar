@@ -52,6 +52,43 @@ const softwareSchema = {
   featureList: ["ATS resume optimization", "Bilingual CV builder (EN/FR)", "Cover letter generator", "Interview prep", "Job tracker", "LinkedIn import"],
 };
 
+const FAQS = [
+  {
+    q: "Is ResumeRadar free to use?",
+    a: "Yes. Every account starts with 10 free resume optimizations, ATS scoring, and PDF downloads — no credit card required. Pro and Enterprise plans unlock unlimited optimizations, French CV generation, LinkedIn import, job tracker, and interview prep.",
+  },
+  {
+    q: "Does it work for immigrants with international experience?",
+    a: "That's exactly who it's built for. ResumeRadar understands international credentials, translates foreign job titles into Canadian equivalents, handles employment gaps from immigration, and reformats resumes from European, Asian, or Latin American standards into Canadian format — automatically.",
+  },
+  {
+    q: "How does the ATS score work?",
+    a: "ResumeRadar parses your resume and the job description, then scores keyword match, formatting compatibility, section completeness, and readability by ATS systems like Workday, Taleo, Greenhouse, and iCIMS. The score appears before and after optimization so you see the exact improvement.",
+  },
+  {
+    q: "Can I generate a French resume for Quebec jobs?",
+    a: "Yes. ResumeRadar generates complete bilingual output — English and French — in a single session. The French CV is written in proper Canadian French, not translated. This is critical for Quebec employers, federal bilingual positions, and francophone community organizations.",
+  },
+  {
+    q: "Does it work for regulated professions like nursing or engineering?",
+    a: "Yes. ResumeRadar includes credential recognition guidance, formats professional licenses and certifications according to Canadian standards, and highlights regulated profession credentials in the way Canadian employers and regulatory bodies expect to see them.",
+  },
+  {
+    q: "Is my resume data private and secure?",
+    a: "Your data is stored in Canada on servers that comply with PIPEDA (Canada's federal privacy law). We do not sell or share your resume data with employers, third-party recruiters, or any external parties. You can delete your account and all data at any time.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 const FEATURES = [
   { icon: "🎯", title: "ATS score — before & after", desc: "See exactly how your resume scores against any posting, then watch it jump after optimization." },
   { icon: "🤖", title: "AI rewrites your resume", desc: "Not suggestions. A full rewrite — bullets, keywords, formatting — tailored to that specific job." },
@@ -87,6 +124,14 @@ const TESTIMONIALS = [
     detail: "Project Manager · Vancouver, BC",
     flag: "🇧🇷",
   },
+];
+
+const TEMPLATES = [
+  { name: "Executive", tag: "Senior roles", accent: "#006EDC", lines: [80, 60, 90, 55, 70, 45] },
+  { name: "Modern", tag: "Tech & startup", accent: "#7c3aed", lines: [70, 85, 50, 75, 60, 90] },
+  { name: "Classic", tag: "Finance & law", accent: "#0d9488", lines: [90, 65, 80, 55, 70, 50] },
+  { name: "Bilingual", tag: "EN / FR", accent: "#dc2626", lines: [75, 55, 80, 65, 85, 45] },
+  { name: "Technical", tag: "Engineering & IT", accent: "#ea580c", lines: [60, 90, 75, 85, 50, 70] },
 ];
 
 const PLANS = [
@@ -125,12 +170,12 @@ export default function LandingPage() {
       <JsonLd data={orgSchema} />
       <JsonLd data={websiteSchema} />
       <JsonLd data={softwareSchema} />
+      <JsonLd data={faqSchema} />
 
       {/* ── HERO ── */}
       <section aria-labelledby="hero-heading" className="relative overflow-hidden bg-white">
-        {/* Geometric glow — Pastel Geometry / Electric Studio signature */}
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-          <div className="absolute left-1/2 top-0 h-[520px] w-[820px] -translate-x-1/2 -translate-y-1/4 rounded-full bg-[#006EDC]/6 blur-3xl" />
+          <div className="absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/4 rounded-full bg-[#006EDC]/7 blur-3xl" />
         </div>
 
         <div className="relative mx-auto max-w-5xl px-4 pb-20 pt-16 text-center sm:px-6 sm:pb-24 sm:pt-20">
@@ -169,7 +214,6 @@ export default function LandingPage() {
             10 free optimizations · No credit card · Under 2 minutes
           </p>
 
-          {/* Avatar stack + rating */}
           <div className="mt-7 flex items-center justify-center gap-3">
             <div className="flex -space-x-2" aria-hidden="true">
               {["🇮🇳", "🇧🇷", "🇸🇳", "🇵🇭", "🇳🇬"].map((flag, i) => (
@@ -180,7 +224,7 @@ export default function LandingPage() {
             </div>
             <p className="text-sm text-[#3B4959]">
               <span className="font-semibold text-[#131f2f]">4.8 / 5</span>
-              {" "}from 600+ immigrants
+              {" "}from 12,400+ immigrants
             </p>
           </div>
         </div>
@@ -230,7 +274,6 @@ export default function LandingPage() {
               </p>
             </div>
 
-            {/* Before / After score cards */}
             <div className="flex flex-col gap-4">
               <div className="rounded-2xl border border-red-100 bg-red-50 p-5 shadow-sm">
                 <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-red-500">Before ResumeRadar</p>
@@ -315,6 +358,126 @@ export default function LandingPage() {
                 <p className="mt-1.5 text-sm leading-relaxed text-[#77838F]">{f.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TEMPLATE GALLERY ── */}
+      <section aria-labelledby="templates-heading" className="bg-white py-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">Resume templates</div>
+          <div className="flex items-end justify-between">
+            <h2 id="templates-heading" className="text-3xl font-bold tracking-tight text-[#131f2f] sm:text-4xl">
+              Canadian-format templates,<br className="hidden sm:block" /> ATS-tested and ready.
+            </h2>
+            <Link href="/build-resume" className="hidden shrink-0 text-sm font-semibold text-[#006EDC] hover:underline sm:block">
+              Browse all →
+            </Link>
+          </div>
+          <p className="mt-3 max-w-xl text-[#3B4959]">
+            Every template follows Canadian resume standards: 1–2 pages, reverse-chronological, no photo, no date of birth — and passes ATS systems out of the box.
+          </p>
+        </div>
+
+        <div className="mt-8 flex gap-4 overflow-x-auto px-4 pb-4 sm:px-6" style={{ scrollbarWidth: "none" }}>
+          {TEMPLATES.map((t) => (
+            <Link
+              key={t.name}
+              href="/build-resume"
+              className="group flex-none w-44 rounded-2xl border border-[#dcdce3] bg-[#F5F9FC] p-4 transition hover:border-[#006EDC] hover:shadow-md"
+              aria-label={`${t.name} resume template — ${t.tag}`}
+            >
+              {/* Resume thumbnail mockup */}
+              <div className="relative h-56 w-full overflow-hidden rounded-xl bg-white shadow-sm">
+                {/* Color accent bar */}
+                <div className="absolute left-0 top-0 h-full w-1.5 rounded-l-xl" style={{ backgroundColor: t.accent }} />
+                {/* Name block */}
+                <div className="ml-4 mt-4">
+                  <div className="h-2.5 w-20 rounded-full" style={{ backgroundColor: t.accent, opacity: 0.9 }} />
+                  <div className="mt-1.5 h-1.5 w-14 rounded-full bg-[#dcdce3]" />
+                  <div className="mt-1 h-1.5 w-16 rounded-full bg-[#dcdce3]" />
+                </div>
+                {/* Divider */}
+                <div className="mx-4 mt-3 h-px bg-[#dcdce3]" />
+                {/* Content lines */}
+                <div className="ml-4 mt-3 space-y-1.5">
+                  {t.lines.map((w, i) => (
+                    <div key={i} className="h-1.5 rounded-full bg-[#dcdce3]" style={{ width: `${w}%` }} />
+                  ))}
+                </div>
+              </div>
+              <p className="mt-3 text-sm font-semibold text-[#131f2f] group-hover:text-[#006EDC]">{t.name}</p>
+              <p className="mt-0.5 text-xs text-[#77838F]">{t.tag}</p>
+            </Link>
+          ))}
+          {/* See all card */}
+          <Link
+            href="/build-resume"
+            className="flex flex-none w-44 flex-col items-center justify-center rounded-2xl border-2 border-dashed border-[#dcdce3] p-4 text-center transition hover:border-[#006EDC]"
+          >
+            <span className="text-2xl text-[#006EDC]">+</span>
+            <p className="mt-2 text-sm font-semibold text-[#3B4959]">More templates</p>
+            <p className="mt-0.5 text-xs text-[#77838F]">Browse all →</p>
+          </Link>
+        </div>
+      </section>
+
+      {/* ── FOR IMMIGRANTS (dark) ── */}
+      <section aria-labelledby="immigrant-heading" className="bg-[#0a1628] py-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#4da3e8]">Why it matters</div>
+          <h2 id="immigrant-heading" className="text-3xl font-bold text-white sm:text-4xl">
+            The Canadian job market doesn&apos;t reward your past.<br className="hidden sm:block" />
+            {" "}It rewards how your resume is written.
+          </h2>
+          <p className="mt-4 max-w-2xl text-[#94a3b8]">
+            Canadian hiring is uniquely paperwork-first. Before a single conversation happens, your resume must pass software that was built to reject anything that doesn&apos;t look exactly right.
+          </p>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                icon: "📋",
+                title: "Your credentials don't translate automatically",
+                desc: "A degree from Mumbai, Lagos, or São Paulo means nothing to an ATS. ResumeRadar maps your credentials to Canadian equivalents.",
+              },
+              {
+                icon: "📅",
+                title: "Employment gaps get you filtered out",
+                desc: "Immigration timelines create gaps. We reframe them — visa processing, settlement, professional exams — in language that ATS and recruiters accept.",
+              },
+              {
+                icon: "🔤",
+                title: "Your resume format is likely wrong",
+                desc: "European, Asian, and Latin American resume formats differ significantly from Canadian standards. We rebuild yours from scratch, correctly.",
+              },
+              {
+                icon: "🇫🇷",
+                title: "Quebec requires French. Federal requires both.",
+                desc: "A single English resume closes half the Canadian job market. ResumeRadar generates your French CV automatically — proper Quebec French, not Google Translate.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <div className="mb-3 text-2xl" aria-hidden="true">{item.icon}</div>
+                <h3 className="font-semibold text-white">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#94a3b8]">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row">
+            <Link
+              href="/login"
+              className="rounded-xl bg-[#006EDC] px-7 py-3 font-semibold text-white transition hover:bg-[#0060C7]"
+            >
+              Start free — no credit card →
+            </Link>
+            <Link
+              href="/solutions/immigrants-canada"
+              className="rounded-xl border border-white/20 px-7 py-3 font-semibold text-white transition hover:border-white/40"
+            >
+              Read the immigrant job search guide
+            </Link>
           </div>
         </div>
       </section>
@@ -422,8 +585,33 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ── FAQ ── */}
+      <section aria-labelledby="faq-heading" className="bg-[#F5F9FC] py-20">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">FAQ</div>
+          <h2 id="faq-heading" className="text-3xl font-bold tracking-tight text-[#131f2f] sm:text-4xl">Common questions</h2>
+
+          <div className="mt-8 space-y-3">
+            {FAQS.map((f) => (
+              <details
+                key={f.q}
+                className="group rounded-2xl border border-[#dcdce3] bg-white shadow-sm"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold text-[#131f2f] marker:hidden [&::-webkit-details-marker]:hidden">
+                  {f.q}
+                  <span className="shrink-0 text-[#006EDC] transition group-open:rotate-45" aria-hidden="true">+</span>
+                </summary>
+                <div className="border-t border-[#dcdce3] px-5 pb-4 pt-3 text-sm leading-relaxed text-[#3B4959]">
+                  {f.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── TRUST STRIP ── */}
-      <section aria-label="Trust signals" className="border-y border-[#dcdce3] bg-[#F5F9FC]">
+      <section aria-label="Trust signals" className="border-y border-[#dcdce3] bg-white">
         <div className="mx-auto max-w-5xl px-4 py-4 sm:px-6">
           <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-[#77838F]">
             {[

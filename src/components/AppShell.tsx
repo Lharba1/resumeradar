@@ -33,7 +33,17 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   // Auth / admin — no nav, render children directly
   if (isNoNav) return <>{children}</>;
 
-  // Everything else (homepage, marketing, SEO pages) — public top nav
+  // Homepage gets no constraining wrapper — sections control their own width
+  if (pathname === "/") {
+    return (
+      <div className="min-h-screen bg-white">
+        <PublicNav />
+        {children}
+      </div>
+    );
+  }
+
+  // Everything else (marketing, SEO pages) — public top nav + constrained wrapper
   return (
     <div className="min-h-screen bg-[#F5F9FC]">
       <PublicNav />
