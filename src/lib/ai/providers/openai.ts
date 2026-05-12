@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import { withRetry } from "../retry";
 
 let _client: OpenAI | null = null;
 
@@ -17,7 +18,7 @@ export async function chatJSONOpenAI<T>(
   model: string,
 ): Promise<T> {
   const client = getClient();
-  const res = await client.chat.completions.create({
+  const res = await withRetry(() => client.chat.completions.create({
     model,
     temperature,
     response_format: { type: "json_object" },
@@ -25,7 +26,7 @@ export async function chatJSONOpenAI<T>(
       { role: "system", content: system },
       { role: "user", content: user },
     ],
-  });
+  }));
   const text = res.choices[0]?.message?.content ?? "{}";
   return JSON.parse(text) as T;
 }

@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { withRetry } from "../retry";
 
 let _client: GoogleGenerativeAI | null = null;
 
@@ -26,7 +27,7 @@ export async function chatJSONGoogle<T>(
     systemInstruction: system,
   });
 
-  const result = await genModel.generateContent(user);
+  const result = await withRetry(() => genModel.generateContent(user));
   const text = result.response.text();
   return JSON.parse(text) as T;
 }

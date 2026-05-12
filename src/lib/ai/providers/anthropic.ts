@@ -1,4 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
+import { withRetry } from "../retry";
 
 let _client: Anthropic | null = null;
 
@@ -29,13 +30,13 @@ export async function chatJSONAnthropic<T>(
   const client = getClient();
 
   const makeRequest = async (): Promise<string> => {
-    const res = await client.messages.create({
+    const res = await withRetry(() => client.messages.create({
       model,
       max_tokens: 4096,
       temperature,
       system: system + JSON_SUFFIX,
       messages: [{ role: "user", content: user }],
-    });
+    }));
     return res.content[0]?.type === "text" ? res.content[0].text : "";
   };
 
@@ -53,13 +54,13 @@ export async function chatJSONAnthropic<T>(
     }
 
     // Repair call on the actual broken output (not a re-run of the original prompt)
-    const res = await client.messages.create({
+    const res = await withRetry(() => client.messages.create({
       model,
       max_tokens: 4096,
       temperature: 0,
       system: "Fix the following broken JSON. Return ONLY the corrected JSON object, nothing else.",
       messages: [{ role: "user", content: "Fix this broken JSON:\n" + brokenOutput.slice(0, 2000) }],
-    });
+    }));
     const raw = res.content[0]?.type === "text" ? res.content[0].text : "{}";
     return JSON.parse(extractJSON(raw)) as T;
   }

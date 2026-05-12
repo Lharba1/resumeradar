@@ -5,6 +5,7 @@ import { wrapUserContent, PROMPT_INJECTION_GUARD } from "@/lib/promptUtils";
 import { requireUser } from "@/lib/auth-guard";
 import { checkAndIncrement } from "@/lib/rate-limit";
 import { trackAISpend } from "@/lib/ai-spend";
+import { createServiceRoleClient } from "@/lib/supabase-server";
 import type { CVProfile } from "@/lib/types";
 import type { CVData } from "@/app/api/cv/generate/route";
 
@@ -73,7 +74,9 @@ export async function POST(req: NextRequest) {
   try {
     result = await chatJSON<OptimizeResult>(ATS_OPTIMIZER_SYSTEM + PROMPT_INJECTION_GUARD, `${candidateBlock}\n\n${jdBlock}`, 0.25);
   } catch (err) {
-    return NextResponse.json({ error: `AI error: ${err instanceof Error ? err.message : "unknown"}` }, { status: 502 });
+    const msg = err instanceof Error ? err.message : "unknown";
+    try { void createServiceRoleClient().from("admin_actions").insert({ action: "ai_error", details: { route: "/api/cv/optimize", user_id: user.id, error: msg } }); } catch { /* non-blocking */ }
+    return NextResponse.json({ error: "Internal server error" }, { status: 502 });
   }
 
   if (!result.optimized_cv?.header) {
