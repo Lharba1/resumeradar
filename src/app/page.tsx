@@ -166,7 +166,7 @@ const PLANS = [
 
 export default function LandingPage() {
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <JsonLd data={orgSchema} />
       <JsonLd data={websiteSchema} />
       <JsonLd data={softwareSchema} />
@@ -178,7 +178,7 @@ export default function LandingPage() {
           <div className="absolute right-0 top-0 h-[700px] w-[700px] translate-x-1/4 -translate-y-1/4 rounded-full bg-[#006EDC]/7 blur-3xl" />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-16 sm:px-6 sm:pb-24 sm:pt-20">
+        <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-10 sm:px-6 sm:pb-24 sm:pt-20">
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
 
             {/* Left — copy */}
@@ -188,7 +188,7 @@ export default function LandingPage() {
                 <span>Built for immigrants in Canada · Free to start</span>
               </div>
 
-              <h1 id="hero-heading" className="text-5xl font-black tracking-tight text-[#131f2f] sm:text-6xl lg:text-6xl">
+              <h1 id="hero-heading" className="text-4xl font-black tracking-tight text-[#131f2f] sm:text-5xl lg:text-6xl">
                 Your resume gets{" "}
                 <span className="text-red-500">rejected</span>
                 <br className="hidden sm:block" />
@@ -202,13 +202,13 @@ export default function LandingPage() {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/login"
-                  className="rounded-xl bg-[#006EDC] px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#006EDC]/25 transition hover:bg-[#0060C7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#006EDC]"
+                  className="w-full rounded-xl bg-[#006EDC] px-8 py-3.5 text-center text-base font-semibold text-white shadow-lg shadow-[#006EDC]/25 transition hover:bg-[#0060C7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#006EDC] sm:w-auto"
                 >
                   Fix my resume — free →
                 </Link>
                 <Link
                   href="/features/ats-optimizer"
-                  className="rounded-xl border border-[#dcdce3] px-8 py-3.5 text-base font-semibold text-[#3B4959] transition hover:border-[#CCD0D5] hover:text-[#131f2f]"
+                  className="w-full rounded-xl border border-[#dcdce3] px-8 py-3.5 text-center text-base font-semibold text-[#3B4959] transition hover:border-[#CCD0D5] hover:text-[#131f2f] sm:w-auto"
                 >
                   See how it works
                 </Link>
@@ -234,7 +234,7 @@ export default function LandingPage() {
             </div>
 
             {/* Right — CSS resume mockup */}
-            <div className="order-1 flex justify-center lg:order-2 lg:col-span-5">
+            <div className="order-1 hidden lg:order-2 lg:col-span-5 lg:flex lg:justify-center">
               <div className="relative w-full max-w-[320px] px-6 py-6">
                 {/* Resume card */}
                 <div className="rotate-[1.5deg] rounded-2xl border border-[#dcdce3] bg-white p-5 shadow-2xl">
@@ -317,7 +317,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── TEMPLATE GALLERY (moved up — position 3) ── */}
-      <section aria-labelledby="templates-heading" className="bg-white py-20">
+      <section aria-labelledby="templates-heading" className="bg-white py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">Resume templates</div>
           <div className="flex items-end justify-between">
@@ -377,7 +377,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── URGENCY BAND (new) ── */}
-      <section aria-label="Recruiter reality" className="bg-gradient-to-r from-[#006EDC] to-[#0043a8] py-14">
+      <section aria-label="Recruiter reality" className="bg-gradient-to-r from-[#006EDC] to-[#0043a8] py-10 sm:py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -390,7 +390,7 @@ export default function LandingPage() {
             </div>
             <Link
               href="/login"
-              className="shrink-0 rounded-xl border border-white/30 bg-white/10 px-7 py-3.5 font-semibold text-white backdrop-blur-sm transition hover:border-white/60 hover:bg-white/20"
+              className="w-full rounded-xl border border-white/30 bg-white/10 px-7 py-3.5 text-center font-semibold text-white backdrop-blur-sm transition hover:border-white/60 hover:bg-white/20 lg:w-auto"
             >
               Optimize mine now →
             </Link>
@@ -399,7 +399,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── PROBLEM ── */}
-      <section aria-labelledby="problem-heading" className="bg-[#F5F9FC] py-20">
+      <section aria-labelledby="problem-heading" className="bg-[#F5F9FC] py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">The problem</div>
           <h2 id="problem-heading" className="text-3xl font-bold tracking-tight text-[#131f2f] sm:text-4xl">
@@ -463,7 +463,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section aria-labelledby="how-heading" className="bg-white py-20">
+      <section aria-labelledby="how-heading" className="bg-white py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">How it works</div>
           <h2 id="how-heading" className="text-3xl font-bold tracking-tight text-[#131f2f] sm:text-4xl">Ready in under 2 minutes</h2>
@@ -494,7 +494,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── FEATURES ── */}
-      <section aria-labelledby="features-heading" className="bg-[#F5F9FC] py-20">
+      <section aria-labelledby="features-heading" className="bg-[#F5F9FC] py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">Everything included</div>
           <h2 id="features-heading" className="text-3xl font-bold tracking-tight text-[#131f2f] sm:text-4xl">One platform. Your whole job search.</h2>
@@ -503,7 +503,7 @@ export default function LandingPage() {
             {FEATURES.map((f) => (
               <div
                 key={f.title}
-                className="rounded-2xl border border-[#dcdce3] bg-white p-5 shadow-sm transition hover:border-[#006EDC] hover:shadow-md"
+                className="rounded-2xl border border-[#dcdce3] bg-white p-4 shadow-sm transition hover:border-[#006EDC] hover:shadow-md sm:p-5"
               >
                 <div
                   className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-[#E6F2FD] text-2xl"
@@ -520,7 +520,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── FOR IMMIGRANTS (dark) ── */}
-      <section aria-labelledby="immigrant-heading" className="bg-[#0a1628] py-20">
+      <section aria-labelledby="immigrant-heading" className="bg-[#0a1628] py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#4da3e8]">Why it matters</div>
           <h2 id="immigrant-heading" className="text-3xl font-bold text-white sm:text-4xl">
@@ -580,7 +580,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── WHO IT'S FOR ── */}
-      <section aria-labelledby="audience-heading" className="bg-white py-20">
+      <section aria-labelledby="audience-heading" className="bg-white py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">Who it&apos;s for</div>
           <h2 id="audience-heading" className="text-3xl font-bold tracking-tight text-[#131f2f] sm:text-4xl">Built for every stage of your Canadian journey</h2>
@@ -605,14 +605,14 @@ export default function LandingPage() {
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section aria-labelledby="testimonials-heading" className="bg-[#F5F9FC] py-20">
+      <section aria-labelledby="testimonials-heading" className="bg-[#F5F9FC] py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">Real results</div>
           <h2 id="testimonials-heading" className="text-3xl font-bold tracking-tight text-[#131f2f] sm:text-4xl">They got the callback. You can too.</h2>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {TESTIMONIALS.map((t) => (
-              <article key={t.name} className="flex flex-col rounded-2xl border border-[#dcdce3] bg-white p-5 shadow-sm">
+              <article key={t.name} className="flex flex-col rounded-2xl border border-[#dcdce3] bg-white p-4 shadow-sm sm:p-5">
                 <div className="text-sm text-amber-400" aria-label="5 out of 5 stars">★★★★★</div>
                 <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-[#3B4959]">
                   &ldquo;{t.quote}&rdquo;
@@ -633,7 +633,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── PRICING ── */}
-      <section aria-labelledby="pricing-heading" className="bg-white py-20">
+      <section aria-labelledby="pricing-heading" className="bg-white py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">Pricing</div>
           <h2 id="pricing-heading" className="text-3xl font-bold tracking-tight text-[#131f2f] sm:text-4xl">Start free. Upgrade when you&apos;re ready.</h2>
@@ -642,10 +642,10 @@ export default function LandingPage() {
             {PLANS.map((p) => (
               <div
                 key={p.name}
-                className={`rounded-2xl p-5 shadow-sm ${p.highlight ? "border-2 border-[#006EDC] bg-[#F5F9FC]" : "border border-[#dcdce3] bg-white"}`}
+                className={`rounded-2xl p-4 shadow-sm sm:p-5 ${p.highlight ? "border-2 border-[#006EDC] bg-[#F5F9FC] lg:scale-105" : "border border-[#dcdce3] bg-white"}`}
               >
                 {p.highlight && (
-                  <div className="mb-3 inline-flex rounded-full bg-[#006EDC] px-3 py-0.5 text-[11px] font-bold text-white">
+                  <div className="mb-3 inline-flex rounded-full bg-[#006EDC] px-3 py-1 text-[11px] font-bold text-white">
                     Most popular
                   </div>
                 )}
@@ -683,7 +683,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── FAQ ── */}
-      <section aria-labelledby="faq-heading" className="bg-[#F5F9FC] py-20">
+      <section aria-labelledby="faq-heading" className="bg-[#F5F9FC] py-12 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">FAQ</div>
           <h2 id="faq-heading" className="text-3xl font-bold tracking-tight text-[#131f2f] sm:text-4xl">Common questions</h2>
@@ -725,7 +725,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── FINAL CTA ── */}
-      <section aria-labelledby="cta-heading" className="bg-[#006EDC] py-20">
+      <section aria-labelledby="cta-heading" className="bg-[#006EDC] py-12 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
           <h2 id="cta-heading" className="text-3xl font-black text-white sm:text-4xl">
             Stop getting filtered out.
