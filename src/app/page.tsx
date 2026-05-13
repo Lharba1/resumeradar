@@ -45,10 +45,16 @@ const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   name: "ResumeRadar",
+  url: "https://resumeradar.io",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   description: "AI-powered ATS resume optimizer, CV builder, cover letter generator, interview prep, and job tracker for immigrants in Canada.",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "CAD" },
+  offers: [
+    { "@type": "Offer", name: "Free",       price: "0",  priceCurrency: "CAD" },
+    { "@type": "Offer", name: "Starter",    price: "9",  priceCurrency: "CAD" },
+    { "@type": "Offer", name: "Pro",        price: "19", priceCurrency: "CAD" },
+    { "@type": "Offer", name: "Enterprise", price: "49", priceCurrency: "CAD" },
+  ],
   featureList: ["ATS resume optimization", "Bilingual CV builder (EN/FR)", "Cover letter generator", "Interview prep", "Job tracker", "LinkedIn import"],
 };
 

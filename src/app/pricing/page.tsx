@@ -137,6 +137,7 @@ const schemaData = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   name: "ResumeRadar",
+  url: "https://resumeradar.io",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   offers: PLANS.map((p) => ({
@@ -148,10 +149,20 @@ const schemaData = {
   })),
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home",    item: "https://resumeradar.io" },
+    { "@type": "ListItem", position: 2, name: "Pricing", item: "https://resumeradar.io/pricing" },
+  ],
+};
+
 export default function PricingPage() {
   return (
     <>
       <JsonLd data={schemaData} />
+      <JsonLd data={breadcrumbSchema} />
       <div className="mx-auto max-w-5xl">
 
         {/* Header */}

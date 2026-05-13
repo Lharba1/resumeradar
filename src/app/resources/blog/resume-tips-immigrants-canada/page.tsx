@@ -21,8 +21,8 @@ const article = {
   description: "The most common resume mistakes immigrants make when applying for Canadian jobs — and how to fix them.",
   datePublished: "2026-05-10",
   dateModified: "2026-05-10",
-  author: { "@type": "Organization", name: "ResumeRadar" },
-  publisher: { "@type": "Organization", name: "ResumeRadar", logo: { "@type": "ImageObject", url: "https://resumeradar.io/logo.png" } },
+  author: { "@type": "Person", name: "ResumeRadar Editorial Team", url: "https://resumeradar.io/about" },
+  publisher: { "@type": "Organization", name: "ResumeRadar", url: "https://resumeradar.io", logo: { "@type": "ImageObject", url: "https://resumeradar.io/logo.png" } },
   mainEntityOfPage: { "@type": "WebPage", "@id": "https://resumeradar.io/resources/blog/resume-tips-immigrants-canada" },
 };
 

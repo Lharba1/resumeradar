@@ -20,8 +20,8 @@ const article = {
   headline: "Canadian Resume vs US Resume — Key Differences (2026)",
   datePublished: "2026-05-10",
   dateModified: "2026-05-10",
-  author: { "@type": "Organization", name: "ResumeRadar" },
-  publisher: { "@type": "Organization", name: "ResumeRadar", logo: { "@type": "ImageObject", url: "https://resumeradar.io/logo.png" } },
+  author: { "@type": "Person", name: "ResumeRadar Editorial Team", url: "https://resumeradar.io/about" },
+  publisher: { "@type": "Organization", name: "ResumeRadar", url: "https://resumeradar.io", logo: { "@type": "ImageObject", url: "https://resumeradar.io/logo.png" } },
 };
 
 const breadcrumb = {
