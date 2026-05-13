@@ -23,9 +23,10 @@ const SECURITY_HEADERS = [
   // Enforcing CSP — Report-Only version is kept for 7 days before promoting new restrictions
   { key: "Content-Security-Policy", value: CSP_DIRECTIVES },
   // Report-Only: stricter future policy being monitored before enforcement
+  // Violations are posted to /api/csp-report → admin_actions table
   {
     key: "Content-Security-Policy-Report-Only",
-    value: CSP_DIRECTIVES.replace("'unsafe-inline'", ""),
+    value: CSP_DIRECTIVES.replace("'unsafe-inline'", "") + "; report-uri /api/csp-report",
   },
 ];
 
