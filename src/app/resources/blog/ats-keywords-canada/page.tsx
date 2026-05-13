@@ -80,7 +80,11 @@ export default function ATSKeywordsPage() {
         <h1 className="text-4xl font-bold tracking-tight text-[#131f2f]">
           Top ATS keywords for Canadian jobs 2026
         </h1>
-        <p className="mt-2 text-sm text-[#77838F]">Published May 2026 · 5 min read</p>
+        <div className="mt-2 flex items-center gap-2 text-sm text-[#77838F]">
+          <span>By ResumeRadar Editorial Team</span>
+          <span>·</span>
+          <span>Published May 2026 · 5 min read</span>
+        </div>
         <p className="mt-4 text-lg text-[#3B4959]">
           ATS keyword matching is how your resume gets past automated screening. Here are the most searched keywords for the top Canadian industries — and how to use them without keyword stuffing.
         </p>
@@ -123,6 +127,38 @@ export default function ATSKeywordsPage() {
 
         <div className="mt-4 rounded-xl border border-[#b3d4f5] bg-[#E6F2FD] p-4 text-sm text-[#006EDC]">
           <strong>Important:</strong> These are general keyword lists. The best keywords for your specific application come from the actual job description you are applying to. <Link href="/features/ats-optimizer" className="underline">ResumeRadar&apos;s ATS optimizer</Link> extracts the exact keywords from each posting and adds the missing ones to your resume automatically.
+        </div>
+
+        {/* How to find keywords */}
+        <div className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">How to find the right keywords for any job posting</h2>
+          <div className="space-y-3">
+            {[
+              {
+                step: "1",
+                title: "Copy the job description into a text document",
+                desc: "Paste the full posting. Then highlight every technical skill, tool, certification, and job-specific verb you see. These are your target keywords — you need them on your resume.",
+              },
+              {
+                step: "2",
+                title: "Compare against your resume line by line",
+                desc: "For each highlighted keyword: does your resume contain the exact phrasing? Not a synonym — the exact phrase. \"Project management\" and \"managing projects\" score differently in ATS. Rewrite your bullets to use the same wording as the posting.",
+              },
+              {
+                step: "3",
+                title: "Add missing keywords in context — not in a list",
+                desc: "Weave missing keywords into your bullet points and professional summary. \"Delivered projects using Agile and Scrum methodologies, managing cross-functional teams of 8–12 across 3 time zones.\" Every keyword appears naturally in a sentence that also quantifies your experience.",
+              },
+            ].map((item) => (
+              <div key={item.step} className="flex gap-4 rounded-xl border border-[#dcdce3] bg-white p-4">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#E6F2FD] text-sm font-bold text-[#006EDC]">{item.step}</div>
+                <div>
+                  <p className="font-semibold text-[#131f2f]">{item.title}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-[#77838F]">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mt-12 rounded-2xl bg-[#006EDC] p-7 text-white">

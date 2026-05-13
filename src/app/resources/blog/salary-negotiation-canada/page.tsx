@@ -58,9 +58,13 @@ export default function SalaryNegotiationCanadaPage() {
 
         <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">Blog</div>
         <h1 className="text-4xl font-bold tracking-tight text-[#131f2f]">Salary negotiation in Canada — a practical guide for immigrants</h1>
-        <p className="mt-2 text-sm text-[#77838F]">Published May 2026 · 7 min read</p>
+        <div className="mt-2 flex items-center gap-2 text-sm text-[#77838F]">
+          <span>By ResumeRadar Editorial Team</span>
+          <span>·</span>
+          <span>Published May 2026 · 7 min read</span>
+        </div>
         <p className="mt-4 text-lg text-[#3B4959]">
-          Salary negotiation is expected in Canada. Not negotiating is often interpreted as a lack of confidence — not as politeness. Here is exactly how to research, time, and execute a successful negotiation on your first Canadian job offer.
+          Salary negotiation is expected in Canada. Not negotiating is often interpreted as a lack of confidence — not as politeness. Here is exactly how to research, time, and execute a successful negotiation on your first Canadian job offer. Before you reach the offer stage, make sure your <Link href="/resources/blog/resume-tips-immigrants-canada" className="text-[#006EDC] underline hover:text-[#0060C7]">resume</Link> and <Link href="/resources/blog/interview-prep-canada-immigrants" className="text-[#006EDC] underline hover:text-[#0060C7]">interview preparation</Link> are solid.
         </p>
 
         {/* Citable block */}
@@ -148,6 +152,83 @@ export default function SalaryNegotiationCanadaPage() {
               ))}
             </div>
           </section>
+        </div>
+
+        <div className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">Salary ranges by industry in Canada (2026)</h2>
+          <p className="mb-4 text-[#3B4959]">Knowing the market rate before negotiating is essential. These are median salary ranges for common roles in Canada&apos;s major markets (Toronto, Vancouver, Ottawa, Montreal). Source: Statistics Canada Labour Force Survey + LinkedIn Salary Insights 2025.</p>
+          <div className="overflow-hidden rounded-xl border border-[#dcdce3] bg-white">
+            <table className="w-full text-sm">
+              <thead className="bg-[#F5F9FC]">
+                <tr>
+                  <th className="px-4 py-3 text-left font-semibold text-[#131f2f]">Role</th>
+                  <th className="px-4 py-3 text-left font-semibold text-[#131f2f]">Toronto/Vancouver</th>
+                  <th className="px-4 py-3 text-left font-semibold text-[#131f2f]">Ottawa/Montreal</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["Software Engineer (mid)", "$95,000–$130,000", "$85,000–$115,000"],
+                  ["Project Manager", "$85,000–$120,000", "$75,000–$105,000"],
+                  ["Financial Analyst", "$65,000–$95,000", "$60,000–$90,000"],
+                  ["Data Analyst", "$75,000–$105,000", "$68,000–$95,000"],
+                  ["Marketing Manager", "$70,000–$100,000", "$65,000–$90,000"],
+                  ["Registered Nurse", "$75,000–$95,000", "$70,000–$88,000"],
+                  ["Civil Engineer (P.Eng.)", "$85,000–$120,000", "$78,000–$110,000"],
+                  ["HR Generalist", "$58,000–$82,000", "$55,000–$78,000"],
+                ].map(([role, toronto, ottawa]) => (
+                  <tr key={role} className="border-t border-[#dcdce3]">
+                    <td className="px-4 py-3 font-medium text-[#131f2f]">{role}</td>
+                    <td className="px-4 py-3 text-[#3B4959]">{toronto}</td>
+                    <td className="px-4 py-3 text-[#77838F]">{ottawa}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-2 text-xs text-[#77838F]">Figures represent total cash compensation. Ranges vary by company size, sector, and experience level. Verify current rates on Statistics Canada, Glassdoor, or LinkedIn Salary.</p>
+        </div>
+
+        <div className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">What to say — and not say — in a Canadian salary negotiation</h2>
+          <div className="space-y-4">
+            {[
+              {
+                label: "When asked: 'What are your salary expectations?'",
+                avoid: "\"I need at least $X\" or giving a specific number first",
+                say: "\"Based on my research and the scope of the role, I'm targeting a range of $X to $Y. I'm open to discussing the full compensation package.\"",
+              },
+              {
+                label: "After receiving an offer",
+                avoid: "Accepting immediately or saying 'that's too low'",
+                say: "\"Thank you — I'm genuinely excited about this opportunity. I was hoping we could get to $X given [specific reason]. Is there flexibility there?\"",
+              },
+              {
+                label: "When they say the salary is fixed",
+                avoid: "Dropping the conversation",
+                say: "\"I understand. Is there flexibility on [vacation days / signing bonus / remote work / review timeline]?\"",
+              },
+              {
+                label: "If you have competing offers",
+                avoid: "Lying about competing offers",
+                say: "\"I do have another offer I'm considering at $X. I'm more interested in this role — is there a way to close that gap?\"",
+              },
+            ].map((item) => (
+              <div key={item.label} className="rounded-2xl border border-[#dcdce3] bg-white p-5">
+                <p className="mb-3 font-semibold text-[#131f2f]">{item.label}</p>
+                <div className="space-y-2">
+                  <div className="rounded-xl bg-red-50 px-4 py-2.5">
+                    <p className="mb-1 text-xs font-semibold uppercase text-red-500">Avoid</p>
+                    <p className="text-sm text-red-600">{item.avoid}</p>
+                  </div>
+                  <div className="rounded-xl bg-emerald-50 px-4 py-2.5">
+                    <p className="mb-1 text-xs font-semibold uppercase text-emerald-600">Say instead</p>
+                    <p className="text-sm text-emerald-700">&quot;{item.say}&quot;</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mt-12 rounded-2xl bg-[#006EDC] p-7 text-white">

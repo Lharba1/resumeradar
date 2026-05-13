@@ -1,122 +1,110 @@
 # ResumeRadar — SEO + GEO Implementation Roadmap
+**Last updated:** 2026-05-13
 
 ---
 
-## Phase 1 — Technical Foundation (Week 1–2)
+## Phase 1 — Technical Foundation ✅ COMPLETE
 
-**Goal:** Make the site crawlable, indexable, and AI-readable.
-
-### Next.js Metadata (1–2 days)
-- [ ] Add `generateMetadata()` to `app/layout.tsx` with default title template: `"%s | ResumeRadar"`
-- [ ] Add page-level metadata to `/` (landing), `/pricing`, all feature pages
-- [ ] Open Graph tags: `og:title`, `og:description`, `og:image` (1200×630px)
-- [ ] Twitter card meta tags
-- [ ] Canonical URLs on all pages
-
-### Robots & Crawlers (2 hours)
-- [ ] Create `/public/robots.txt` — allow GPTBot, PerplexityBot, ClaudeBot, OAI-SearchBot
-- [ ] Block CCBot (training harvester) if desired
-- [ ] Point `Sitemap:` to `https://resumeradar.io/sitemap.xml`
-
-### Sitemap (half day)
-- [ ] Create `/app/sitemap.ts` — dynamic Next.js sitemap
-- [ ] Include all public pages (landing, pricing, features/*, solutions/*, compare/*, resources/*)
-- [ ] Exclude app pages (/optimize, /build-resume, /jobs, /tracker, /library, /dashboard)
-- [ ] Submit to Google Search Console + Bing Webmaster Tools
-
-### llms.txt (1 hour)
-- [ ] Create `/public/llms.txt` — see GEO-ANALYSIS.md for content
-- [ ] Describes all tools, key resources, pricing tiers, contact
-
-### Server-Side Rendering Audit (1 day)
-- [ ] Convert landing page `/` to SSR (remove `"use client"`, use `generateMetadata`)
-- [ ] Ensure `/pricing`, `/features/*`, `/solutions/*` are SSR
-- [ ] App pages can stay client-only (behind auth)
+| Task | Status |
+|------|--------|
+| robots.txt with AI crawlers (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot, Bytespider; CCBot blocked) | ✅ Done |
+| llms.txt at /public/llms.txt | ✅ Done |
+| sitemap.ts — 30 clean pages, no ghost URLs | ✅ Done |
+| All public pages as Next.js SSR server components | ✅ Done |
+| Title + meta description on all pages | ✅ Done |
+| Open Graph image (/public/og-image.png) | ✅ Done |
+| hreflang EN ↔ FR on homepage and key pages | ✅ Done |
+| Canonical URLs on all pages | ✅ Done |
 
 ---
 
-## Phase 2 — Core Pages & Schema (Week 3–6)
+## Phase 2 — Core Pages & Schema ✅ COMPLETE
 
-**Goal:** Build the pages that capture high-intent search traffic.
-
-### Core Pages to Build
-- [ ] `/pricing` — SoftwareApplication + Offer schema
-- [ ] `/features/ats-optimizer` — feature page with schema
-- [ ] `/solutions/immigrants-canada` — primary audience landing page
-- [ ] `/compare/jobscan-alternative` — comparison page (highest-converting content type)
-- [ ] `/resources/guides/canadian-resume-guide` — cornerstone SEO content
-- [ ] `/resources/guides/ats-optimization-guide` — cornerstone SEO content
-
-### Schema Implementation
-- [ ] `Organization` schema on every page (name, url, logo, sameAs links)
-- [ ] `WebSite` schema with `SearchAction` on homepage
-- [ ] `SoftwareApplication` schema on homepage and feature pages
-- [ ] `Article` + `Person` (author) schema on all blog posts
-- [ ] `BreadcrumbList` on all inner pages
-
-### Analytics Setup
-- [ ] Google Search Console — verify domain, submit sitemap
-- [ ] Google Analytics 4 — pageviews, organic channel, conversion events
-- [ ] Bing Webmaster Tools — submit sitemap, enable IndexNow
-- [ ] Set up conversion goal: "Signed up from organic"
+| Task | Status |
+|------|--------|
+| Homepage with FAQPage schema + 4 pricing tiers | ✅ Done |
+| /pricing page with BreadcrumbList + secure checkout strip | ✅ Done |
+| /features/ats-optimizer feature page | ✅ Done |
+| /solutions/immigrants-canada, /international-students, /engineers-canada, /french-speakers | ✅ Done |
+| 5 comparison pages (/compare/*) | ✅ Done |
+| 3 guides (/resources/guides/*) | ✅ Done |
+| 7 blog posts (/resources/blog/*) | ✅ Done |
+| /resources/templates | ✅ Done |
+| /fr + /fr/optimiseur-cv-ats | ✅ Done |
+| /about page | ✅ Done |
+| Organization schema with logo (/public/logo.png) | ✅ Done |
+| BlogPosting + Person author schema on all blog posts | ✅ Done |
+| BreadcrumbList on all inner pages | ✅ Done |
+| SoftwareApplication with 4 offers (USD) | ✅ Done |
+| priceCurrency = USD across all schemas | ✅ Done |
+| Ghost URLs removed from sitemap (5 pages) | ✅ Done |
+| Admin billing dashboard (MRR, plan stats, manual override) | ✅ Done |
+| CSP Report-Only header + /api/csp-report endpoint | ✅ Done |
+| Next.js upgraded to 16.2.6 (HIGH CVE patch) | ✅ Done |
 
 ---
 
-## Phase 3 — Content & GEO Off-Site (Month 2–3)
+## Phase 3 — E-E-A-T & Content Quality 🔄 IN PROGRESS
 
-**Goal:** Build authority and get cited by AI systems.
+### Code fixes (this sprint)
 
-### Content Production
-- [ ] Publish 8 blog posts (see CONTENT-CALENDAR.md Month 1–2)
-- [ ] Build 4 solution pages
-- [ ] Launch French content hub `/fr/`
-- [ ] Create free resume templates page (link magnet)
+| Task | Priority | Status |
+|------|----------|--------|
+| Remove dead sameAs URLs from Organization schema (page.tsx:28-32) | CRITICAL | 🔄 In progress |
+| Fix canadian-resume-guide Article author: Organization → Person | HIGH | 🔄 In progress |
+| Add source links to Stats Canada + ATS statistics across pages | HIGH | 🔄 In progress |
+| Create /contact page | HIGH | 🔄 In progress |
+| Add visible author bylines to all blog posts | MEDIUM | 🔄 In progress |
+| Add contextual inline internal links in blog/guide body content | MEDIUM | 🔄 In progress |
+| Expand all 7 blog posts to 1,500+ words | HIGH | 🔄 In progress |
+| Expand guides to 2,000+ words | HIGH | 🔄 In progress |
+| Fix /fr sitemap ghost pages (build or remove) | MEDIUM | ❌ Pending |
 
-### Off-Site Brand Mentions (GEO priority)
-- [ ] **Product Hunt launch** — generates Reddit discussions, backlinks, early users
-- [ ] **List on G2, Capterra, AlternativeTo** — free, high DA, AI training sources
-- [ ] **Reddit posts:** r/ImmigrationCanada, r/cscareerquestions, r/Resume, r/PersonalFinanceCanada
-- [ ] **LinkedIn company page** — posts about ATS tips, Canadian job market
-- [ ] **YouTube:** 2-3 short demos (screen recordings) — "How to optimize your resume for ATS in 3 minutes"
+### Off-site brand signals (user action required)
 
-### E-E-A-T Building
-- [ ] Add author bio page with credentials for blog posts
-- [ ] Add "Last updated" date to all guides
-- [ ] Add statistics/data citations from Statistics Canada, IRCC, LinkedIn Workforce Report
-- [ ] Add 3 testimonials with full name + job title + company
+| Task | Priority | Status |
+|------|----------|--------|
+| Product Hunt launch | HIGH | ❌ Pending |
+| Reddit posts (r/ImmigrationCanada, r/PersonalFinanceCanada, r/cscareerquestions) | HIGH | ❌ Pending |
+| LinkedIn company page | HIGH | ❌ Pending |
+| G2 / Capterra / AlternativeTo listing | HIGH | ❌ Pending |
+| Resend DNS email verification | MEDIUM | ⏳ Awaiting DNS propagation |
+
+### Operations
+
+| Task | Priority | Status |
+|------|----------|--------|
+| Stripe live key — replace 7-day expiring key with permanent restricted key | URGENT | ❌ Action needed |
+| CSP: promote Report-Only → Enforced (after 7 days monitoring admin_actions) | MEDIUM | ⏳ Monitor |
+| Google Search Console — verify domain + submit sitemap | HIGH | ❌ Pending |
+| Bing Webmaster Tools — submit sitemap + enable IndexNow | MEDIUM | ❌ Pending |
 
 ---
 
 ## Phase 4 — Scale & Authority (Month 4–12)
 
-**Goal:** Compound growth — content → rankings → citations → signups.
-
-### Content Scale
+### Content scale
 - [ ] 2 blog posts/week (1 EN + 1 FR)
-- [ ] 1 original data piece/month ("We analyzed X Canadian job postings")
-- [ ] Expand comparison pages (vs Resume.io, vs Rezi, vs Enhancv)
-- [ ] Programmatic pages: `/resources/templates/[industry]-resume-template`
+- [ ] 1 original data piece/month ("We analyzed 500 Canadian job postings — top ATS keywords")
+- [ ] Programmatic pages: /resources/templates/[industry]-resume-template
+- [ ] New feature pages as product grows
 
-### Link Building
-- [ ] Guest posts on immigration blogs (Settlement.org, CIC News, Moving2Canada)
-- [ ] HARO/Qwoted responses for HR/resume/career journalists
+### Link building
+- [ ] Guest posts: Settlement.org, CIC News, Moving2Canada
+- [ ] HARO/Qwoted for HR/resume/career journalists
 - [ ] Partner with immigration consultants for resource mentions
 - [ ] Apply for "Best Tools for Newcomers" listicles
 
 ### Advanced GEO
-- [ ] Publish original survey: "500 Canadian HR managers on ATS usage" — highly citable
-- [ ] Create an ATS Score Calculator (free, linkable, citable tool)
-- [ ] Monitor AI citations: search "best ats resume tool canada" in ChatGPT, Perplexity monthly
-- [ ] Add `sameAs` entity links (LinkedIn, Crunchbase, Product Hunt, GitHub) to Organization schema
+- [ ] Publish original survey: "500 Canadian HR managers on ATS usage"
+- [ ] Free ATS Score Calculator (linkable, citable)
+- [ ] Monitor AI citations monthly in ChatGPT + Perplexity
+- [ ] Add sameAs once social accounts are live
 
 ---
 
-## Quick Wins Checklist (Do This Week)
+## Urgent This Week
 
-- [ ] `robots.txt` — 30 minutes
-- [ ] `llms.txt` — 1 hour
-- [ ] `sitemap.xml` (Next.js dynamic) — 2 hours
-- [ ] Landing page `<title>` and `<meta description>` — 1 hour
-- [ ] Open Graph image for homepage — 2 hours (design)
-- [ ] Google Search Console verification — 20 minutes
-- [ ] LinkedIn company page — 1 hour
+1. **Replace Stripe live key** before 7-day expiry
+2. **Google Search Console** — verify domain, submit sitemap
+3. **LinkedIn company page** — highest-impact 1-hour brand signal

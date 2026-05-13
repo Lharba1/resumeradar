@@ -21,8 +21,8 @@ const articleSchema = {
   description: "Step-by-step job search guide for immigrants and newcomers to Canada.",
   datePublished: "2026-05-10",
   dateModified: "2026-05-10",
-  author: { "@type": "Organization", name: "ResumeRadar" },
-  publisher: { "@type": "Organization", name: "ResumeRadar", logo: { "@type": "ImageObject", url: "https://resumeradar.io/logo.png" } },
+  author: { "@type": "Person", name: "ResumeRadar Editorial Team", url: "https://resumeradar.io/about" },
+  publisher: { "@type": "Organization", name: "ResumeRadar", url: "https://resumeradar.io", logo: { "@type": "ImageObject", url: "https://resumeradar.io/logo.png" } },
 };
 
 const breadcrumb = {
@@ -180,6 +180,39 @@ export default function JobSearchGuide() {
               </tbody>
             </table>
           </div>
+        </div>
+
+        {/* Job search timeline */}
+        <div className="mt-12">
+          <h2 className="mb-2 text-2xl font-bold text-[#131f2f]">Canadian job search timeline for newcomers</h2>
+          <p className="mb-4 text-sm text-[#77838F]">Realistic milestones based on professionals with post-secondary credentials and in-demand skills.</p>
+          <div className="overflow-hidden rounded-2xl border border-[#dcdce3] bg-white">
+            <table className="w-full text-sm">
+              <thead className="bg-[#F5F9FC]">
+                <tr>
+                  <th className="px-5 py-3 text-left font-semibold text-[#131f2f]">Timeframe</th>
+                  <th className="px-5 py-3 text-left font-semibold text-[#131f2f]">Focus</th>
+                  <th className="px-5 py-3 text-left font-semibold text-[#131f2f]">Key actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["Week 1–2", "Foundation", "Build Canadian-format resume, optimize LinkedIn, identify target roles and companies"],
+                  ["Week 3–4", "Applications", "Submit 10–15 tailored applications/week, check ATS score for each with ResumeRadar (target ≥70%)"],
+                  ["Month 2", "Networking", "Attend settlement agency events (ACCES Employment, TRIEC), send 10 LinkedIn connection requests/week, request informational interviews"],
+                  ["Month 3", "Interviews", "Expect first phone screens, prepare 8 STAR stories, research companies on Glassdoor"],
+                  ["Month 4–6", "Offer stage", "Negotiate salary (research Job Bank wage data), review offer letter, give notice to current employer if applicable"],
+                ].map(([time, focus, actions]) => (
+                  <tr key={time} className="border-t border-[#dcdce3]">
+                    <td className="px-5 py-3 font-medium text-[#006EDC] whitespace-nowrap">{time}</td>
+                    <td className="px-5 py-3 font-medium text-[#131f2f]">{focus}</td>
+                    <td className="px-5 py-3 text-[#3B4959]">{actions}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-3 text-xs text-[#77838F]">Source: Statistics Canada Longitudinal Immigration Database (IMDB). Times vary by occupation, province, and credential recognition status.</p>
         </div>
 
         <div className="mt-12 rounded-2xl bg-[#006EDC] p-8 text-white">

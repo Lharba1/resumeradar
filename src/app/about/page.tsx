@@ -34,7 +34,7 @@ export default function AboutPage() {
           <section>
             <h2 className="mb-3 text-2xl font-bold text-[#131f2f]">Why we built this</h2>
             <p className="leading-relaxed">
-              Canada welcomes over 400,000 new permanent residents every year. Many are highly skilled — engineers, doctors, developers, accountants — with years of international experience. Yet a significant number spend months or years in Canada unable to find work that matches their qualifications.
+              Canada welcomes over <a href="https://www.canada.ca/en/immigration-refugees-citizenship/news/notices/supplementary-immigration-levels-2024.html" target="_blank" rel="noopener noreferrer" className="text-[#006EDC] underline">400,000 new permanent residents</a> every year. Many are highly skilled — engineers, doctors, developers, accountants — with years of international experience. Yet a significant number spend months or years in Canada unable to find work that matches their qualifications.
             </p>
             <p className="mt-3 leading-relaxed">
               The barrier is rarely skill. It&apos;s a system problem: Canadian employers use Applicant Tracking Systems (ATS) that filter out resumes before any human reads them. Resumes written for other markets — even excellent ones — fail ATS screening at alarming rates. The formatting is wrong. The keywords are different. The job titles don&apos;t match. The result: qualified candidates are rejected automatically, and no one tells them why.

@@ -1,97 +1,101 @@
 # ResumeRadar — Site Structure & URL Architecture
+**Last updated:** 2026-05-13
 
-## URL Hierarchy
+## Live URL Inventory (30 pages in sitemap)
 
 ```
 resumeradar.io/
 │
-├── /                          ← Landing page (SSR required)
-├── /pricing                   ← Pricing tiers (SSR required)
-├── /features                  ← Features overview
-│   ├── /features/ats-optimizer
-│   ├── /features/resume-builder
-│   ├── /features/cover-letter
-│   ├── /features/interview-prep
-│   └── /features/job-tracker
+├── /                              ✅ Live — SSR, FAQPage schema, 4 offers
+├── /pricing                       ✅ Live — SoftwareApplication + Offer + BreadcrumbList
+├── /about                         ✅ Live
+├── /privacy                       ✅ Live
+├── /terms                         ✅ Live
+├── /contact                       ❌ MISSING — add (trust signal for Google)
 │
-├── /solutions                 ← Use-case pages
-│   ├── /solutions/immigrants-canada
-│   ├── /solutions/international-students
-│   ├── /solutions/newcomers-canada
-│   ├── /solutions/engineers-canada
-│   └── /solutions/french-speakers
+├── /features/
+│   └── /features/ats-optimizer    ✅ Live — SoftwareApplication + FAQPage
+│   NOTE: resume-builder, cover-letter, interview-prep, job-tracker
+│         NOT BUILT — removed from sitemap (were ghost URLs)
 │
-├── /compare                   ← Comparison pages (high-converting)
-│   ├── /compare/jobscan-alternative
-│   ├── /compare/jobradar-vs-jobscan
-│   ├── /compare/jobradar-vs-resumeio
-│   └── /compare/best-ats-resume-tools-canada
+├── /solutions/
+│   ├── /solutions/immigrants-canada       ✅ Live
+│   ├── /solutions/international-students  ✅ Live
+│   ├── /solutions/engineers-canada        ✅ Live
+│   └── /solutions/french-speakers         ✅ Live
+│   NOTE: newcomers-canada NOT BUILT — removed from sitemap
 │
-├── /resources                 ← Content hub
-│   ├── /resources/blog
-│   │   ├── /resources/blog/how-ats-works-canada
-│   │   ├── /resources/blog/canadian-resume-format-guide
-│   │   ├── /resources/blog/resume-tips-immigrants-canada
-│   │   └── ...
-│   ├── /resources/guides
-│   │   ├── /resources/guides/ats-optimization-guide
-│   │   ├── /resources/guides/canadian-resume-guide
-│   │   └── /resources/guides/job-search-immigrants-canada
-│   └── /resources/templates   ← Free CV templates (SEO magnet)
+├── /compare/
+│   ├── /compare/jobscan-alternative           ✅ Live
+│   ├── /compare/jobradar-vs-jobscan           ✅ Live
+│   ├── /compare/jobradar-vs-resumeio          ✅ Live
+│   ├── /compare/jobradar-vs-rezi              ✅ Live
+│   └── /compare/best-ats-resume-tools-canada  ✅ Live
 │
-├── /fr                        ← French content hub
-│   ├── /fr/optimiseur-cv-ats
-│   ├── /fr/construire-cv
-│   └── /fr/ressources/blogue
+├── /resources/
+│   ├── /resources/templates               ✅ Live
+│   ├── /resources/blog                    ✅ Live (index)
+│   │   ├── /resources/blog/resume-tips-immigrants-canada   ✅ Live (~950w, needs expansion)
+│   │   ├── /resources/blog/ats-keywords-canada             ✅ Live (~900w, needs expansion)
+│   │   ├── /resources/blog/canadian-resume-vs-us-resume    ✅ Live (~950w, needs expansion)
+│   │   ├── /resources/blog/cover-letter-canada-guide       ✅ Live (~1,000w, needs expansion)
+│   │   ├── /resources/blog/interview-prep-canada-immigrants ✅ Live (~1,100w, needs expansion)
+│   │   ├── /resources/blog/linkedin-profile-canada         ✅ Live (~900w, needs expansion)
+│   │   └── /resources/blog/salary-negotiation-canada       ✅ Live (~1,200w, needs expansion)
+│   └── /resources/guides/
+│       ├── /resources/guides/canadian-resume-guide         ✅ Live (⚠️ author fix needed + expansion)
+│       ├── /resources/guides/ats-optimization-guide        ✅ Live (needs expansion)
+│       └── /resources/guides/job-search-immigrants-canada  ✅ Live (needs expansion)
 │
-├── /about
-├── /contact
-├── /privacy
-├── /terms
-├── /sitemap.xml
-├── /robots.txt
-└── /llms.txt                  ← GEO: AI crawler guidance
+├── /fr/                                   ✅ Live
+│   ├── /fr/optimiseur-cv-ats              ✅ Live
+│   ├── /fr/ressources/blogue/guide-cv-canadien         ❌ In sitemap — NOT BUILT
+│   └── /fr/ressources/guides/recherche-emploi-canada   ❌ In sitemap — NOT BUILT
+│
+├── /sitemap.xml                           ✅ Clean (30 URLs)
+├── /robots.txt                            ✅ AI crawlers allowed
+└── /llms.txt                              ✅ Live
 ```
 
 ---
 
-## Priority Pages to Build First
+## App Pages (auth-gated, excluded from sitemap)
 
-### Tier 1 — Launch (Week 1-2)
-1. `/` — Landing page with SSR metadata
-2. `/pricing` — Pricing page with schema
-3. `/features/ats-optimizer` — Core feature page
-4. `/solutions/immigrants-canada` — Primary audience page
-5. `/resources/guides/canadian-resume-guide` — SEO anchor content
+```
+/login          /optimize       /dashboard
+/build-resume   /jobs           /tracker
+/cover-letter   /interview      /library
+/settings       /admin/*
+```
 
-### Tier 2 — Month 1
-6. `/resources/guides/ats-optimization-guide`
-7. `/compare/jobscan-alternative`
-8. `/solutions/international-students`
-9. `/resources/blog/how-ats-works-canada`
-10. `/fr/optimiseur-cv-ats`
+---
 
-### Tier 3 — Month 2-3
-11-20. Remaining features, solutions, comparison pages, blog posts
+## Action Items
+
+| Page | Issue | Priority |
+|------|-------|----------|
+| /contact | Missing entirely — trust signal | HIGH |
+| /fr/ressources/blogue/guide-cv-canadien | In sitemap but page doesn't exist — build or remove from sitemap | HIGH |
+| /fr/ressources/guides/recherche-emploi-canada | Same — in sitemap but not built | MEDIUM |
 
 ---
 
 ## Internal Linking Strategy
 
-- Landing page → Features → Pricing (conversion funnel)
-- Blog posts → relevant Features page (MOFU bridge)
-- Guides → Solutions pages (audience matching)
-- Comparison pages → Pricing (bottom-of-funnel)
-- Every blog post → 1 guide + 1 feature page (link depth)
-- French pages ↔ English pages via `hreflang` tags
+**Current state:** Blog posts and guides only have "related links" at the bottom — no contextual inline links in the body.
+
+**Target:** Every piece of content must have 2–4 inline contextual links:
+- Blog posts → relevant feature page + related guide
+- Guides → solutions pages + feature pages
+- Solution pages → feature pages + pricing
+- Comparison pages → /pricing (bottom-of-funnel)
 
 ---
 
-## hreflang Implementation
+## hreflang Status
 
-All bilingual pages must have:
-```html
-<link rel="alternate" hreflang="en-ca" href="https://resumeradar.io/[page]" />
-<link rel="alternate" hreflang="fr-ca" href="https://resumeradar.io/fr/[page]" />
-<link rel="alternate" hreflang="x-default" href="https://resumeradar.io/[page]" />
-```
+| Page pair | Status |
+|-----------|--------|
+| / ↔ /fr | ✅ Done |
+| /features/ats-optimizer ↔ /fr/optimiseur-cv-ats | ✅ Done |
+| Blog posts ↔ French equivalents | ❌ Not done (FR pages not built yet) |

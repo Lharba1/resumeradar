@@ -64,9 +64,13 @@ export default function LinkedInProfilePage() {
 
         <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">Blog</div>
         <h1 className="text-4xl font-bold tracking-tight text-[#131f2f]">How to optimize your LinkedIn profile for Canadian jobs</h1>
-        <p className="mt-2 text-sm text-[#77838F]">Published May 2026 · 6 min read</p>
+        <div className="mt-2 flex items-center gap-2 text-sm text-[#77838F]">
+          <span>By ResumeRadar Editorial Team</span>
+          <span>·</span>
+          <span>Published May 2026 · 6 min read</span>
+        </div>
         <p className="mt-4 text-lg text-[#3B4959]">
-          LinkedIn is the primary professional network for Canadian hiring. Over 70% of Canadian jobs are filled through it — either through direct applications or recruiter outreach. Here is how to optimize your profile for the Canadian market.
+          LinkedIn is the primary professional network for Canadian hiring. Over 70% of Canadian jobs are filled through it — either through direct applications or recruiter outreach. Here is how to optimize your profile for the Canadian market. For the underlying application materials, see our <Link href="/resources/blog/resume-tips-immigrants-canada" className="text-[#006EDC] underline hover:text-[#0060C7]">resume tips for immigrants</Link> and <Link href="/resources/blog/ats-keywords-canada" className="text-[#006EDC] underline hover:text-[#0060C7]">ATS keywords guide</Link>.
         </p>
 
         {/* Citable block */}
@@ -89,10 +93,43 @@ export default function LinkedInProfilePage() {
           </div>
         </div>
 
+        {/* How recruiters use LinkedIn */}
+        <div className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">How Canadian recruiters actually search LinkedIn</h2>
+          <p className="mb-4 text-sm leading-relaxed text-[#3B4959]">
+            Understanding how recruiters search helps you optimize for the fields they filter on — not just the ones that look good visually.
+          </p>
+          <div className="space-y-3">
+            {[
+              {
+                title: "Boolean keyword search",
+                desc: "Recruiters search with operators like: (\"Software Engineer\" OR \"Developer\") AND (\"React\" OR \"TypeScript\") AND \"Toronto\". Your headline, job titles, skills, and about section are all indexed. This is why keyword placement matters — not just having skills listed, but having them in the sections LinkedIn indexes for search.",
+              },
+              {
+                title: "\"Open to Work\" filter",
+                desc: "Recruiters can filter exclusively for candidates who have enabled Open to Work. If your search is confidential, use the recruiter-only option (the green banner is not shown). If you are actively looking, the public banner signals availability and typically doubles inbound recruiter messages.",
+              },
+              {
+                title: "Location-based filtering",
+                desc: "Location is one of the most-used recruiter filters. If your profile says a foreign city, you will be excluded from most Canadian searches. Update your location to your Canadian city (or \"Greater Toronto Area\", \"Greater Vancouver\") immediately — even before you arrive, if you have a confirmed move date.",
+              },
+              {
+                title: "Skills endorsement weighting",
+                desc: "LinkedIn's algorithm weights skills with 5+ endorsements higher in recruiter search results. Ask former colleagues, managers, or classmates to endorse your top 3–5 skills. Even 3–4 endorsements on a skill moves it ahead of unendorsed skills in recruiter-facing results.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="rounded-xl border border-[#dcdce3] bg-white p-4">
+                <p className="font-semibold text-[#131f2f]">{item.title}</p>
+                <p className="mt-1 text-sm leading-relaxed text-[#77838F]">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <section className="mt-10">
           <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">LinkedIn import — skip manual data entry</h2>
           <p className="text-sm leading-relaxed text-[#3B4959]">
-            ResumeRadar can import your LinkedIn profile directly — paste your LinkedIn URL and we pull your experience, education, and skills automatically. This populates your ResumeRadar profile without re-entering everything manually, so you can start optimizing resumes immediately.
+            ResumeRadar can import your LinkedIn profile directly — paste your LinkedIn URL and we pull your experience, education, and skills automatically. This populates your ResumeRadar profile without re-entering everything manually, so you can start optimizing resumes immediately. For a broader overview of finding work in Canada, see the <Link href="/resources/guides/job-search-immigrants-canada" className="text-[#006EDC] underline hover:text-[#0060C7]">complete job search guide for immigrants</Link>.
           </p>
           <Link href="/login" className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#006EDC] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#0060C7]">
             Import from LinkedIn →

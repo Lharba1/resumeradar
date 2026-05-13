@@ -31,6 +31,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.3,
     },
+    {
+      url: `${BASE}/contact`,
+      lastModified: now,
+      changeFrequency: "yearly" as const,
+      priority: 0.4,
+    },
   ];
 
   // Feature pages — only include built pages (add others as they go live)

@@ -51,7 +51,11 @@ export default function CoverLetterGuide() {
 
         <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">Blog</div>
         <h1 className="text-4xl font-bold tracking-tight text-[#131f2f]">How to write a cover letter for Canadian jobs</h1>
-        <p className="mt-2 text-sm text-[#77838F]">Published May 2026 · 7 min read</p>
+        <div className="mt-2 flex items-center gap-2 text-sm text-[#77838F]">
+          <span>By ResumeRadar Editorial Team</span>
+          <span>·</span>
+          <span>Published May 2026 · 7 min read</span>
+        </div>
         <p className="mt-4 text-lg text-[#3B4959]">
           Canadian cover letters are shorter and more direct than those used in many other countries. Here is the exact format, what to include, what to avoid — and how immigrants should handle work authorization.
         </p>
@@ -60,7 +64,7 @@ export default function CoverLetterGuide() {
         <div className="mt-10 rounded-2xl border border-[#dcdce3] bg-[#F5F9FC] p-5">
           <h2 className="mb-2 font-semibold text-[#131f2f]">Do Canadian employers still read cover letters?</h2>
           <p className="text-sm leading-relaxed text-[#3B4959]">
-            According to a 2025 survey of Canadian HR professionals by the Human Resources Professionals Association (HRPA), 47% of recruiters read cover letters when they are submitted, and 83% say a strong cover letter can move a borderline candidate into the interview round. However, the cover letter must be concise — 3 short paragraphs, under 300 words — and specific to the role. Generic cover letters using phrases like &quot;I am writing to express my interest in your organization&quot; are immediately dismissed. The most effective Canadian cover letters open with a specific accomplishment relevant to the role, demonstrate knowledge of the company, and close with a clear, confident ask for an interview. For immigrants, the cover letter is also the appropriate place to address work authorization — not the resume.
+            According to a 2025 survey of Canadian HR professionals by the Human Resources Professionals Association (HRPA), 47% of recruiters read cover letters when they are submitted, and 83% say a strong cover letter can move a borderline candidate into the interview round. However, the cover letter must be concise — 3 short paragraphs, under 300 words — and specific to the role. Generic cover letters using phrases like &quot;I am writing to express my interest in your organization&quot; are immediately dismissed. The most effective Canadian cover letters open with a specific accomplishment relevant to the role, demonstrate knowledge of the company, and close with a clear, confident ask for an <Link href="/resources/blog/interview-prep-canada-immigrants" className="text-[#006EDC] underline hover:text-[#0060C7]">interview</Link>. For immigrants, the cover letter is also the appropriate place to address work authorization — not the <Link href="/resources/blog/resume-tips-immigrants-canada" className="text-[#006EDC] underline hover:text-[#0060C7]">resume</Link>.
           </p>
         </div>
 
@@ -117,9 +121,66 @@ export default function CoverLetterGuide() {
           <section>
             <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">Cover letter in French — when and how</h2>
             <p className="text-sm leading-relaxed text-[#3B4959]">
-              Write your cover letter in French for Quebec employers and bilingual federal positions. If the job posting is bilingual, write in the language the posting leads with. ResumeRadar&apos;s cover letter generator produces fully professional French cover letters tailored to any job description.
+              Write your cover letter in French for Quebec employers and bilingual federal positions. If the job posting is bilingual, write in the language the posting leads with. ResumeRadar&apos;s cover letter generator produces fully professional French cover letters tailored to any job description. For resume formatting conventions, see the <Link href="/resources/guides/canadian-resume-guide" className="text-[#006EDC] underline hover:text-[#0060C7]">Canadian Resume Format Guide</Link>.
             </p>
           </section>
+        </div>
+
+        <div className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">Canadian cover letter structure — annotated example</h2>
+          <p className="mb-4 text-[#3B4959]">A Canadian cover letter has 4 distinct parts. Here is what each one should accomplish:</p>
+          <div className="space-y-4">
+            {[
+              {
+                label: "Opening paragraph",
+                purpose: "State the exact job title, where you found it, and one sentence on why you're a strong fit. Do not open with 'I am writing to apply for...' — it's the weakest opener possible.",
+                example: "\"I am applying for the Senior Project Manager role posted on LinkedIn (Req. #4821). With eight years managing cross-functional infrastructure projects in Brazil and Germany, I bring the international delivery experience and PMP certification your team is looking for.\"",
+              },
+              {
+                label: "Value paragraph",
+                purpose: "2–3 sentences with your most relevant achievement, quantified. Match language directly from the job posting.",
+                example: "\"At Infosys Canada, I led a $3.2M cloud migration that reduced operating costs by 28% — on time and under budget. The project required coordinating 14 vendors across 3 time zones, which is directly relevant to your multi-region delivery model.\"",
+              },
+              {
+                label: "Connection paragraph",
+                purpose: "Why this company specifically. One sentence showing you researched them — not generic.",
+                example: "\"I've followed Shopify's engineering culture since your 2023 Build Things That Matter keynote, and the emphasis on autonomous teams aligns with how I work best.\"",
+              },
+              {
+                label: "Closing",
+                purpose: "Confident close, not apologetic. State you welcome a conversation. Include your contact details even though they're on the resume.",
+                example: "\"I would welcome the opportunity to discuss how my background fits this role. I can be reached at your.email@domain.com or 647-555-0123.\"",
+              },
+            ].map((item) => (
+              <div key={item.label} className="rounded-2xl border border-[#dcdce3] bg-white p-5">
+                <p className="mb-1 text-xs font-bold uppercase tracking-widest text-[#006EDC]">{item.label}</p>
+                <p className="mb-3 text-sm text-[#77838F]">{item.purpose}</p>
+                <div className="rounded-xl bg-[#F5F9FC] p-3">
+                  <p className="mb-1 text-xs font-semibold uppercase text-[#77838F]">Example</p>
+                  <p className="text-sm italic text-[#3B4959]">{item.example}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">Cover letter mistakes Canadian recruiters see every day</h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              { mistake: "Using the same cover letter for every application", fix: "Recruiters can tell instantly. At minimum, change the company name, job title, and the 'why this company' sentence." },
+              { mistake: "Writing more than one page", fix: "Canadian cover letters are 3–4 paragraphs, never more than one page. Recruiters spend under 30 seconds on them." },
+              { mistake: "Summarizing your resume", fix: "A cover letter adds context, not repetition. Share one story or achievement that the resume can't tell." },
+              { mistake: "Vague openers like 'I am a hard-working professional'", fix: "Start with the job title and your strongest relevant credential. Specificity signals confidence." },
+              { mistake: "Not mentioning the job posting reference or how you found the role", fix: "Always mention where you saw the posting. It shows attention to detail and confirms you're applying for the right role." },
+              { mistake: "Formal or overly academic language", fix: "Canadian workplace culture is professional but direct. Write the way you would speak in a job interview — not the way you'd write a university essay." },
+            ].map((item) => (
+              <div key={item.mistake} className="rounded-2xl border border-[#dcdce3] bg-white p-4">
+                <p className="mb-1 flex items-start gap-2 text-sm font-semibold text-red-600"><span>✗</span>{item.mistake}</p>
+                <p className="text-xs leading-relaxed text-[#77838F]"><span className="font-semibold text-emerald-600">Fix: </span>{item.fix}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mt-12 rounded-2xl bg-[#006EDC] p-7 text-white">

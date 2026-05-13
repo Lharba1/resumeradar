@@ -108,17 +108,23 @@ export default function ResumeTipsPage() {
         <h1 className="text-4xl font-bold tracking-tight text-[#131f2f]">
           10 resume tips for immigrants in Canada
         </h1>
-        <p className="mt-2 text-sm text-[#77838F]">Published May 2026 · 6 min read</p>
+        <div className="mt-2 flex items-center gap-2 text-sm text-[#77838F]">
+          <span>By ResumeRadar Editorial Team</span>
+          <span>·</span>
+          <span>Published May 2026 · 6 min read</span>
+        </div>
         <p className="mt-4 text-lg text-[#3B4959]">
-          Most immigrants applying to Canadian jobs make the same formatting and keyword mistakes. Here are the 10 most impactful fixes — and why each one matters for ATS screening.
+          Most immigrants applying to Canadian jobs make the same formatting and keyword mistakes. Here are the 10 most impactful fixes — and why each one matters for <Link href="/features/ats-optimizer" className="text-[#006EDC] underline hover:text-[#0060C7]">ATS screening</Link>. For a full formatting walkthrough, see the <Link href="/resources/guides/canadian-resume-guide" className="text-[#006EDC] underline hover:text-[#0060C7]">Canadian Resume Format Guide</Link>.
         </p>
 
         {/* Citable block */}
         <div className="mt-10 rounded-2xl border border-[#dcdce3] bg-[#F5F9FC] p-5">
           <p className="text-sm leading-relaxed text-[#3B4959]">
-            <strong>The key insight:</strong> In Canada, your resume is read by software before it&apos;s read by a human. Over 95% of Canadian employers with 50+ employees use Applicant Tracking Systems (ATS) that automatically filter applications based on keyword matching, section detection, and formatting compatibility. A skilled candidate whose resume fails ATS screening will never receive a callback — regardless of their actual qualifications. The 10 tips below directly address the most common reasons immigrant resumes are filtered out of Canadian ATS systems.
+            <strong>The key insight:</strong> In Canada, your resume is read by software before it&apos;s read by a human. Over 95% of Canadian employers with 50+ employees use Applicant Tracking Systems (ATS) that automatically filter applications based on keyword matching, section detection, and formatting compatibility. A skilled candidate whose resume fails <Link href="/features/ats-optimizer" className="text-[#006EDC] underline hover:text-[#0060C7]">ATS screening</Link> will never receive a callback — regardless of their actual qualifications. The 10 tips below directly address the most common reasons immigrant resumes are filtered out of Canadian ATS systems.
           </p>
         </div>
+
+        <p className="mt-2 text-xs text-[#77838F]">Sources: <a href="https://www150.statcan.gc.ca/n1/pub/71-222-x/2018002/chap2-eng.htm" target="_blank" rel="noopener noreferrer" className="hover:text-[#006EDC] underline">Statistics Canada, Labour Force Survey</a>; LinkedIn Talent Solutions Canadian Workforce Report 2025.</p>
 
         {/* Tips */}
         <div className="mt-10 space-y-5">
@@ -133,6 +139,58 @@ export default function ResumeTipsPage() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Common mistakes */}
+        <div className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">Common mistakes immigrants make even after reading these tips</h2>
+          <div className="space-y-3">
+            {[
+              {
+                title: "Using a Canva or heavily designed template",
+                desc: "Canva templates look professional but are typically built as image layers or tables — both of which ATS systems fail to parse correctly. Skills end up mixed with job titles, dates disappear, and entire sections go missing. Use a plain DOCX or PDF generated from a Word or Google Docs template, or an ATS-specific tool.",
+              },
+              {
+                title: "Sending the same resume to every job",
+                desc: "This is the single most common reason for low ATS scores. Every job posting has different keywords — a resume optimized for one posting might score 35% on another. Tailoring takes 5–10 minutes per application and routinely doubles callback rates. It is not optional if you are serious about your Canadian job search.",
+              },
+              {
+                title: "Skipping the professional summary",
+                desc: "Most internationally trained candidates either omit the professional summary entirely or write a generic objective statement. The summary is the first thing ATS reads and the first thing a recruiter reads. It should contain your 3 most important keywords for the role, your years of experience, and the specific value you bring — in 3–4 sentences.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="rounded-xl border border-[#dcdce3] bg-white p-4">
+                <p className="font-semibold text-[#131f2f]">{item.title}</p>
+                <p className="mt-1 text-sm leading-relaxed text-[#77838F]">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Quick checklist */}
+        <div className="mt-10 rounded-2xl border border-[#dcdce3] bg-[#F5F9FC] p-6">
+          <h2 className="mb-4 text-lg font-bold text-[#131f2f]">Quick checklist before you submit</h2>
+          <ul className="space-y-2 text-sm text-[#3B4959]">
+            {[
+              "No photo on the resume",
+              "Single-column layout — no tables or text boxes",
+              "Every bullet starts with a past-tense action verb",
+              "At least 3 bullets per role are quantified with numbers",
+              "Keywords from the job description appear in your resume",
+              "Resume is 1–2 pages maximum",
+              "Canadian city and province in contact details",
+              "Professional summary included (3–4 sentences)",
+            ].map((item, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <span className="mt-0.5 text-[#006EDC]">✓</span>
+                <span>{item}</span>
+              </li>
+            ))}
+            <li className="flex items-start gap-2">
+              <span className="mt-0.5 text-[#006EDC]">✓</span>
+              <span><Link href="/features/ats-optimizer" className="text-[#006EDC] underline hover:text-[#0060C7]">ATS score checked</Link> before submitting</span>
+            </li>
+          </ul>
         </div>
 
         <div className="mt-12 rounded-2xl bg-[#006EDC] p-7 text-white">

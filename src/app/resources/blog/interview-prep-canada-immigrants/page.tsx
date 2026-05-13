@@ -62,7 +62,11 @@ export default function InterviewPrepPage() {
 
         <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">Blog</div>
         <h1 className="text-4xl font-bold tracking-tight text-[#131f2f]">Interview prep for immigrants in Canada</h1>
-        <p className="mt-2 text-sm text-[#77838F]">Published May 2026 · 8 min read</p>
+        <div className="mt-2 flex items-center gap-2 text-sm text-[#77838F]">
+          <span>By ResumeRadar Editorial Team</span>
+          <span>·</span>
+          <span>Published May 2026 · 8 min read</span>
+        </div>
         <p className="mt-4 text-lg text-[#3B4959]">
           Canadian interviews are almost entirely behavioural — they focus on what you did in the past, not what you would theoretically do. Here is how to prepare, including the STAR method, common questions, and how to handle international experience.
         </p>
@@ -140,9 +144,51 @@ export default function InterviewPrepPage() {
           <section>
             <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">Salary negotiation in Canada</h2>
             <p className="text-sm leading-relaxed text-[#3B4959]">
-              Salary negotiation is expected and respected in Canada — not negotiating is often interpreted as lack of confidence. Research the role using Glassdoor, LinkedIn Salary, and the Government of Canada Job Bank wage data. Counter-offer with a range: &quot;Based on my research and experience, I was expecting something in the range of $X–$Y. Is there flexibility there?&quot; Never give a number first — let the employer anchor.
+              Salary negotiation is expected and respected in Canada — not negotiating is often interpreted as lack of confidence. Research the role using Glassdoor, LinkedIn Salary, and the Government of Canada Job Bank wage data. Counter-offer with a range: &quot;Based on my research and experience, I was expecting something in the range of $X–$Y. Is there flexibility there?&quot; Never give a number first — let the employer anchor. For a full guide, see <Link href="/resources/blog/salary-negotiation-canada" className="text-[#006EDC] underline hover:text-[#0060C7]">Salary Negotiation in Canada</Link>.
             </p>
           </section>
+        </div>
+
+        <div className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">How to answer behavioural questions: the STAR method</h2>
+          <p className="mb-4 text-[#3B4959]">Canadian interviews heavily favor behavioural questions — &quot;Tell me about a time when...&quot; These require a structured answer. The STAR method is the standard framework Canadian HR professionals are trained to evaluate.</p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              { letter: "S", word: "Situation", desc: "Set the context in 1–2 sentences. Where were you, what was the challenge? Don't over-explain — get to the action quickly." },
+              { letter: "T", word: "Task", desc: "What was your specific responsibility? What were you expected to accomplish?" },
+              { letter: "A", word: "Action", desc: "What did YOU do? Use 'I', not 'we'. This is the most important part — be specific about your contribution." },
+              { letter: "R", word: "Result", desc: "What happened? Quantify where possible. 'The project launched on time' is weaker than 'We delivered 3 weeks early and saved $40K.'" },
+            ].map((item) => (
+              <div key={item.letter} className="rounded-2xl border border-[#dcdce3] bg-white p-5">
+                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-[#E6F2FD] text-lg font-black text-[#006EDC]">{item.letter}</div>
+                <p className="font-semibold text-[#131f2f]">{item.word}</p>
+                <p className="mt-1 text-sm leading-relaxed text-[#77838F]">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 rounded-2xl border border-[#dcdce3] bg-[#F5F9FC] p-5">
+            <p className="mb-2 text-sm font-semibold text-[#131f2f]">Example: &quot;Tell me about a time you managed a difficult project&quot;</p>
+            <p className="text-sm leading-relaxed text-[#3B4959]"><strong>S:</strong> &quot;At my previous role in São Paulo, we were 6 weeks from a product launch when our lead developer resigned.&quot; <strong>T:</strong> &quot;I was responsible for keeping the release on track without bringing in external contractors due to budget constraints.&quot; <strong>A:</strong> &quot;I restructured the remaining work into daily sprints, cross-trained two junior devs on the critical path features, and negotiated a 2-week extension with the client by showing them a revised risk-adjusted timeline.&quot; <strong>R:</strong> &quot;We launched 10 days late instead of 6 weeks late, retained the client, and the product had zero critical bugs in the first 30 days.&quot;</p>
+          </div>
+        </div>
+
+        <div className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">Questions to ask at the end of your interview</h2>
+          <p className="mb-4 text-[#3B4959]">In Canada, not asking questions at the end of an interview is a red flag. It signals low interest. Prepare 3–4 questions in advance. These are strong options:</p>
+          <div className="space-y-3">
+            {[
+              { q: "What does success look like in this role in the first 90 days?", why: "Shows you're results-oriented and planning ahead" },
+              { q: "What are the biggest challenges the team is facing right now?", why: "Signals you're ready to contribute to real problems" },
+              { q: "How would you describe the team culture here?", why: "Normal in Canada — work culture is openly discussed" },
+              { q: "What does the onboarding process look like?", why: "Practical, shows you're planning your start" },
+              { q: "What are the next steps in the hiring process?", why: "Always appropriate — sets expectations on timeline" },
+            ].map((item) => (
+              <div key={item.q} className="rounded-xl border border-[#dcdce3] bg-white p-4">
+                <p className="text-sm font-semibold text-[#131f2f]">&quot;{item.q}&quot;</p>
+                <p className="mt-1 text-xs text-[#77838F]">Why it works: {item.why}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mt-12 rounded-2xl bg-[#006EDC] p-7 text-white">

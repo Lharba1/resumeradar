@@ -1,139 +1,170 @@
 # ResumeRadar — GEO Readiness Analysis
 **Generative Engine Optimization (AI Search Visibility)**
 *Based on seo-geo skill — February 2026 standards*
+*Last updated: 2026-05-13*
 
 ---
 
-## GEO Readiness Score: 8/100
+## GEO Readiness Score: 52/100
+*(was 8/100 — +44 points from technical infrastructure work)*
 
-ResumeRadar currently has near-zero GEO readiness. No content exists beyond the app UI, no AI crawlers are configured, no llms.txt, no off-site brand mentions.
+Technical GEO foundation is complete. Score is now blocked by off-site brand signals — the only remaining gap is community presence (Reddit, Product Hunt, LinkedIn, G2).
 
 ---
 
 ## Platform Breakdown
 
-| Platform | Current Score | Gap |
-|----------|--------------|-----|
-| Google AI Overviews | 2/100 | No indexed content, no SSR public pages |
-| ChatGPT | 0/100 | Not mentioned on Reddit/Wikipedia/YouTube |
-| Perplexity | 0/100 | No Reddit presence, no community validation |
-| Bing Copilot | 2/100 | No Bing indexing |
+| Platform | Score | Status |
+|----------|-------|--------|
+| Google AI Overviews | 55/100 | SSR ✅, schema ✅, sitemap ✅ — needs indexed content to age |
+| ChatGPT | 35/100 | Not on Reddit/Wikipedia — strong once brand mentions land |
+| Perplexity | 30/100 | No Reddit presence yet — highest-leverage gap |
+| Bing Copilot | 48/100 | SSR ✅, sitemap ✅, hreflang ✅ |
 
 ---
 
-## AI Crawler Access Status
+## AI Crawler Access Status: ✅ DONE
 
-**Status: UNKNOWN — robots.txt not yet configured**
+`/public/robots.txt` is configured and live:
 
-Required configuration for `/robots.txt`:
-```
-User-agent: *
-Allow: /
+| Crawler | Status |
+|---------|--------|
+| GPTBot (OpenAI) | ✅ Allowed |
+| OAI-SearchBot (OpenAI) | ✅ Allowed |
+| ChatGPT-User (OpenAI) | ✅ Allowed |
+| ClaudeBot (Anthropic) | ✅ Allowed |
+| PerplexityBot (Perplexity) | ✅ Allowed |
+| anthropic-ai (Anthropic) | ✅ Allowed |
+| Bytespider (ByteDance) | ✅ Allowed |
+| CCBot (Common Crawl — training harvester) | ✅ Blocked |
 
-# AI search crawlers — allow for visibility
-User-agent: GPTBot
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-# Block training data harvesters (optional)
-User-agent: CCBot
-Disallow: /
-
-Sitemap: https://resumeradar.io/sitemap.xml
-```
+App routes (`/admin`, `/api`, `/dashboard`, `/optimize`, etc.) are correctly disallowed.
 
 ---
 
-## llms.txt Status: MISSING
+## llms.txt Status: ✅ DONE
 
-**Required file at `resumeradar.io/llms.txt`:**
+`/public/llms.txt` exists and is served at `https://resumeradar.io/llms.txt`.
 
-```
-# ResumeRadar
-
-> ResumeRadar is an AI-powered career platform helping immigrants and newcomers land jobs in Canada. Tools include an ATS resume optimizer, CV builder, cover letter generator, interview prep, and job tracker. Available in English and French.
-
-## Core Tools
-- [ATS Resume Optimizer](/features/ats-optimizer): Tailors any resume to a specific job description and improves ATS match score
-- [Resume Builder](/features/resume-builder): Build a Canadian-format resume from scratch
-- [Cover Letter Generator](/features/cover-letter): AI-generated cover letters tailored to job postings
-- [Interview Prep](/features/interview-prep): Role-specific interview questions and coaching
-- [Job Tracker](/tracker): Track applications, statuses, and follow-ups
-
-## Key Resources
-- [Canadian Resume Guide](/resources/guides/canadian-resume-guide): How to format a resume for Canadian employers
-- [ATS Optimization Guide](/resources/guides/ats-optimization-guide): How to pass applicant tracking systems
-- [Job Search for Immigrants](/solutions/immigrants-canada): Specific guidance for newcomers
-
-## About
-- Target market: Canada (English and French)
-- Pricing: Free tier available, Pro and Enterprise plans
-- Privacy: PIPEDA compliant, data retention policy enforced
-- Contact: hello@resumeradar.io
-```
+Includes: product description, core tools with URLs, key resources, product details (pricing, PIPEDA, bilingual), contact.
 
 ---
 
-## Brand Mention Analysis
+## Server-Side Rendering: ✅ DONE
 
-| Platform | Status | Action Required |
-|----------|--------|----------------|
-| Wikipedia | Not present | Not yet viable (needs existing authority first) |
-| Reddit | Not present | Create posts in r/ImmigrationCanada, r/PersonalFinanceCanada, r/cscareerquestions |
-| YouTube | Not present | Create 2-3 short demo videos; get mentioned in immigration YouTubers' content |
-| LinkedIn | Not present | Company page + founder posts about ATS/immigration job search |
-| Product Hunt | Not launched | Launch on Product Hunt (generates backlinks + Reddit discussions) |
-| G2 / Capterra | Not listed | List the product (free, high DA backlinks) |
-| AlternativeTo | Not listed | List under "Jobscan alternatives" |
+All public-facing SEO pages are Next.js App Router server components (no `"use client"`):
 
-**Key insight:** Reddit and YouTube mentions are the fastest path to ChatGPT and Perplexity citations. Brand mentions correlate 3× more strongly with AI visibility than backlinks.
+| Page | SSR |
+|------|-----|
+| `/` (homepage) | ✅ |
+| `/pricing` | ✅ |
+| `/features/ats-optimizer` | ✅ |
+| `/solutions/*` (4 pages) | ✅ |
+| `/compare/*` (5 pages) | ✅ |
+| `/resources/guides/*` (3 pages) | ✅ |
+| `/resources/blog/*` (7 posts + index) | ✅ |
+| `/resources/templates` | ✅ |
+| `/fr` and `/fr/optimiseur-cv-ats` | ✅ |
 
----
-
-## Server-Side Rendering Check
-
-**Critical issue:** Most pages use `"use client"` — AI crawlers cannot execute JavaScript.
-
-Pages that MUST be SSR for AI/SEO visibility:
-- `/` (landing page)
-- `/pricing`
-- `/features/*`
-- `/solutions/*`
-- `/resources/*` (blog, guides)
-- `/compare/*`
-
-App pages (`/optimize`, `/build-resume`, etc.) can stay client-only — they require login anyway.
+App pages (`/optimize`, `/build-resume`, `/jobs`, etc.) are client-only — correct, as they require login.
 
 ---
 
-## Top 5 Highest-Impact GEO Changes
+## Schema Markup: ✅ DONE
 
-1. **Create `llms.txt`** — 1 hour, immediate AI crawler guidance
-2. **Fix `robots.txt`** — 30 minutes, allows GPTBot/PerplexityBot/ClaudeBot
-3. **SSR the landing page** — ensures Google AI Overviews can read content
-4. **Launch on Product Hunt** — generates Reddit discussions + backlinks in 24h
-5. **Post in r/ImmigrationCanada** — fastest path to Perplexity citations (Reddit = 46.7% of Perplexity sources)
+| Schema | Pages | Status |
+|--------|-------|--------|
+| Organization (sitewide) | layout.tsx | ✅ logo.png live |
+| WebSite + SearchAction | layout.tsx | ✅ |
+| SoftwareApplication | homepage, features | ✅ All 4 offers (USD) |
+| BreadcrumbList | pricing, features, solutions, guides, blog | ✅ |
+| BlogPosting + Person author | all 7 blog posts | ✅ |
+| FAQPage | features/ats-optimizer | ✅ (citability benefit) |
+
+`priceCurrency` is consistently `"USD"` across all offer schemas.
 
 ---
 
-## Citability Content Requirements
+## Hreflang (EN ↔ FR): ✅ DONE
 
-Each public page should have at least one **134–167 word self-contained answer block** that AI can extract directly. Example for the homepage:
+`alternates.languages` set on homepage (`/` ↔ `/fr`) and features page.
+French pages (`/fr`, `/fr/optimiseur-cv-ats`) exist and are server-rendered.
 
-> "ResumeRadar is a free AI-powered career platform designed for immigrants and newcomers to Canada. It analyzes any resume against a specific job description, calculates an ATS compatibility score, and rewrites the resume to maximize keyword matching and pass automated screening systems. The platform supports both English and French resumes and is built around Canada's unique job market, including federal and provincial job boards. Immigrants using ResumeRadar can build a resume from scratch using Canadian formatting standards, generate tailored cover letters, and practice interview questions specific to their target role. A free plan is available with 10 optimizations per month."
+---
 
-That block is 105 words — needs to be 134–167. Add one specific stat or outcome claim.
+## Sitemap: ✅ CLEAN
+
+Ghost URLs removed (5 pages that didn't exist):
+- `/features/resume-builder`, `/features/cover-letter`, `/features/interview-prep`, `/features/job-tracker`
+- `/solutions/newcomers-canada`
+
+Duplicate entries removed (`extraSolutionPages` array deleted).
+
+Current sitemap coverage: 30 URLs — all live pages.
+
+---
+
+## Brand Mention Analysis: ❌ NOT DONE
+
+This is the entire remaining gap. Brand mentions correlate **3× more strongly** with AI citations than backlinks.
+
+| Platform | Status | Impact |
+|----------|--------|--------|
+| Reddit | ❌ Not present | **CRITICAL** — Reddit = 46.7% of Perplexity sources, 11.3% of ChatGPT |
+| Product Hunt | ❌ Not launched | **HIGH** — generates Reddit discussions + backlinks in 24h |
+| LinkedIn company page | ❌ Not created | HIGH — LinkedIn = moderate ChatGPT citation signal |
+| G2 / Capterra | ❌ Not listed | HIGH — high DA backlinks + review signals |
+| AlternativeTo | ❌ Not listed | MEDIUM — "Jobscan alternative" query traffic |
+| YouTube | ❌ No videos | MEDIUM — YouTube mentions = strongest AI citation signal (r=0.737) |
+| Wikipedia | ❌ Not viable yet | LOW — needs existing authority first |
+
+---
+
+## Passage-Level Citability
+
+Homepage has a 134–167 word citable block. No changes needed — block is present and well-formed.
+
+---
+
+## Pending Actions (by priority)
+
+### 1. Product Hunt Launch (1 day effort → HIGH impact)
+- Generates Reddit discussions organically
+- Backlinks from high-DA pages
+- Community validation signal for ChatGPT/Perplexity
+
+### 2. Reddit Posts
+Post in:
+- `r/ImmigrationCanada` — "Built a free ATS resume optimizer for newcomers to Canada"
+- `r/PersonalFinanceCanada` — job search angle
+- `r/cscareerquestions` — bilingual/ATS angle
+
+Each post gets ResumeRadar mentioned → Perplexity starts citing it within weeks.
+
+### 3. LinkedIn Company Page
+- Create page, publish 3-5 posts about ATS/Canada job search
+- Founder posts with personal brand (higher engagement)
+
+### 4. G2 / Capterra / AlternativeTo
+- Free listings, high DA backlinks
+- AlternativeTo under "Jobscan alternatives" captures comparison traffic
+
+### 5. CSP: Promote from Report-Only to Enforced
+After monitoring `admin_actions` (action = `csp_violation`) for 7 days with no violations, change `Content-Security-Policy-Report-Only` to `Content-Security-Policy` in `next.config.ts`.
+
+### 6. Stripe Live Key
+Replace the 7-day expiring key with a permanent restricted Stripe key before it expires.
+
+### 7. Resend DNS
+Complete email verification once DNS propagates (was pending, could take 4h).
+
+---
+
+## Score Projection
+
+| Milestone | Estimated Score |
+|-----------|----------------|
+| Current (technical complete) | 52/100 |
+| After Product Hunt + Reddit (2 weeks) | ~68/100 |
+| After G2/Capterra + LinkedIn (1 month) | ~78/100 |
+| After YouTube + aging content (3 months) | ~88/100 |

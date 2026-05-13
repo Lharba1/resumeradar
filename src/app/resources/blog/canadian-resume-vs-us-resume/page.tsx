@@ -116,7 +116,11 @@ export default function CanadianVsUSResumePage() {
         <h1 className="text-4xl font-bold tracking-tight text-[#131f2f]">
           Canadian resume vs US resume — key differences
         </h1>
-        <p className="mt-2 text-sm text-[#77838F]">Published May 2026 · 5 min read</p>
+        <div className="mt-2 flex items-center gap-2 text-sm text-[#77838F]">
+          <span>By ResumeRadar Editorial Team</span>
+          <span>·</span>
+          <span>Published May 2026 · 5 min read</span>
+        </div>
         <p className="mt-4 text-lg text-[#3B4959]">
           Canadian and American resumes are similar in structure — but the differences matter, especially around language requirements, professional licensing, work authorization disclosure, and currency/unit conventions.
         </p>
@@ -152,6 +156,76 @@ export default function CanadianVsUSResumePage() {
                     <p className="text-sm leading-relaxed text-[#3B4959]">{row.us}</p>
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Full side-by-side table */}
+        <div className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">Canadian vs US resume — side-by-side comparison</h2>
+          <div className="overflow-hidden rounded-xl border border-[#dcdce3] bg-white">
+            <table className="w-full text-sm">
+              <thead className="bg-[#F5F9FC]">
+                <tr>
+                  <th className="px-4 py-3 text-left font-semibold text-[#131f2f]">Element</th>
+                  <th className="px-4 py-3 text-left font-semibold text-[#006EDC]">Canadian Resume 🇨🇦</th>
+                  <th className="px-4 py-3 text-left font-semibold text-[#131f2f]">US Resume 🇺🇸</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["Length", "1–2 pages strictly", "1–2 pages (1 preferred)"],
+                  ["Objective vs Summary", "Professional summary preferred", "Summary or objective both common"],
+                  ["References", "\"Available upon request\" — or omit entirely", "Omit — provided when requested"],
+                  ["Photo", "Never included", "Never included"],
+                  ["Date of birth", "Never included", "Never included"],
+                  ["Bilingual note", "Always include EN/FR proficiency if applicable", "Not applicable"],
+                  ["Postal/ZIP code", "Include province and city only (not full address)", "City and state only"],
+                  ["Education format", "Institution, Degree, City, Year", "Similar — GPA optional"],
+                  ["Certifications", "Include P.Eng., CPA, RN, etc. with exact Canadian designation", "Include — US designations only"],
+                  ["ATS compatibility", "Critical — 95%+ of employers use ATS", "Critical — 75%+ of large employers use ATS"],
+                ].map(([element, canadian, us]) => (
+                  <tr key={element} className="border-t border-[#dcdce3]">
+                    <td className="px-4 py-3 font-medium text-[#131f2f]">{element}</td>
+                    <td className="px-4 py-3 text-[#3B4959]">{canadian}</td>
+                    <td className="px-4 py-3 text-[#77838F]">{us}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Key changes section */}
+        <div className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">Key things to change when adapting a US resume for Canada</h2>
+          <div className="space-y-3">
+            {[
+              {
+                title: "Add French language proficiency",
+                desc: "Even basic conversational French is worth listing. For federal government roles and Quebec employers, bilingualism is often required. For all other roles, it is a differentiator. Add it to your skills section with your proficiency level (conversational, professional, native).",
+              },
+              {
+                title: "Replace US certifications with Canadian equivalents",
+                desc: "A US Professional Engineer (PE) license is not recognized in Canada — you need the provincial P.Eng. designation from the relevant provincial association (PEO in Ontario, APEGA in Alberta). The same applies to nursing (provincial college registration), accounting (CPA Canada), and other regulated professions. Note the status of your credential recognition process if it is underway.",
+              },
+              {
+                title: "Switch dollar figures and units to Canadian",
+                desc: "Budget amounts, salary references, and financial figures should use CAD. Distances should be in kilometres. Include the province alongside the city — 'Toronto, ON' not just 'Toronto'. Canadian readers expect these conventions and their absence signals the resume was written for another market.",
+              },
+              {
+                title: "Remove work authorization references",
+                desc: "Canadian human rights codes are stricter than US rules about considering immigration status in hiring. Do not include work permit status, citizenship, or visa type on your resume. Disclose this in the cover letter or application form only when directly asked.",
+              },
+              {
+                title: "Add WES equivalency reference for your degree",
+                desc: "If your degree is from outside Canada, add a brief note in the education section: 'Assessed as equivalent to a Canadian Bachelor's degree by World Education Services (WES), 2024.' This one line removes a major question mark for Canadian recruiters who are unfamiliar with your institution.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="rounded-xl border border-[#dcdce3] bg-white p-4">
+                <p className="font-semibold text-[#131f2f]">{item.title}</p>
+                <p className="mt-1 text-sm leading-relaxed text-[#77838F]">{item.desc}</p>
               </div>
             ))}
           </div>

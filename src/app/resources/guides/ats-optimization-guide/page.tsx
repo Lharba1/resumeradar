@@ -146,6 +146,58 @@ export default function ATSOptimizationGuidePage() {
 
         </div>
 
+        <div className="mt-10 space-y-10">
+          <section>
+            <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">How different ATS systems score resumes</h2>
+            <p className="mb-4 leading-relaxed text-[#3B4959]">Not all ATS systems work the same way. Understanding the platform an employer uses helps you optimize correctly.</p>
+            <div className="overflow-hidden rounded-xl border border-[#dcdce3] bg-white">
+              <table className="w-full text-sm">
+                <thead className="bg-[#F5F9FC]">
+                  <tr>
+                    <th className="px-4 py-3 text-left font-semibold text-[#131f2f]">ATS System</th>
+                    <th className="px-4 py-3 text-left font-semibold text-[#131f2f]">Used by</th>
+                    <th className="px-4 py-3 text-left font-semibold text-[#131f2f]">Key optimization factor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Workday", "RBC, TD, federal government, Shopify", "Section headers must match expected labels exactly"],
+                    ["Taleo (Oracle)", "Air Canada, Bell, large manufacturers", "Keyword density + exact phrase matching"],
+                    ["Greenhouse", "Tech companies, startups", "Skills section + job title matching"],
+                    ["iCIMS", "Healthcare, universities, mid-size companies", "Education section formatting critical"],
+                    ["SAP SuccessFactors", "Enterprise, mining, energy sector", "Structured data extraction from standard sections"],
+                  ].map(([ats, users, factor]) => (
+                    <tr key={ats} className="border-t border-[#dcdce3]">
+                      <td className="px-4 py-3 font-medium text-[#131f2f]">{ats}</td>
+                      <td className="px-4 py-3 text-[#77838F]">{users}</td>
+                      <td className="px-4 py-3 text-[#3B4959]">{factor}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">What hurts your ATS score — common mistakes</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                { issue: "Two-column or table layouts", detail: "ATS parsers read linearly. Multi-column layouts merge content from different sections." },
+                { issue: "Headers/footers with contact info", detail: "Many ATS systems ignore headers and footers entirely. Put contact info in the main body." },
+                { issue: "Images, logos, or graphics", detail: "ATS cannot extract text from images. Any content in a graphic is invisible to the system." },
+                { issue: "Non-standard section labels", detail: "Use 'Work Experience', not 'My Career'. ATS looks for expected labels." },
+                { issue: "Saved .docx with tracked changes", detail: "Always submit clean files without revision marks. Track changes can confuse parsers." },
+                { issue: "Text boxes (Word/Canva)", detail: "Text boxes are extracted separately or missed entirely. Use standard paragraph text only." },
+              ].map((item) => (
+                <div key={item.issue} className="rounded-xl border border-red-100 bg-red-50 p-4">
+                  <p className="mb-1 font-semibold text-red-700">✗ {item.issue}</p>
+                  <p className="text-xs leading-relaxed text-red-600">{item.detail}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+
         {/* CTA */}
         <div className="mt-12 rounded-2xl bg-[#006EDC] p-8 text-white">
           <h2 className="text-xl font-bold">Check your ATS score for free</h2>

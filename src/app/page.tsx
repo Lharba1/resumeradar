@@ -25,11 +25,6 @@ const orgSchema = {
   url: "https://resumeradar.io",
   logo: "https://resumeradar.io/logo.png",
   description: "AI-powered ATS resume optimizer and job search platform for immigrants and newcomers to Canada.",
-  sameAs: [
-    "https://www.linkedin.com/company/resumeradar",
-    "https://twitter.com/resumeradar",
-    "https://www.producthunt.com/products/resumeradar",
-  ],
 };
 
 const websiteSchema = {
@@ -422,7 +417,7 @@ export default function LandingPage() {
                 An ATS (Applicant Tracking System) reads every resume before a recruiter does. It extracts keywords, scores your match against the job description, and auto-rejects anything below 60–70%. No email. No feedback. No human review.
               </p>
               <p className="mt-4 text-sm leading-relaxed text-[#3B4959]">
-                More than 95% of Canadian companies with 50+ employees use ATS — every bank, federal department, hospital, and major tech company. A resume built for a European or US market, or designed in Canva, often scores below 30%. Not because you&apos;re not qualified. Because the machine can&apos;t read it.
+                More than 95% of Canadian companies with 50+ employees use ATS<sup><a href="https://business.linkedin.com/talent-solutions/blog/trends-and-research/2018/5-recruiter-efficiency-stats-that-will-make-you-think-twice-about-ats" target="_blank" rel="noopener noreferrer" className="text-[#77838F] text-xs">[1]</a></sup> — every bank, federal department, hospital, and major tech company. A resume built for a European or US market, or designed in Canva, often scores below 30%. Not because you&apos;re not qualified. Because the machine can&apos;t read it.
               </p>
               <p className="mt-4 text-sm leading-relaxed text-[#3B4959]">
                 ResumeRadar reads the job posting, identifies every missing keyword, and rewrites your resume around them — in English or French.

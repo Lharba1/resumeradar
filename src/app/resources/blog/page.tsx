@@ -33,6 +33,38 @@ const POSTS = [
     date: "May 2026",
     readTime: "5 min",
   },
+  {
+    href: "/resources/blog/cover-letter-canada-guide",
+    category: "Cover Letter",
+    title: "How to write a cover letter for Canadian jobs",
+    desc: "Canadian cover letter format, length, what to include, work authorization wording, and before/after examples.",
+    date: "May 2026",
+    readTime: "7 min",
+  },
+  {
+    href: "/resources/blog/interview-prep-canada-immigrants",
+    category: "Interview Prep",
+    title: "Interview prep for immigrants in Canada",
+    desc: "STAR method, the 8 most common behavioural questions, how to present international experience, and salary negotiation.",
+    date: "May 2026",
+    readTime: "8 min",
+  },
+  {
+    href: "/resources/blog/linkedin-profile-canada",
+    category: "LinkedIn",
+    title: "How to optimize your LinkedIn profile for Canadian jobs",
+    desc: "Complete LinkedIn checklist for immigrants: headline, about section, skills, location, and recruiter visibility.",
+    date: "May 2026",
+    readTime: "6 min",
+  },
+  {
+    href: "/resources/blog/salary-negotiation-canada",
+    category: "Salary",
+    title: "Salary negotiation in Canada — a practical guide for immigrants",
+    desc: "When to bring up salary, research tools, counter-offer scripts, and what else to negotiate beyond base pay.",
+    date: "May 2026",
+    readTime: "7 min",
+  },
 ];
 
 const GUIDES = [
@@ -45,6 +77,11 @@ const GUIDES = [
     href: "/resources/guides/ats-optimization-guide",
     title: "ATS Optimization Guide 2026",
     desc: "How ATS works in Canada and how to pass automated screening.",
+  },
+  {
+    href: "/resources/guides/job-search-immigrants-canada",
+    title: "Complete Job Search Guide for Immigrants in Canada",
+    desc: "End-to-end guide: resume, LinkedIn, networking, applications, interviews, and offers.",
   },
 ];
 

@@ -21,7 +21,7 @@ const articleSchema = {
   description: "Complete guide to writing a Canadian-format resume for immigrants and newcomers.",
   datePublished: "2026-05-01",
   dateModified: "2026-05-10",
-  author: { "@type": "Organization", name: "ResumeRadar" },
+  author: { "@type": "Person", name: "ResumeRadar Editorial Team", url: "https://resumeradar.io/about" },
   publisher: {
     "@type": "Organization",
     name: "ResumeRadar",
@@ -69,7 +69,7 @@ export default function CanadianResumeGuidePage() {
         <div className="mt-10 rounded-2xl border border-[#dcdce3] bg-[#F5F9FC] p-6">
           <h2 className="mb-3 text-lg font-bold text-[#131f2f]">What is a Canadian resume format?</h2>
           <p className="leading-relaxed text-[#3B4959]">
-            A Canadian resume is a 1–2 page document following a reverse-chronological format that presents work experience, education, and skills in a style optimized for Canadian hiring practices and Applicant Tracking Systems (ATS). Canadian resumes differ from CVs used in Europe and many other countries — they are shorter, include no photo, no date of birth, no nationality, and no marital status. They use concise, achievement-focused bullet points starting with action verbs rather than paragraphs or duty lists. According to the Government of Canada&apos;s job market data, Canadian employers receive an average of 250+ applications per posting, making ATS filtering essential. A resume that does not conform to Canadian format standards is often screened out before any human sees it, regardless of the candidate&apos;s qualifications or experience level.
+            A Canadian resume is a 1–2 page document following a reverse-chronological format that presents work experience, education, and skills in a style optimized for Canadian hiring practices and Applicant Tracking Systems (ATS). Canadian resumes differ from CVs used in Europe and many other countries — they are shorter, include no photo, no date of birth, no nationality, and no marital status. They use concise, achievement-focused bullet points starting with action verbs rather than paragraphs or duty lists. According to <a href="https://www.canada.ca/en/employment-social-development/programs/job-bank.html" target="_blank" rel="noopener noreferrer" className="text-[#006EDC] underline">the Government of Canada&apos;s job market data</a>, Canadian employers receive an average of 250+ applications per posting, making ATS filtering essential. A resume that does not conform to Canadian format standards is often screened out before any human sees it, regardless of the candidate&apos;s qualifications or experience level.
           </p>
         </div>
 
@@ -179,6 +179,52 @@ export default function CanadianResumeGuidePage() {
           </section>
 
         </div>
+
+        <section className="mt-10 space-y-10">
+          <div>
+            <h2 className="mb-4 text-2xl font-bold text-[#131f2f]">How to optimize your Canadian resume for ATS</h2>
+            <p className="mb-4 leading-relaxed text-[#3B4959]">
+              Having the right format is necessary but not sufficient. Your resume also needs to pass ATS keyword filtering. ATS systems compare your resume against the job description and score it on keyword match, section completeness, and formatting compatibility.
+            </p>
+            <div className="space-y-3">
+              {[
+                {
+                  title: "Match keywords exactly from the job posting",
+                  desc: "If the job says 'stakeholder management', your resume should say 'stakeholder management' — not 'managing stakeholders' or 'stakeholder engagement'. ATS matching is literal.",
+                },
+                {
+                  title: "Include a Skills section with a keyword list",
+                  desc: "A dedicated Skills or Core Competencies section near the top of your resume gives ATS a high-density keyword zone. List 8–12 relevant hard skills and certifications.",
+                },
+                {
+                  title: "Use standard section headers",
+                  desc: "Label sections 'Work Experience', 'Education', 'Skills', 'Certifications'. Non-standard labels like 'My Journey' or 'What I Bring' are often missed by ATS parsers.",
+                },
+                {
+                  title: "Avoid tables, columns, and graphics",
+                  desc: "Single-column plain text is the most ATS-readable format. Multi-column layouts, text boxes, and images cause parsing errors that result in garbled or missing content.",
+                },
+                {
+                  title: "Check your score before submitting",
+                  desc: "Use ResumeRadar's ATS optimizer to calculate your match score against the specific job posting. A score below 70% significantly reduces your chance of reaching a human reviewer.",
+                },
+              ].map((item) => (
+                <div key={item.title} className="flex gap-3 rounded-xl border border-[#dcdce3] bg-white p-4">
+                  <span className="mt-0.5 shrink-0 font-bold text-[#006EDC]">✓</span>
+                  <div>
+                    <p className="font-semibold text-[#131f2f]">{item.title}</p>
+                    <p className="mt-0.5 text-sm leading-relaxed text-[#77838F]">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 rounded-2xl border border-[#E6F2FD] bg-[#E6F2FD] p-4">
+              <p className="text-sm text-[#006EDC]">
+                <strong>How ResumeRadar helps:</strong> Paste any job description and ResumeRadar rewrites your resume with all the right keywords added in context — and shows your <Link href="/features/ats-optimizer" className="underline hover:no-underline">ATS score before and after optimization</Link>.
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* CTA box */}
         <div className="mt-12 rounded-2xl bg-[#006EDC] p-8 text-white">

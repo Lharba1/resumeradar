@@ -1,4 +1,5 @@
 # ResumeRadar — Content Calendar
+**Last updated:** 2026-05-13
 
 ## Content Pillars
 
@@ -9,70 +10,107 @@
 
 ---
 
-## Month 1 — Foundation Content (must exist before any promotion)
+## Live Content Status
 
-| Week | Page | Type | Target Keyword | Priority |
-|------|------|------|---------------|----------|
-| 1 | /resources/guides/canadian-resume-guide | Long-form guide | canadian resume format guide | Critical |
-| 1 | /resources/guides/ats-optimization-guide | Long-form guide | ats resume optimization guide | Critical |
-| 2 | /solutions/immigrants-canada | Solution page | resume for newcomers to canada | Critical |
-| 2 | /features/ats-optimizer | Feature page | ats resume optimizer canada | Critical |
-| 3 | /resources/blog/how-ats-works-canada | Blog post | how does ats work canada | High |
-| 3 | /compare/jobscan-alternative | Comparison page | jobscan alternative | High |
-| 4 | /pricing | Pricing page | resume optimizer pricing canada | High |
-| 4 | /fr/optimiseur-cv-ats | French feature page | optimiseur CV ATS canada | High |
+### Guides (3 live)
+| Page | Status | Approx. Words | Action needed |
+|------|--------|--------------|---------------|
+| /resources/guides/canadian-resume-guide | ✅ Live | ~1,100w | Expand → 2,000w; fix author to Person |
+| /resources/guides/ats-optimization-guide | ✅ Live | ~900w | Expand → 2,000w |
+| /resources/guides/job-search-immigrants-canada | ✅ Live | ~800w | Expand → 1,500w |
 
----
+### Blog Posts (7 live)
+| Page | Status | Approx. Words | Action needed |
+|------|--------|--------------|---------------|
+| /resources/blog/resume-tips-immigrants-canada | ✅ Live | ~950w | Expand → 1,500w |
+| /resources/blog/ats-keywords-canada | ✅ Live | ~900w | Expand → 1,500w |
+| /resources/blog/canadian-resume-vs-us-resume | ✅ Live | ~950w | Expand → 1,500w |
+| /resources/blog/cover-letter-canada-guide | ✅ Live | ~1,000w | Expand → 1,500w |
+| /resources/blog/interview-prep-canada-immigrants | ✅ Live | ~1,100w | Expand → 1,500w |
+| /resources/blog/linkedin-profile-canada | ✅ Live | ~900w | Expand → 1,500w |
+| /resources/blog/salary-negotiation-canada | ✅ Live | ~1,200w | Expand → 1,500w |
 
-## Month 2 — Expansion
+### Solution Pages (4 live — good depth, no expansion needed)
+| Page | Status |
+|------|--------|
+| /solutions/immigrants-canada | ✅ Live |
+| /solutions/international-students | ✅ Live |
+| /solutions/engineers-canada | ✅ Live |
+| /solutions/french-speakers | ✅ Live |
 
-| Page | Type | Target Keyword |
-|------|------|---------------|
-| /resources/blog/resume-tips-immigrants-canada | Blog | resume tips immigrants canada |
-| /resources/blog/canadian-resume-vs-us-resume | Blog | canadian vs american resume differences |
-| /solutions/international-students | Solution | resume for international students canada |
-| /compare/jobradar-vs-jobscan | Comparison | jobradar vs jobscan |
-| /resources/blog/ats-keywords-canada | Blog | ats keywords for canadian jobs |
-| /resources/templates | Templates hub | free canadian resume templates |
-| /fr/ressources/blogue/guide-cv-canadien | French blog | guide CV canadien |
-| /solutions/engineers-canada | Solution | resume for engineers canada |
+### Comparison Pages (5 live)
+| Page | Status |
+|------|--------|
+| /compare/jobradar-vs-jobscan | ✅ Live |
+| /compare/jobradar-vs-resumeio | ✅ Live |
+| /compare/jobradar-vs-rezi | ✅ Live |
+| /compare/jobscan-alternative | ✅ Live |
+| /compare/best-ats-resume-tools-canada | ✅ Live |
 
----
-
-## Month 3 — Authority Building
-
-| Page | Type | Target Keyword |
-|------|------|---------------|
-| /resources/blog/interview-prep-canada-immigrants | Blog | interview tips newcomers canada |
-| /resources/blog/cover-letter-canada-guide | Blog | how to write cover letter canada |
-| /compare/best-ats-resume-tools-canada | Roundup | best ats resume tools canada |
-| /solutions/french-speakers | Solution | emploi canada francophones |
-| /resources/guides/job-search-immigrants-canada | Guide | job search guide immigrants canada |
-| /resources/blog/linkedin-profile-canada | Blog | optimize linkedin profile canada |
-| /about | About page | jobradar about |
-| /fr/ressources/guides/recherche-emploi-canada | French guide | recherche emploi immigrant canada |
-
----
-
-## Ongoing Blog Cadence (Month 4+)
-
-**2 posts/week minimum:**
-- 1 English (ATS/resume/immigration)
-- 1 French (mirror of top English content or French-specific)
-
-**Monthly cornerstone piece:**
-- Original data or research ("We analyzed 500 Canadian job postings — here are the top 20 ATS keywords")
-- These are the most citable pieces for LLMs
+### French Pages (2 live)
+| Page | Status |
+|------|--------|
+| /fr | ✅ Live |
+| /fr/optimiseur-cv-ats | ✅ Live |
+| /fr/ressources/blogue/guide-cv-canadien | ❌ In sitemap — NOT BUILT |
+| /fr/ressources/guides/recherche-emploi-canada | ❌ In sitemap — NOT BUILT |
 
 ---
 
-## Content Format Rules for GEO Citability
+## Immediate Sprint — Content Expansion Priority
+
+All existing blog posts are under the 1,500-word minimum. Expand in this order:
+
+| # | Page | Target | Key additions |
+|---|------|--------|---------------|
+| 1 | /resources/guides/canadian-resume-guide | 2,000w | Fix author→Person, add ATS tool section, more examples, source links |
+| 2 | /resources/blog/resume-tips-immigrants-canada | 1,500w | Deeper per-tip explanations, examples, Stats Canada citation |
+| 3 | /resources/blog/ats-keywords-canada | 1,500w | Keyword tables by industry, before/after examples |
+| 4 | /resources/guides/ats-optimization-guide | 2,000w | Step-by-step process, before/after examples |
+| 5 | /resources/blog/canadian-resume-vs-us-resume | 1,500w | Side-by-side comparison table |
+| 6 | /resources/blog/linkedin-profile-canada | 1,500w | Section-by-section LinkedIn guide |
+| 7 | /resources/blog/cover-letter-canada-guide | 1,500w | Template examples, structure guide |
+
+All expansions must add:
+- [ ] External source links (Statistics Canada, IRCC, LinkedIn Workforce Report)
+- [ ] 2–4 contextual inline internal links in the body
+- [ ] Visible author byline + published date on the page
+
+---
+
+## New Pages to Build (Month 3)
+
+| Page | Type | Target Keyword | Priority |
+|------|------|---------------|----------|
+| /contact | Contact page | — | HIGH — trust signal |
+| /resources/blog/how-ats-works-canada | Blog | how does ats work canada | HIGH |
+| /fr/ressources/blogue/guide-cv-canadien | French blog | guide cv canadien | HIGH (already in sitemap) |
+| /fr/ressources/guides/recherche-emploi-canada | French guide | recherche emploi immigrant canada | MEDIUM (already in sitemap) |
+| /resources/blog/work-permit-job-search-canada | Blog | work permit job search canada | MEDIUM |
+
+---
+
+## Month 4+ — Scale Content
+
+**Cadence:** 2 posts/week minimum (1 EN + 1 FR)
+
+**Monthly cornerstone:**
+- "We analyzed [N] Canadian job postings — top ATS keywords by industry" — most citable for LLMs
+- "Canadian ATS Report [Quarter]"
+
+**Programmatic opportunities:**
+- /resources/templates/[industry]-resume-template (50+ pages)
+- /resources/blog/ats-keywords-[industry]-canada (10+ pages)
+
+---
+
+## GEO Content Format Rules
 
 Every blog post and guide must include:
-- [ ] A 134–167 word definition/answer block at the top (citable by AI)
-- [ ] Question-based H2/H3 headings ("What is ATS?", "How do I optimize my resume?")
+- [ ] 134–167 word self-contained answer block near the top (citable by AI)
+- [ ] Question-based H2/H3 headings
 - [ ] At least 1 data table
-- [ ] Author byline with credentials
-- [ ] Published date + last-updated date
-- [ ] 1 internal link to a feature page
-- [ ] 1 internal link to a related guide
+- [ ] Visible author byline with credentials and date
+- [ ] External citation links to primary sources
+- [ ] 2–4 contextual inline internal links
+- [ ] CTA box linking to the most relevant feature
