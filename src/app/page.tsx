@@ -50,10 +50,10 @@ const softwareSchema = {
   operatingSystem: "Web",
   description: "AI-powered ATS resume optimizer, CV builder, cover letter generator, interview prep, and job tracker for immigrants in Canada.",
   offers: [
-    { "@type": "Offer", name: "Free",       price: "0",  priceCurrency: "CAD" },
-    { "@type": "Offer", name: "Starter",    price: "9",  priceCurrency: "CAD" },
-    { "@type": "Offer", name: "Pro",        price: "19", priceCurrency: "CAD" },
-    { "@type": "Offer", name: "Enterprise", price: "49", priceCurrency: "CAD" },
+    { "@type": "Offer", name: "Free",       price: "0",  priceCurrency: "USD" },
+    { "@type": "Offer", name: "Starter",    price: "9",  priceCurrency: "USD" },
+    { "@type": "Offer", name: "Pro",        price: "19", priceCurrency: "USD" },
+    { "@type": "Offer", name: "Enterprise", price: "49", priceCurrency: "USD" },
   ],
   featureList: ["ATS resume optimization", "Bilingual CV builder (EN/FR)", "Cover letter generator", "Interview prep", "Job tracker", "LinkedIn import"],
 };

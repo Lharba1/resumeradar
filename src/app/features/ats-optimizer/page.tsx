@@ -22,7 +22,7 @@ const schemaData = {
   operatingSystem: "Web",
   description:
     "AI-powered ATS resume optimizer that rewrites your resume to match any Canadian job description and calculates compatibility scores before and after optimization.",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "CAD" },
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   featureList: [
     "ATS compatibility score (before and after)",
     "AI rewriting matched to job description keywords",

@@ -144,7 +144,7 @@ const schemaData = {
     "@type": "Offer",
     name: p.name,
     price: p.id === "free" ? "0" : p.id === "starter" ? "9" : p.id === "pro" ? "19" : "49",
-    priceCurrency: "CAD",
+    priceCurrency: "USD",
     description: p.description,
   })),
 };

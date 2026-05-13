@@ -26,7 +26,7 @@ const schemaData = {
   operatingSystem: "Web",
   inLanguage: "fr-CA",
   description: "Outil IA d'optimisation de CV pour les systèmes ATS canadiens. Génère des CV professionnels en français et en anglais.",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "CAD" },
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
 };
 
 const breadcrumb = {
