@@ -25,9 +25,24 @@ interface PlanDraft {
 }
 
 const PLAN_COLOR: Record<string, string> = {
-  free: "text-[#77838F]",
-  pro: "text-emerald-700",
+  free:       "text-[#77838F]",
+  starter:    "text-blue-700",
+  pro:        "text-emerald-700",
   enterprise: "text-purple-700",
+};
+
+const ROUTE_LABELS: Record<string, string> = {
+  "/api/cover-letter":             "Cover Letter",
+  "/api/cv/generate":              "CV Generator",
+  "/api/cv/optimize":              "CV Optimizer",
+  "/api/cv/parse":                 "CV Upload & Parse",
+  "/api/dashboard":                "Dashboard Insights",
+  "/api/interview-prep/feedback":  "Interview Feedback",
+  "/api/interview-prep/questions": "Interview Questions",
+  "/api/jobs/fetch":               "Job Search",
+  "/api/jobs/score":               "Job Scoring",
+  "/api/tracker":                  "Application Tracker",
+  "/api/linkedin/import":          "LinkedIn Import",
 };
 
 function useFlash() {
@@ -407,7 +422,12 @@ export default function AdminPlansPage() {
           <tbody>
             {routes.map((route) => (
               <tr key={route} className="border-b border-[#F5F7FA] hover:bg-[#FAFBFC]">
-                <td className="px-4 py-3 font-mono text-xs text-[#3B4959]">{route}</td>
+                <td className="px-4 py-3">
+                  {ROUTE_LABELS[route] && (
+                    <span className="block text-sm font-medium text-[#131f2f]">{ROUTE_LABELS[route]}</span>
+                  )}
+                  <span className="font-mono text-xs text-[#77838F]">{route}</span>
+                </td>
                 {plans.map((p) => {
                   const key = `${p.id}:${route}`;
                   const val = getLimit(p.id, route);
