@@ -136,40 +136,28 @@ const TEMPLATES = [
 
 const PLANS = [
   {
-    name: "Free",
-    price: "$0",
-    period: "forever",
-    features: ["10 ATS optimizations / month", "5 CV uploads / month", "Cover letters (5/month)", "PDF download"],
-    cta: "Get started free",
-    href: "/login",
-    highlight: false,
+    id: "free", name: "Free", price: "$0", period: "forever",
+    description: "Everything you need to get started.",
+    cta: "Get started free", ctaSub: null, href: "/login", highlight: false, trialBadge: false,
+    features: ["10 ATS optimizations / month","5 CV uploads / month","3 job searches / day","Cover letters (5/month)","Interview prep (5 sessions/month)","CV Library (10 saved CVs, 90-day retention)","English & French CV output","PDF download"],
   },
   {
-    name: "Starter",
-    price: "$9",
-    period: "/ month",
-    features: ["15 ATS optimizations / month", "10 CV uploads / month", "Cover letters (15/month)", "Interview prep (20 sessions/month)"],
-    cta: "Start Starter",
-    href: "/login?next=/settings",
-    highlight: false,
+    id: "starter", name: "Starter", price: "$9", period: "/ month",
+    description: "For casual job seekers who need more than free.",
+    cta: "Start Starter", ctaSub: null, href: "/login?next=/settings", highlight: false, trialBadge: false,
+    features: ["15 ATS optimizations / month","10 CV uploads / month","5 job searches / day","Cover letters (15/month)","Interview prep (20 sessions/month)","CV Library (25 saved CVs, 180-day retention)","English & French CV output","PDF download"],
   },
   {
-    name: "Pro",
-    price: "$19",
-    period: "/ month",
-    features: ["50 ATS optimizations / month", "Cover letters (unlimited)", "Interview prep (unlimited)", "LinkedIn profile import", "Priority AI processing"],
-    cta: "Start 3-day free trial",
-    href: "/login?next=/settings",
-    highlight: true,
+    id: "pro", name: "Pro", price: "$19", period: "/ month",
+    description: "For active job seekers who apply every week.",
+    cta: "Start 3-day free trial", ctaSub: "then $19/month — cancel anytime", href: "/login?next=/settings", highlight: true, trialBadge: true,
+    features: ["50 ATS optimizations / month","25 CV uploads / month","10 job searches / day","Cover letters (unlimited)","Interview prep (unlimited)","CV Library (50 saved CVs, 365-day retention)","English & French CV output","PDF download","Priority AI processing","LinkedIn profile import"],
   },
   {
-    name: "Enterprise",
-    price: "$49",
-    period: "/ month",
-    features: ["200 ATS optimizations / month", "Unlimited CV uploads", "Multiple client profiles", "Dedicated support"],
-    cta: "Start Enterprise",
-    href: "/login?next=/settings",
-    highlight: false,
+    id: "enterprise", name: "Enterprise", price: "$49", period: "/ month",
+    description: "For immigration consultants and career coaches.",
+    cta: "Start Enterprise", ctaSub: null, href: "/login?next=/settings", highlight: false, trialBadge: false,
+    features: ["200 ATS optimizations / month","Unlimited CV uploads","Unlimited job searches","Cover letters (unlimited)","Interview prep (unlimited)","CV Library (200 saved CVs, 365-day retention)","English & French CV output","PDF download","Priority AI processing","LinkedIn profile import","Multiple client profiles"],
   },
 ];
 
@@ -643,49 +631,64 @@ export default function LandingPage() {
 
       {/* ── PRICING ── */}
       <section aria-labelledby="pricing-heading" className="bg-white py-12 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">Pricing</div>
-          <h2 id="pricing-heading" className="text-3xl font-bold tracking-tight text-[#131f2f] sm:text-4xl">Start free. Upgrade when you&apos;re ready.</h2>
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="mb-12 text-center">
+            <h2 id="pricing-heading" className="text-4xl font-bold tracking-tight text-[#131f2f]">Simple, transparent pricing</h2>
+            <p className="mx-auto mt-4 max-w-xl text-lg text-[#77838F]">Start free. Try Pro for 3 days — no charge until your trial ends.</p>
+          </div>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {PLANS.map((p) => (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {PLANS.map((plan) => (
               <div
-                key={p.name}
-                className={`rounded-2xl p-4 shadow-sm sm:p-5 ${p.highlight ? "border-2 border-[#006EDC] bg-[#F5F9FC] lg:scale-105" : "border border-[#dcdce3] bg-white"}`}
+                key={plan.id}
+                className={`flex flex-col rounded-2xl border p-6 ${
+                  plan.highlight
+                    ? "border-[#006EDC] bg-[#006EDC] text-white shadow-xl shadow-[#006EDC]/20"
+                    : "border-[#dcdce3] bg-white"
+                }`}
               >
-                {p.highlight && (
-                  <div className="mb-3 inline-flex rounded-full bg-[#006EDC] px-3 py-1 text-[11px] font-bold text-white">
-                    Most popular
+                {(plan.highlight || plan.trialBadge) && (
+                  <div className="mb-4 flex items-center gap-2 flex-wrap">
+                    {plan.highlight && (
+                      <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white">Most popular</span>
+                    )}
+                    {plan.trialBadge && (
+                      <span className="rounded-full bg-white text-[#006EDC] px-3 py-1 text-xs font-bold">3 days free</span>
+                    )}
                   </div>
                 )}
-                <h3 className="font-bold text-[#131f2f]">{p.name}</h3>
-                <div className="mt-1 flex items-end gap-1">
-                  <span className="text-3xl font-black text-[#131f2f]">{p.price}</span>
-                  <span className="mb-0.5 text-sm text-[#77838F]">{p.period}</span>
+                <p className={`text-sm font-semibold ${plan.highlight ? "text-white/80" : "text-[#77838F]"}`}>{plan.name}</p>
+                <div className="mt-2 flex items-end gap-1">
+                  <span className={`text-4xl font-bold ${plan.highlight ? "text-white" : "text-[#131f2f]"}`}>{plan.price}</span>
+                  <span className={`mb-1 text-sm ${plan.highlight ? "text-white/70" : "text-[#77838F]"}`}>{plan.period}</span>
                 </div>
-                <ul className="mt-4 space-y-2">
-                  {p.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm text-[#3B4959]">
-                      <span className="shrink-0 font-bold text-emerald-500">✓</span>
-                      {f}
+                <p className={`mt-2 text-sm ${plan.highlight ? "text-white/80" : "text-[#3B4959]"}`}>{plan.description}</p>
+                <Link
+                  href={plan.href}
+                  className={`mt-6 rounded-xl py-3 text-center text-sm font-semibold transition ${
+                    plan.highlight
+                      ? "bg-white text-[#006EDC] hover:bg-white/90"
+                      : "bg-[#006EDC] text-white hover:bg-[#0060C7]"
+                  }`}
+                >
+                  {plan.cta}
+                </Link>
+                {plan.ctaSub && (
+                  <p className={`mt-2 text-center text-xs ${plan.highlight ? "text-white/60" : "text-[#77838F]"}`}>{plan.ctaSub}</p>
+                )}
+                <ul className="mt-6 flex-1 space-y-2.5">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm">
+                      <span className={`mt-0.5 shrink-0 ${plan.highlight ? "text-white/80" : "text-[#006EDC]"}`}>✓</span>
+                      <span className={plan.highlight ? "text-white/90" : "text-[#3B4959]"}>{f}</span>
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href={p.href}
-                  className={`mt-5 flex w-full items-center justify-center rounded-xl py-2.5 text-sm font-semibold transition ${
-                    p.highlight
-                      ? "bg-[#006EDC] text-white hover:bg-[#0060C7]"
-                      : "border border-[#dcdce3] text-[#3B4959] hover:border-[#CCD0D5]"
-                  }`}
-                >
-                  {p.cta}
-                </Link>
               </div>
             ))}
           </div>
 
-          <p className="mt-6 text-center text-xs text-[#77838F]">
+          <p className="mt-8 text-center text-xs text-[#77838F]">
             No credit card for the free plan · Cancel anytime · Data stored in Canada (PIPEDA compliant)
           </p>
         </div>
