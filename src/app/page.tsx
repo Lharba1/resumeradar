@@ -138,28 +138,37 @@ const PLANS = [
   {
     name: "Free",
     price: "$0",
-    period: "/month",
-    features: ["10 resume optimizations", "ATS score before & after", "PDF download", "Cover letter (3/month)"],
-    cta: "Start free",
+    period: "forever",
+    features: ["10 ATS optimizations / month", "5 CV uploads / month", "Cover letters (5/month)", "PDF download"],
+    cta: "Get started free",
     href: "/login",
+    highlight: false,
+  },
+  {
+    name: "Starter",
+    price: "$9",
+    period: "/ month",
+    features: ["15 ATS optimizations / month", "10 CV uploads / month", "Cover letters (15/month)", "Interview prep (20 sessions/month)"],
+    cta: "Start Starter",
+    href: "/login?next=/settings",
     highlight: false,
   },
   {
     name: "Pro",
     price: "$19",
-    period: "/month",
-    features: ["Unlimited optimizations", "French CV generation", "LinkedIn import", "Interview prep", "Job tracker", "Priority support"],
-    cta: "Start Pro",
-    href: "/login",
+    period: "/ month",
+    features: ["50 ATS optimizations / month", "Cover letters (unlimited)", "Interview prep (unlimited)", "LinkedIn profile import", "Priority AI processing"],
+    cta: "Start 3-day free trial",
+    href: "/login?next=/settings",
     highlight: true,
   },
   {
     name: "Enterprise",
     price: "$49",
-    period: "/month",
-    features: ["Everything in Pro", "Team accounts", "Bulk optimization", "API access", "Dedicated support"],
-    cta: "Contact us",
-    href: "/pricing",
+    period: "/ month",
+    features: ["200 ATS optimizations / month", "Unlimited CV uploads", "Multiple client profiles", "Dedicated support"],
+    cta: "Start Enterprise",
+    href: "/login?next=/settings",
     highlight: false,
   },
 ];
@@ -638,7 +647,7 @@ export default function LandingPage() {
           <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#006EDC]">Pricing</div>
           <h2 id="pricing-heading" className="text-3xl font-bold tracking-tight text-[#131f2f] sm:text-4xl">Start free. Upgrade when you&apos;re ready.</h2>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {PLANS.map((p) => (
               <div
                 key={p.name}
