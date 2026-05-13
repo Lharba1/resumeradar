@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { getBrowserClient } from "@/lib/supabase-browser";
 
 const NAV_LINKS = [
   { label: "Features", href: "/features/ats-optimizer" },
@@ -12,6 +14,14 @@ const NAV_LINKS = [
 
 export default function PublicNav() {
   const pathname = usePathname();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const supabase = getBrowserClient();
+    supabase.auth.getSession().then(({ data: { session } }) => setIsLoggedIn(!!session));
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => setIsLoggedIn(!!session));
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#dcdce3] bg-white/95 backdrop-blur-sm">
@@ -47,18 +57,29 @@ export default function PublicNav() {
 
         {/* CTAs */}
         <div className="flex shrink-0 items-center gap-2">
-          <Link
-            href="/login"
-            className="hidden rounded-lg px-3 py-1.5 text-sm font-medium text-[#3B4959] transition hover:text-[#131f2f] sm:inline"
-          >
-            Sign in
-          </Link>
-          <Link
-            href="/login"
-            className="rounded-lg bg-[#006EDC] px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0060C7]"
-          >
-            Get started free
-          </Link>
+          {isLoggedIn ? (
+            <Link
+              href="/upload"
+              className="rounded-lg bg-[#006EDC] px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0060C7]"
+            >
+              Go to app
+            </Link>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="hidden rounded-lg px-3 py-1.5 text-sm font-medium text-[#3B4959] transition hover:text-[#131f2f] sm:inline"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/login"
+                className="rounded-lg bg-[#006EDC] px-4 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0060C7]"
+              >
+                Get started free
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>

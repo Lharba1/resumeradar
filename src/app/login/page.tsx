@@ -1,15 +1,23 @@
 "use client";
 
-import { Suspense, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { getBrowserClient } from "@/lib/supabase-browser";
 
 function LoginForm() {
   const searchParams = useSearchParams();
   const next = searchParams.get("next") ?? "/upload";
   const authError = searchParams.get("error");
+  const router = useRouter();
 
   const [email, setEmail] = useState("");
+
+  // Redirect already-authenticated users straight to the app
+  useEffect(() => {
+    getBrowserClient().auth.getSession().then(({ data: { session } }) => {
+      if (session) router.replace(next);
+    });
+  }, [next, router]);
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(
