@@ -6,7 +6,10 @@ export const metadata: Metadata = {
   title: "ResumeRadar — AI Resume Optimizer & Job Search for Immigrants in Canada",
   description:
     "Upload your resume, get an ATS score, and receive an AI-optimized version tailored to any job description. Built for immigrants and newcomers to Canada. Free to start.",
-  alternates: { canonical: "https://resumeradar.io" },
+  alternates: {
+    canonical: "https://resumeradar.io",
+    languages: { "fr-CA": "https://resumeradar.io/fr" },
+  },
   openGraph: {
     url: "https://resumeradar.io",
     title: "ResumeRadar — AI Resume Optimizer for Immigrants in Canada",

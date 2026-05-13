@@ -33,13 +33,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Feature pages (add as each is built)
+  // Feature pages — only include built pages (add others as they go live)
   const featurePages: MetadataRoute.Sitemap = [
     "/features/ats-optimizer",
-    "/features/resume-builder",
-    "/features/cover-letter",
-    "/features/interview-prep",
-    "/features/job-tracker",
   ].map((path) => ({
     url: `${BASE}${path}`,
     lastModified: now,
@@ -47,11 +43,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // Solution pages
+  // Solution pages — only built pages
   const solutionPages: MetadataRoute.Sitemap = [
     "/solutions/immigrants-canada",
     "/solutions/international-students",
-    "/solutions/newcomers-canada",
     "/solutions/engineers-canada",
     "/solutions/french-speakers",
   ].map((path) => ({
@@ -122,16 +117,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // Additional solution pages
-  const extraSolutionPages: MetadataRoute.Sitemap = [
-    "/solutions/international-students",
-    "/solutions/engineers-canada",
-  ].map((path) => ({
-    url: `${BASE}${path}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
 
   // About page
   const aboutPage: MetadataRoute.Sitemap = [
@@ -142,7 +127,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticPages,
     ...featurePages,
     ...solutionPages,
-    ...extraSolutionPages,
     ...comparePages,
     ...guidePages,
     ...blogPages,
