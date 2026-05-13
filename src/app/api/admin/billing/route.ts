@@ -1,23 +1,12 @@
 import { NextResponse } from "next/server";
-import { requireUser } from "@/lib/auth-guard";
+import { requireAdmin } from "@/lib/admin-guard";
 import { getStripe, PLAN_FROM_PRICE } from "@/lib/stripe";
-import { createServiceRoleClient } from "@/lib/supabase-server";
 
 export const runtime = "nodejs";
 
 export async function GET() {
-  const { user, unauthorized } = await requireUser();
-  if (unauthorized) return unauthorized;
-
-  const supabase = createServiceRoleClient();
-  const { data: profile } = await supabase
-    .from("user_subscriptions")
-    .select("plan_id")
-    .eq("user_id", user.id)
-    .maybeSingle();
-  if (profile?.plan_id !== "enterprise") {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
+  const { adminSupabase, forbidden } = await requireAdmin();
+  if (forbidden) return forbidden;
 
   if (!process.env.STRIPE_SECRET_KEY) {
     return NextResponse.json({ configured: false });
@@ -31,7 +20,7 @@ export async function GET() {
       stripe.subscriptions.list({ status: "active",   limit: 100 }),
       stripe.subscriptions.list({ status: "trialing", limit: 100 }),
       stripe.events.list({ limit: 15 }),
-      supabase.from("user_subscriptions").select("plan_id"),
+      adminSupabase.from("user_subscriptions").select("plan_id"),
     ]);
 
     let mrr = 0;
@@ -71,18 +60,8 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { user, unauthorized } = await requireUser();
-  if (unauthorized) return unauthorized;
-
-  const supabase = createServiceRoleClient();
-  const { data: profile } = await supabase
-    .from("user_subscriptions")
-    .select("plan_id")
-    .eq("user_id", user.id)
-    .maybeSingle();
-  if (profile?.plan_id !== "enterprise") {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
+  const { user, adminSupabase, forbidden } = await requireAdmin();
+  if (forbidden) return forbidden;
 
   let body: { email: string; plan_id: string };
   try { body = await req.json(); }
@@ -94,18 +73,18 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid plan_id" }, { status: 400 });
   }
 
-  const { data: { users } } = await supabase.auth.admin.listUsers({ perPage: 1000 });
+  const { data: { users } } = await adminSupabase.auth.admin.listUsers({ perPage: 1000 });
   const target = users.find((u) => u.email === email.trim().toLowerCase());
   if (!target) return NextResponse.json({ error: "User not found" }, { status: 404 });
 
-  await supabase.from("user_subscriptions").upsert(
+  await adminSupabase.from("user_subscriptions").upsert(
     { user_id: target.id, plan_id, status: "active" },
     { onConflict: "user_id" },
   );
 
-  void supabase.from("admin_actions").insert({
+  void adminSupabase.from("admin_actions").insert({
     action:  "manual_plan_override",
-    details: { target_email: email, plan_id, overridden_by: user.id },
+    details: { target_email: email, plan_id, overridden_by: user!.id },
   });
 
   return NextResponse.json({ ok: true, user_id: target.id, plan_id });
